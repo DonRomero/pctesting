@@ -32,7 +32,8 @@ namespace pctesting
                         Close();
                         break;
                     case "admin":
-                        //TODO перейти на форму для админа
+                        new AdminForm();
+                        break;
                         Close();
                         break;
                     default:
