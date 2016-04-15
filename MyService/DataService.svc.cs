@@ -54,10 +54,12 @@ namespace MyService
 
         public void setConnection()
         {
-            if (!Directory.Exists(@"C:\pctesting"))
-                Directory.CreateDirectory(@"C:\pctesting");
-            if (!File.Exists(@"C:\pctesting\mydb.sqlite"))
-                SQLiteConnection.CreateFile(@"C:\pctesting\mydb.sqlite");//файл хранится в папке с IIS Express
+            //if (!Directory.Exists(@"C:\pctesting"))
+            //    Directory.CreateDirectory(@"C:\pctesting");
+            //if (!File.Exists(@"C:\pctesting\mydb.sqlite"))
+            //    SQLiteConnection.CreateFile(@"C:\pctesting\mydb.sqlite");
+            if (!File.Exists(@"mydb.sqlite"))
+                SQLiteConnection.CreateFile(@"mydb.sqlite");//файл хранится в папке с IIS Express
             execute("CREATE TABLE IF NOT EXISTS COMPUTER(id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT);", sql);
             execute("CREATE TABLE IF NOT EXISTS USER(id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, password TEXT, admin INTEGER);", sql);
             execute("INSERT INTO USER VALUES(NULL, '" + adminLogin + "', '" + adminPassword + "', '" + 1 + "');", sql);
@@ -65,6 +67,18 @@ namespace MyService
                 fk_computer + ", " +
                 fk_user + ";", sql);
             execute("CREATE TABLE IF NOT EXISTS TRAFFIC(id INTEGER PRIMARY KEY AUTOINCREMENT, URL TEXT, time INTEGER, computerID INTEGER, userID INTEGER, " +
+                fk_computer + ", " +
+                fk_user + ";", sql);
+            execute("CREATE TABLE IF NOT EXISTS TEST(id INTEGER PRIMARY KEY AUTOINCREMENT, time INTEGER, computerID INTEGER, " +
+                fk_computer, sql);
+            execute("CREATE TABLE IF NOT EXISTS CHARACTERISTIC(id INTEGER PRIMARY KEY AUTOINCREMENT, RAM TEXT, CRU TEXT, VideoRAM TEXT, freeRAM TEXT testID INTEGER, " +
+                "CONSTRAINT fk_test " +
+                "FOREIGN KEY (testID) " +
+                "REFERENCES TEST(id)", sql);
+            execute("CREATE TABLE IF NOT EXISTS PROCESS(id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, startTime INTEGER, finishTime INTEGER, computerID INTEGER, userID INTEGER, " +
+                fk_computer + ", " +
+                fk_user + ";", sql);
+            execute("CREATE TABLE IF NOT EXISTS ACTIVITY(id INTEGER PRIMARY KEY AUTOINCREMENT, allTime INTEGER, activeTime INTEGER, passiveTime INTEGER, computerID INTEGER, userID INTEGER, " +
                 fk_computer + ", " +
                 fk_user + ";", sql);
         }
