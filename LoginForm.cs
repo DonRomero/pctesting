@@ -33,7 +33,6 @@ namespace pctesting
                         break;
                     case "admin":
                         new AdminForm();
-                        break;
                         Close();
                         break;
                     default:
