@@ -19,5 +19,11 @@ namespace MyService
 
         [OperationContract]
         string login(string name, string password, string compName);
+
+        [OperationContract]
+        void SavePressedKeToDB();
+
+        [OperationContract]
+        void SaveProcessesToDB();
     }
 }
