@@ -35,39 +35,43 @@
             // 
             // testButton
             // 
-            this.testButton.Location = new System.Drawing.Point(15, 12);
+            this.testButton.Location = new System.Drawing.Point(11, 10);
+            this.testButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.testButton.Name = "testButton";
-            this.testButton.Size = new System.Drawing.Size(250, 30);
+            this.testButton.Size = new System.Drawing.Size(188, 24);
             this.testButton.TabIndex = 0;
             this.testButton.Text = "Тестировать компьютер";
             this.testButton.UseVisualStyleBackColor = true;
             // 
             // reportButton
             // 
-            this.reportButton.Location = new System.Drawing.Point(15, 48);
+            this.reportButton.Location = new System.Drawing.Point(11, 39);
+            this.reportButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.reportButton.Name = "reportButton";
-            this.reportButton.Size = new System.Drawing.Size(250, 30);
+            this.reportButton.Size = new System.Drawing.Size(188, 24);
             this.reportButton.TabIndex = 1;
             this.reportButton.Text = "Сформировать отчёт";
             this.reportButton.UseVisualStyleBackColor = true;
             // 
             // backupButton
             // 
-            this.backupButton.Location = new System.Drawing.Point(15, 84);
+            this.backupButton.Location = new System.Drawing.Point(11, 68);
+            this.backupButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.backupButton.Name = "backupButton";
-            this.backupButton.Size = new System.Drawing.Size(250, 30);
+            this.backupButton.Size = new System.Drawing.Size(188, 24);
             this.backupButton.TabIndex = 2;
             this.backupButton.Text = "Бекап Базы Данных";
             this.backupButton.UseVisualStyleBackColor = true;
             // 
             // AdminForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(282, 128);
+            this.ClientSize = new System.Drawing.Size(212, 104);
             this.Controls.Add(this.backupButton);
             this.Controls.Add(this.reportButton);
             this.Controls.Add(this.testButton);
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "AdminForm";
             this.Text = "AdminForm";
             this.ResumeLayout(false);

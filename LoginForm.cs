@@ -29,11 +29,11 @@ namespace pctesting
                 {
                     case "user":
                         new UserForm();
-                        Close();
+                        this.Hide();
                         break;
                     case "admin":
-                        new AdminForm();
-                        Close();
+                        new AdminForm().Show();
+                        this.Hide();
                         break;
                     default:
                         MessageBox.Show("Неверный логин или пароль.\nВ доступе отказано!");
