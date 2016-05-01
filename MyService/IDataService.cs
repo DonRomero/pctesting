@@ -21,9 +21,9 @@ namespace MyService
         string login(string name, string password, string compName);
 
         [OperationContract]
-        void SavePressedKeToDB();
+        void SaveActivityToDB(DateTime GeneralTime, DateTime ActivityTime, DateTime NotActivityTime, int compID, int userID);
 
         [OperationContract]
-        void SaveProcessesToDB();
+        void SaveProcessesToDB(string Name, DateTime StartTime, DateTime ExitTime, DateTime GeneralTime, int compID, int userID);
     }
 }

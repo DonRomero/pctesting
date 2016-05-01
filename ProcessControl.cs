@@ -10,11 +10,6 @@ namespace pctesting
         class ProcessControl
         {
             List<Process> processLastIteration = Process.GetProcesses().ToList();
-
-            List<string> processName = new List<string>();
-            List<DateTime> startTime = new List<DateTime>();
-            List<DateTime> exitTime = new List<DateTime>();
-
             List<Process> ExitProcess = new List<Process>();
 
             public void UpdateProcess()

@@ -61,29 +61,30 @@ namespace MyService
             //    SQLiteConnection.CreateFile(@"C:\pctesting\mydb.sqlite");
             //if (!File.Exists(@"mydb.sqlite"))
             //    SQLiteConnection.CreateFile(@"mydb.sqlite");//файл хранится в папке с IIS Express
-            sql.Open();
-            execute("CREATE TABLE IF NOT EXISTS COMPUTER(id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT);", sql);
-            execute("CREATE TABLE IF NOT EXISTS USER(id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, password TEXT, admin INTEGER);", sql);
-            execute("INSERT INTO USER VALUES(NULL, '" + adminLogin + "', '" + adminPassword + "', '" + 1 + "');", sql);
+            SQLiteConnection sql1 = new SQLiteConnection(@"DataSource = C:\pctesting\mydb.sqlite;Version=3");
+            sql1.Open();
+            execute("CREATE TABLE IF NOT EXISTS COMPUTER(id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT);", sql1);
+            execute("CREATE TABLE IF NOT EXISTS USER(id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, password TEXT, admin INTEGER);", sql1);
+            execute("INSERT INTO USER VALUES(NULL, '" + adminLogin + "', '" + adminPassword + "', '" + 1 + "');", sql1);
             execute("CREATE TABLE IF NOT EXISTS FILE(id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, path TEXT, time INTEGER, type TEXT, computerID INTEGER, userID INTEGER, " +
                 fk_computer + ", " +
-                fk_user + ";", sql);
+                fk_user + ";", sql1);
             execute("CREATE TABLE IF NOT EXISTS TRAFFIC(id INTEGER PRIMARY KEY AUTOINCREMENT, URL TEXT, time INTEGER, computerID INTEGER, userID INTEGER, " +
                 fk_computer + ", " +
-                fk_user + ";", sql);
+                fk_user + ";", sql1);
             execute("CREATE TABLE IF NOT EXISTS TEST(id INTEGER PRIMARY KEY AUTOINCREMENT, time INTEGER, computerID INTEGER, " +
-                fk_computer+");", sql);
+                fk_computer+");", sql1);
             execute("CREATE TABLE IF NOT EXISTS CHARACTERISTIC(id INTEGER PRIMARY KEY AUTOINCREMENT, RAM TEXT, CRU TEXT, VideoRAM TEXT, freeRAM TEXT, testID INTEGER, " +
                 "CONSTRAINT fk_test " +
                 "FOREIGN KEY (testID) " +
-                "REFERENCES TEST(id));", sql);
-            execute("CREATE TABLE IF NOT EXISTS PROCESS(id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, startTime INTEGER, finishTime INTEGER, computerID INTEGER, userID INTEGER, " +
+                "REFERENCES TEST(id));", sql1);
+            execute("CREATE TABLE IF NOT EXISTS PROCESS(id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, startTime INTEGER, finishTime INTEGER, allTime INTEGER, computerID INTEGER, userID INTEGER, " +
                 fk_computer + ", " +
-                fk_user + ";", sql);
+                fk_user + ";", sql1);
             execute("CREATE TABLE IF NOT EXISTS ACTIVITY(id INTEGER PRIMARY KEY AUTOINCREMENT, allTime INTEGER, activeTime INTEGER, passiveTime INTEGER, computerID INTEGER, userID INTEGER, " +
                 fk_computer + ", " +
-                fk_user + ";", sql);
-            sql.Close();
+                fk_user + ";", sql1);
+            sql1.Close();
         }
 
         public void saveFileDataToDB(string name, string path, int time, string type, int compID, int userID)
@@ -99,6 +100,20 @@ namespace MyService
             sql.Open();
             setConnection();
             execute("INSERT INTO TRAFFIC VALUES( NULL, '" + URL + "'," + time + "," + compID + "," + userID + ");", sql);
+            sql.Close();
+        }
+        public void SaveActivityToDB(DateTime AllTime, DateTime ActivityTime, DateTime NotActivityTime, int compID, int userID)
+        {
+            sql.Open();
+            setConnection();
+            execute("INSERT INTO TRAFFIC VALUES(NULL, " + AllTime + ", " + ActivityTime + ", " + NotActivityTime + ", " + compID + ", " + userID + ");", sql);
+            sql.Close();
+        }
+        public void SaveProcessesToDB(string Name, DateTime StartTime, DateTime FinishTime, DateTime AllTime,int compID, int userID)
+        {
+            sql.Open();
+            setConnection();
+            execute("INSERT INTO TRAFFIC VALUES(NULL, '" + Name + "', " + StartTime + ", " + FinishTime + ", " + AllTime + "," + compID + "," + userID + ");", sql);
             sql.Close();
         }
     }
