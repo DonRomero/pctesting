@@ -14,13 +14,15 @@ namespace pctesting
 {
     public partial class UserForm : Form
     {
-        FileManager fileWatcher = new FileManager();
-        TrafficManager trafficWatcher = new TrafficManager();
+        FileManager fileWatcher;
+        TrafficManager trafficWatcher;
         ProcessControl process = new ProcessControl();
         KeyHook kh = new KeyHook();
-        public UserForm()
+        public UserForm(string userName)
         {
             InitializeComponent();
+            fileWatcher = new FileManager(Environment.MachineName, userName);
+            trafficWatcher = new TrafficManager(Environment.MachineName, userName);
             fileWatcher.watch();
             trafficWatcher.Start();
         }
