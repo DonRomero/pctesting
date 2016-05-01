@@ -22,6 +22,7 @@
     <MetadataSource Address="http://localhost:18336/DataService.svc" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
+    <MetadataFile FileName="DataService2.xsd" MetadataType="Schema" ID="cfbe0c4c-144b-4411-9a50-13ebf21df5f0" SourceId="1" SourceUrl="http://localhost:18336/DataService.svc?xsd=xsd2" />
     <MetadataFile FileName="DataService.wsdl" MetadataType="Wsdl" ID="f92528dc-f193-4e31-b312-6b370547f2e8" SourceId="1" SourceUrl="http://localhost:18336/DataService.svc?wsdl" />
     <MetadataFile FileName="DataService.xsd" MetadataType="Schema" ID="63afce01-eb20-4f89-a493-f3fbe1be3a0e" SourceId="1" SourceUrl="http://localhost:18336/DataService.svc?xsd=xsd0" />
     <MetadataFile FileName="DataService1.xsd" MetadataType="Schema" ID="36730572-4ed7-4a3e-82f0-1a3ae7546991" SourceId="1" SourceUrl="http://localhost:18336/DataService.svc?xsd=xsd1" />

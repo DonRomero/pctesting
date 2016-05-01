@@ -12,10 +12,10 @@ namespace MyService
     public interface IDataService
     {
         [OperationContract]
-        void saveFileDataToDB(string name, string path, int time, string type, int compID, int userID);
+        void saveFileDataToDB(string name, string path, int time, string type, string comp, string user);
 
         [OperationContract]
-        void saveTrafficDataToDB(string URL, int time, int compID, int userID);
+        void saveTrafficDataToDB(string URL, long time, string comp, string user);
 
         [OperationContract]
         string login(string name, string password, string compName);
@@ -25,5 +25,14 @@ namespace MyService
 
         [OperationContract]
         void SaveProcessesToDB(string Name, DateTime StartTime, DateTime ExitTime, DateTime GeneralTime, int compID, int userID);
+
+        [OperationContract]
+        bool makeReport();
+
+        [OperationContract]
+        bool addUser(string name, string password);
+
+        [OperationContract]
+        List<string> getUsers();
     }
 }

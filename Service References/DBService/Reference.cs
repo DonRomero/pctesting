@@ -16,22 +16,52 @@ namespace pctesting.DBService {
     public interface IDataService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDataService/saveFileDataToDB", ReplyAction="http://tempuri.org/IDataService/saveFileDataToDBResponse")]
-        void saveFileDataToDB(string name, string path, int time, string type, int compID, int userID);
+        void saveFileDataToDB(string name, string path, int time, string type, string comp, string user);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDataService/saveFileDataToDB", ReplyAction="http://tempuri.org/IDataService/saveFileDataToDBResponse")]
-        System.Threading.Tasks.Task saveFileDataToDBAsync(string name, string path, int time, string type, int compID, int userID);
+        System.Threading.Tasks.Task saveFileDataToDBAsync(string name, string path, int time, string type, string comp, string user);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDataService/saveTrafficDataToDB", ReplyAction="http://tempuri.org/IDataService/saveTrafficDataToDBResponse")]
-        void saveTrafficDataToDB(string URL, int time, int compID, int userID);
+        void saveTrafficDataToDB(string URL, long time, string comp, string user);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDataService/saveTrafficDataToDB", ReplyAction="http://tempuri.org/IDataService/saveTrafficDataToDBResponse")]
-        System.Threading.Tasks.Task saveTrafficDataToDBAsync(string URL, int time, int compID, int userID);
+        System.Threading.Tasks.Task saveTrafficDataToDBAsync(string URL, long time, string comp, string user);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDataService/login", ReplyAction="http://tempuri.org/IDataService/loginResponse")]
         string login(string name, string password, string compName);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDataService/login", ReplyAction="http://tempuri.org/IDataService/loginResponse")]
         System.Threading.Tasks.Task<string> loginAsync(string name, string password, string compName);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDataService/SaveActivityToDB", ReplyAction="http://tempuri.org/IDataService/SaveActivityToDBResponse")]
+        void SaveActivityToDB(System.DateTime GeneralTime, System.DateTime ActivityTime, System.DateTime NotActivityTime, int compID, int userID);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDataService/SaveActivityToDB", ReplyAction="http://tempuri.org/IDataService/SaveActivityToDBResponse")]
+        System.Threading.Tasks.Task SaveActivityToDBAsync(System.DateTime GeneralTime, System.DateTime ActivityTime, System.DateTime NotActivityTime, int compID, int userID);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDataService/SaveProcessesToDB", ReplyAction="http://tempuri.org/IDataService/SaveProcessesToDBResponse")]
+        void SaveProcessesToDB(string Name, System.DateTime StartTime, System.DateTime ExitTime, System.DateTime GeneralTime, int compID, int userID);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDataService/SaveProcessesToDB", ReplyAction="http://tempuri.org/IDataService/SaveProcessesToDBResponse")]
+        System.Threading.Tasks.Task SaveProcessesToDBAsync(string Name, System.DateTime StartTime, System.DateTime ExitTime, System.DateTime GeneralTime, int compID, int userID);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDataService/makeReport", ReplyAction="http://tempuri.org/IDataService/makeReportResponse")]
+        bool makeReport();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDataService/makeReport", ReplyAction="http://tempuri.org/IDataService/makeReportResponse")]
+        System.Threading.Tasks.Task<bool> makeReportAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDataService/addUser", ReplyAction="http://tempuri.org/IDataService/addUserResponse")]
+        bool addUser(string name, string password);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDataService/addUser", ReplyAction="http://tempuri.org/IDataService/addUserResponse")]
+        System.Threading.Tasks.Task<bool> addUserAsync(string name, string password);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDataService/getUsers", ReplyAction="http://tempuri.org/IDataService/getUsersResponse")]
+        string[] getUsers();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDataService/getUsers", ReplyAction="http://tempuri.org/IDataService/getUsersResponse")]
+        System.Threading.Tasks.Task<string[]> getUsersAsync();
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -61,20 +91,20 @@ namespace pctesting.DBService {
                 base(binding, remoteAddress) {
         }
         
-        public void saveFileDataToDB(string name, string path, int time, string type, int compID, int userID) {
-            base.Channel.saveFileDataToDB(name, path, time, type, compID, userID);
+        public void saveFileDataToDB(string name, string path, int time, string type, string comp, string user) {
+            base.Channel.saveFileDataToDB(name, path, time, type, comp, user);
         }
         
-        public System.Threading.Tasks.Task saveFileDataToDBAsync(string name, string path, int time, string type, int compID, int userID) {
-            return base.Channel.saveFileDataToDBAsync(name, path, time, type, compID, userID);
+        public System.Threading.Tasks.Task saveFileDataToDBAsync(string name, string path, int time, string type, string comp, string user) {
+            return base.Channel.saveFileDataToDBAsync(name, path, time, type, comp, user);
         }
         
-        public void saveTrafficDataToDB(string URL, int time, int compID, int userID) {
-            base.Channel.saveTrafficDataToDB(URL, time, compID, userID);
+        public void saveTrafficDataToDB(string URL, long time, string comp, string user) {
+            base.Channel.saveTrafficDataToDB(URL, time, comp, user);
         }
         
-        public System.Threading.Tasks.Task saveTrafficDataToDBAsync(string URL, int time, int compID, int userID) {
-            return base.Channel.saveTrafficDataToDBAsync(URL, time, compID, userID);
+        public System.Threading.Tasks.Task saveTrafficDataToDBAsync(string URL, long time, string comp, string user) {
+            return base.Channel.saveTrafficDataToDBAsync(URL, time, comp, user);
         }
         
         public string login(string name, string password, string compName) {
@@ -83,6 +113,46 @@ namespace pctesting.DBService {
         
         public System.Threading.Tasks.Task<string> loginAsync(string name, string password, string compName) {
             return base.Channel.loginAsync(name, password, compName);
+        }
+        
+        public void SaveActivityToDB(System.DateTime GeneralTime, System.DateTime ActivityTime, System.DateTime NotActivityTime, int compID, int userID) {
+            base.Channel.SaveActivityToDB(GeneralTime, ActivityTime, NotActivityTime, compID, userID);
+        }
+        
+        public System.Threading.Tasks.Task SaveActivityToDBAsync(System.DateTime GeneralTime, System.DateTime ActivityTime, System.DateTime NotActivityTime, int compID, int userID) {
+            return base.Channel.SaveActivityToDBAsync(GeneralTime, ActivityTime, NotActivityTime, compID, userID);
+        }
+        
+        public void SaveProcessesToDB(string Name, System.DateTime StartTime, System.DateTime ExitTime, System.DateTime GeneralTime, int compID, int userID) {
+            base.Channel.SaveProcessesToDB(Name, StartTime, ExitTime, GeneralTime, compID, userID);
+        }
+        
+        public System.Threading.Tasks.Task SaveProcessesToDBAsync(string Name, System.DateTime StartTime, System.DateTime ExitTime, System.DateTime GeneralTime, int compID, int userID) {
+            return base.Channel.SaveProcessesToDBAsync(Name, StartTime, ExitTime, GeneralTime, compID, userID);
+        }
+        
+        public bool makeReport() {
+            return base.Channel.makeReport();
+        }
+        
+        public System.Threading.Tasks.Task<bool> makeReportAsync() {
+            return base.Channel.makeReportAsync();
+        }
+        
+        public bool addUser(string name, string password) {
+            return base.Channel.addUser(name, password);
+        }
+        
+        public System.Threading.Tasks.Task<bool> addUserAsync(string name, string password) {
+            return base.Channel.addUserAsync(name, password);
+        }
+        
+        public string[] getUsers() {
+            return base.Channel.getUsers();
+        }
+        
+        public System.Threading.Tasks.Task<string[]> getUsersAsync() {
+            return base.Channel.getUsersAsync();
         }
     }
 }
