@@ -21,23 +21,30 @@ namespace pctesting
         private void LoginButton_Click(object sender, EventArgs e)
         {
             DBService.DataServiceClient client = new DataServiceClient();
-            string IP = System.Net.Dns.GetHostEntry(System.Net.Dns.GetHostName()).AddressList[0].ToString();
+             string IP = System.Net.Dns.GetHostEntry(System.Net.Dns.GetHostName()).AddressList[0].ToString();
             if (loginTextBox.Text.Equals("") | passwordTextBox.Text.Equals(""))
-                MessageBox.Show("Введите корректные данные!");
+                MessageBox.Show("Введите корректные данные!", "Некорректный ввод", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             else
-                switch(client.login(loginTextBox.Text, passwordTextBox.Text, IP))
+                try
                 {
-                    case "user":
-                        new UserForm();
-                        this.Hide();
-                        break;
-                    case "admin":
-                        new AdminForm().Show();
-                        this.Hide();
-                        break;
-                    default:
-                        MessageBox.Show("Неверный логин или пароль.\nВ доступе отказано!");
-                        break;
+                    switch (client.login(loginTextBox.Text, passwordTextBox.Text, IP))
+                    {
+                        case "user":
+                            new UserForm(loginTextBox.Text).Show();
+                            this.Hide();
+                            break;
+                        case "admin":
+                            new AdminForm(loginTextBox.Text).Show();
+                            this.Hide();
+                            break;
+                        default:
+                            MessageBox.Show("Неверный логин или пароль", "В доступе отказано!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                            break;
+                    }
+                }
+                catch(Exception ex)
+                {
+                    MessageBox.Show("Возникла ошибка подключения!\nПроверьте работоспособность сервера.", "Ошибка подключения", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
         }
     }
