@@ -90,13 +90,13 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(230, 156);
+            this.ClientSize = new System.Drawing.Size(177, 71);
             this.Controls.Add(this.button1);
             this.Name = "UserForm";
-            this.Text = "Form1";
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
-            this.Load += new System.EventHandler(this.Form1_Load);
-            this.Move += new System.EventHandler(this.Form1_Move);
+            this.Text = "User";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.UserForm_FormClosing);
+            this.Load += new System.EventHandler(this.UserForm_Load);
+            this.Move += new System.EventHandler(this.UserForm_Move);
             this.contextMenuStrip1.ResumeLayout(false);
             this.ResumeLayout(false);
 

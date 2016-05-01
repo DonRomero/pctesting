@@ -36,7 +36,7 @@
             // testButton
             // 
             this.testButton.Location = new System.Drawing.Point(11, 10);
-            this.testButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.testButton.Margin = new System.Windows.Forms.Padding(2);
             this.testButton.Name = "testButton";
             this.testButton.Size = new System.Drawing.Size(188, 24);
             this.testButton.TabIndex = 0;
@@ -46,7 +46,7 @@
             // reportButton
             // 
             this.reportButton.Location = new System.Drawing.Point(11, 39);
-            this.reportButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.reportButton.Margin = new System.Windows.Forms.Padding(2);
             this.reportButton.Name = "reportButton";
             this.reportButton.Size = new System.Drawing.Size(188, 24);
             this.reportButton.TabIndex = 1;
@@ -56,7 +56,7 @@
             // backupButton
             // 
             this.backupButton.Location = new System.Drawing.Point(11, 68);
-            this.backupButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.backupButton.Margin = new System.Windows.Forms.Padding(2);
             this.backupButton.Name = "backupButton";
             this.backupButton.Size = new System.Drawing.Size(188, 24);
             this.backupButton.TabIndex = 2;
@@ -71,9 +71,10 @@
             this.Controls.Add(this.backupButton);
             this.Controls.Add(this.reportButton);
             this.Controls.Add(this.testButton);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "AdminForm";
             this.Text = "AdminForm";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.AdminForm_FormClosed);
             this.ResumeLayout(false);
 
         }

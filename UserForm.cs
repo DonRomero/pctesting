@@ -40,7 +40,7 @@ namespace pctesting
             this.Show();
         }
 
-        private void Form1_Move(object sender, EventArgs e)
+        private void UserForm_Move(object sender, EventArgs e)
         {
             if (this.WindowState == FormWindowState.Minimized)
             {
@@ -175,16 +175,6 @@ namespace pctesting
             process.UpdateProcess();
         }
 
-        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            trafficWatcher.Stop();
-        }
-        private void Form1_Load(object sender, EventArgs e)
-        {
-            kh.KeyDown += new KeyEventHandler(kh_KeyDown);
-            kh.KeyUp += new KeyEventHandler(kh_KeyUp);
-        }
-
         void kh_KeyUp(object sender, KeyEventArgs e)
         {
 
@@ -194,6 +184,18 @@ namespace pctesting
         void kh_KeyDown(object sender, KeyEventArgs e)
         {
             e.Handled = true;
+        }
+
+        private void UserForm_Load(object sender, EventArgs e)
+        {
+            kh.KeyDown += new KeyEventHandler(kh_KeyDown);
+            kh.KeyUp += new KeyEventHandler(kh_KeyUp);
+        }
+
+        private void UserForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            trafficWatcher.Stop();
+            Application.Exit();
         }
     }
 }
