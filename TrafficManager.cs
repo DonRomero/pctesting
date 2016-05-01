@@ -8,10 +8,13 @@ namespace pctesting
     class TrafficManager
     {
         private UrlCaptureConfiguration CaptureConfiguration { get; set; }
+        string comp, user;
 
-        public TrafficManager()
+        public TrafficManager(string comp, string user)
         {
             CaptureConfiguration = new UrlCaptureConfiguration();  // this usually comes from configuration settings
+            this.comp = comp;
+            this.user = user;
         }
 
         private void AfterSession(Session sess)
@@ -58,7 +61,7 @@ namespace pctesting
             if (headers.Contains("Referer"))
                 return;
             DBService.DataServiceClient client = new DataServiceClient();
-            client.saveTrafficDataToDB(sess.fullUrl.ToLower(), (int)DateTime.Now.Subtract(new DateTime(1970, 1, 1)).TotalSeconds, 1, 1);
+            client.saveTrafficDataToDB(sess.fullUrl.ToLower(), (long)DateTime.Now.Ticks/10000, comp, user);
         }
 
         public void Start()

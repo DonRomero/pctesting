@@ -6,6 +6,13 @@ namespace pctesting
 {
     class FileManager
     {
+        static string comp, user;
+        public FileManager(string c, string u)
+        {
+            comp = c;
+            user = u;
+        }
+
         private void initWatcher(FileSystemWatcher watcher)
         {
             watcher.NotifyFilter = NotifyFilters.Attributes | NotifyFilters.CreationTime | NotifyFilters.DirectoryName | NotifyFilters.FileName | NotifyFilters.LastAccess | NotifyFilters.LastWrite | NotifyFilters.Security | NotifyFilters.Size;
@@ -41,13 +48,13 @@ namespace pctesting
         private static void OnChanged(object source, FileSystemEventArgs e)
         {
             DBService.DataServiceClient client = new DataServiceClient();
-            client.saveFileDataToDB(e.Name, e.FullPath, (int)DateTime.Now.Subtract(new DateTime(1970, 1, 1)).TotalSeconds, e.ChangeType.ToString(), 1, 1);
+            client.saveFileDataToDB(e.Name, e.FullPath, (int)DateTime.Now.Ticks/10000, e.ChangeType.ToString(), comp, user);
         }
 
         private static void OnRenamed(object source, RenamedEventArgs e)
         {
             DBService.DataServiceClient client = new DataServiceClient();
-            client.saveFileDataToDB(e.Name, e.FullPath, (int)DateTime.Now.Subtract(new DateTime(1970, 1, 1)).TotalSeconds, e.ChangeType.ToString(), 1, 1);
+            client.saveFileDataToDB(e.Name, e.FullPath, (int)DateTime.Now.Ticks/10000, e.ChangeType.ToString(), comp, user);
         }
     }
 }
