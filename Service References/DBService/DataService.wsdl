@@ -4,6 +4,7 @@
     <xsd:schema targetNamespace="http://tempuri.org/Imports">
       <xsd:import schemaLocation="http://localhost:18336/DataService.svc?xsd=xsd0" namespace="http://tempuri.org/" />
       <xsd:import schemaLocation="http://localhost:18336/DataService.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import schemaLocation="http://localhost:18336/DataService.svc?xsd=xsd2" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
     </xsd:schema>
   </wsdl:types>
   <wsdl:message name="IDataService_saveFileDataToDB_InputMessage">
@@ -24,6 +25,36 @@
   <wsdl:message name="IDataService_login_OutputMessage">
     <wsdl:part name="parameters" element="tns:loginResponse" />
   </wsdl:message>
+  <wsdl:message name="IDataService_SaveActivityToDB_InputMessage">
+    <wsdl:part name="parameters" element="tns:SaveActivityToDB" />
+  </wsdl:message>
+  <wsdl:message name="IDataService_SaveActivityToDB_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SaveActivityToDBResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDataService_SaveProcessesToDB_InputMessage">
+    <wsdl:part name="parameters" element="tns:SaveProcessesToDB" />
+  </wsdl:message>
+  <wsdl:message name="IDataService_SaveProcessesToDB_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SaveProcessesToDBResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDataService_makeReport_InputMessage">
+    <wsdl:part name="parameters" element="tns:makeReport" />
+  </wsdl:message>
+  <wsdl:message name="IDataService_makeReport_OutputMessage">
+    <wsdl:part name="parameters" element="tns:makeReportResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDataService_addUser_InputMessage">
+    <wsdl:part name="parameters" element="tns:addUser" />
+  </wsdl:message>
+  <wsdl:message name="IDataService_addUser_OutputMessage">
+    <wsdl:part name="parameters" element="tns:addUserResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDataService_getUsers_InputMessage">
+    <wsdl:part name="parameters" element="tns:getUsers" />
+  </wsdl:message>
+  <wsdl:message name="IDataService_getUsers_OutputMessage">
+    <wsdl:part name="parameters" element="tns:getUsersResponse" />
+  </wsdl:message>
   <wsdl:portType name="IDataService">
     <wsdl:operation name="saveFileDataToDB">
       <wsdl:input wsaw:Action="http://tempuri.org/IDataService/saveFileDataToDB" message="tns:IDataService_saveFileDataToDB_InputMessage" />
@@ -36,6 +67,26 @@
     <wsdl:operation name="login">
       <wsdl:input wsaw:Action="http://tempuri.org/IDataService/login" message="tns:IDataService_login_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IDataService/loginResponse" message="tns:IDataService_login_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SaveActivityToDB">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDataService/SaveActivityToDB" message="tns:IDataService_SaveActivityToDB_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDataService/SaveActivityToDBResponse" message="tns:IDataService_SaveActivityToDB_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SaveProcessesToDB">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDataService/SaveProcessesToDB" message="tns:IDataService_SaveProcessesToDB_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDataService/SaveProcessesToDBResponse" message="tns:IDataService_SaveProcessesToDB_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="makeReport">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDataService/makeReport" message="tns:IDataService_makeReport_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDataService/makeReportResponse" message="tns:IDataService_makeReport_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="addUser">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDataService/addUser" message="tns:IDataService_addUser_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDataService/addUserResponse" message="tns:IDataService_addUser_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="getUsers">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDataService/getUsers" message="tns:IDataService_getUsers_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDataService/getUsersResponse" message="tns:IDataService_getUsers_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IDataService" type="tns:IDataService">
@@ -60,6 +111,51 @@
     </wsdl:operation>
     <wsdl:operation name="login">
       <soap:operation soapAction="http://tempuri.org/IDataService/login" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SaveActivityToDB">
+      <soap:operation soapAction="http://tempuri.org/IDataService/SaveActivityToDB" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SaveProcessesToDB">
+      <soap:operation soapAction="http://tempuri.org/IDataService/SaveProcessesToDB" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="makeReport">
+      <soap:operation soapAction="http://tempuri.org/IDataService/makeReport" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="addUser">
+      <soap:operation soapAction="http://tempuri.org/IDataService/addUser" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getUsers">
+      <soap:operation soapAction="http://tempuri.org/IDataService/getUsers" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
