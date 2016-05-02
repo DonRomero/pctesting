@@ -17,6 +17,11 @@ namespace pctesting
         public AdminForm(string userName)
         {
             InitializeComponent();
+            getUsers();
+        }
+
+        private void getUsers()
+        {
             string[] users = client.getUsers();
             reportComboBox.DataSource = users;
         }
@@ -34,7 +39,7 @@ namespace pctesting
             }
             else
             {
-                if (client.makeReport())
+                if (client.makeReport(reportComboBox.SelectedItem.ToString()))
                 {
                     MessageBox.Show("Отчёты успешно сохранены.", "Отчёты сохранены");
                 }
@@ -47,8 +52,8 @@ namespace pctesting
 
         private void addUserButton_Click(object sender, EventArgs e)
         {
-            new AddUserForm().Show();
-            this.Hide();
+            new AddUserForm().ShowDialog();
+            getUsers();
         }
     }
 }

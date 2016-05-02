@@ -29,6 +29,7 @@ namespace pctesting
             {
                 MessageBox.Show("Возникла ошибка добавления пользователя!\nВозможно пользователь с таким именем уже существует.", "Ошибка добавления", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+            this.Hide();
         }
     }
 }
