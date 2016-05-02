@@ -138,6 +138,7 @@
             this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "AdminForm";
             this.Text = "AdminForm";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.AdminForm_FormClosing);
             this.Move += new System.EventHandler(this.AdminForm_Move);
             this.contextMenuStrip1.ResumeLayout(false);
             this.ResumeLayout(false);

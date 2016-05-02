@@ -77,7 +77,11 @@ namespace pctesting
 
         private void UserForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            trafficWatcher.Stop();
+            if (e.CloseReason == CloseReason.UserClosing)
+            {
+                e.Cancel = true;
+                this.Hide();
+            }
         }
 
         private void exitButton_Click(object sender, EventArgs e)
