@@ -78,6 +78,5 @@ namespace pctesting
                 this.Hide();
             }
         }
-       
     }
 }

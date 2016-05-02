@@ -37,7 +37,7 @@ namespace pctesting
             Application.Exit();
         }
 
-        private void notifyIcon1_MouseDoubleClick(object sender, MouseEventArgs e)
+        private void pctetingIcon_MouseDoubleClick(object sender, MouseEventArgs e)
         {
             this.Show();
         }
