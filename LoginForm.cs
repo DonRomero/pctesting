@@ -1,18 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using pctesting.DBService;
+using System.IO;
 
 namespace pctesting
 {
     public partial class LoginForm : Form
     {
+        string diskLetter = Path.GetPathRoot(Environment.GetFolderPath(Environment.SpecialFolder.System));
+
         public LoginForm()
         {
             InitializeComponent();
@@ -21,13 +17,31 @@ namespace pctesting
         private void LoginButton_Click(object sender, EventArgs e)
         {
             DBService.DataServiceClient client = new DataServiceClient();
-             string IP = System.Net.Dns.GetHostEntry(System.Net.Dns.GetHostName()).AddressList[0].ToString();
+            string compName;// = System.Net.Dns.GetHostEntry(System.Net.Dns.GetHostName()).AddressList[0].ToString();
+            if (!Directory.Exists(diskLetter + @"pctesting"))
+                Directory.CreateDirectory(diskLetter + @"pctesting");
+            if (!File.Exists(diskLetter + @"pctesting\guid.txt"))
+            { 
+                using (System.IO.StreamWriter file = new System.IO.StreamWriter(diskLetter + @"pctesting\guid.txt"))
+                {
+                    Guid guid = new Guid(Environment.MachineName);
+                    file.WriteLine(guid.ToString());
+                    compName = guid.ToString();
+                }
+            }
+            else
+            {
+                using (System.IO.StreamReader file = new System.IO.StreamReader(diskLetter + @"pctesting\guid.txt"))
+                {
+                    compName = file.ReadLine();
+                }
+            }
             if (loginTextBox.Text.Equals("") | passwordTextBox.Text.Equals(""))
                 MessageBox.Show("Введите корректные данные!", "Некорректный ввод", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             else
                 try
                 {
-                    switch (client.login(loginTextBox.Text, passwordTextBox.Text, IP))
+                    switch (client.login(loginTextBox.Text, passwordTextBox.Text, compName))
                     {
                         case "user":
                             new UserForm(loginTextBox.Text).Show();
@@ -42,7 +56,7 @@ namespace pctesting
                             break;
                     }
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
                     MessageBox.Show("Возникла ошибка подключения!\nПроверьте работоспособность сервера.", "Ошибка подключения", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
