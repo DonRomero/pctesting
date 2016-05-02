@@ -61,7 +61,7 @@ namespace pctesting
         /// </summary>
         public KeyHook()
         {
-            hook();
+            //hook();
         }
 
         /// <summary>

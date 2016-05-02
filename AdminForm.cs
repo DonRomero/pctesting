@@ -55,5 +55,29 @@ namespace pctesting
             new AddUserForm().ShowDialog();
             getUsers();
         }
+
+        private void openToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.Show();
+        }
+
+        private void pctestingIcon_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            this.Show();
+        }
+
+        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
+        private void AdminForm_Move(object sender, EventArgs e)
+        {
+            if (this.WindowState == FormWindowState.Minimized)
+            {
+                this.Hide();
+            }
+        }
+       
     }
 }
