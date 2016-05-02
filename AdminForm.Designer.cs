@@ -34,8 +34,6 @@
             this.reportButton = new System.Windows.Forms.Button();
             this.backupButton = new System.Windows.Forms.Button();
             this.addUserButton = new System.Windows.Forms.Button();
-            this.reportLabel = new System.Windows.Forms.Label();
-            this.reportComboBox = new System.Windows.Forms.ComboBox();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -85,44 +83,26 @@
             this.addUserButton.UseVisualStyleBackColor = true;
             this.addUserButton.Click += new System.EventHandler(this.addUserButton_Click);
             // 
-            // reportLabel
-            // 
-            this.reportLabel.AutoSize = true;
-            this.reportLabel.Location = new System.Drawing.Point(9, 112);
-            this.reportLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.reportLabel.Name = "reportLabel";
-            this.reportLabel.Size = new System.Drawing.Size(122, 13);
-            this.reportLabel.TabIndex = 4;
-            this.reportLabel.Text = "Отчёт о пользователе:";
-            // 
-            // reportComboBox
-            // 
-            this.reportComboBox.FormattingEnabled = true;
-            this.reportComboBox.Location = new System.Drawing.Point(11, 128);
-            this.reportComboBox.Margin = new System.Windows.Forms.Padding(2);
-            this.reportComboBox.Name = "reportComboBox";
-            this.reportComboBox.Size = new System.Drawing.Size(189, 21);
-            this.reportComboBox.TabIndex = 5;
-            // 
             // contextMenuStrip1
             // 
+            this.contextMenuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.openToolStripMenuItem,
             this.exitToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(104, 48);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(121, 56);
             // 
             // openToolStripMenuItem
             // 
             this.openToolStripMenuItem.Name = "openToolStripMenuItem";
-            this.openToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
+            this.openToolStripMenuItem.Size = new System.Drawing.Size(120, 26);
             this.openToolStripMenuItem.Text = "Open";
             this.openToolStripMenuItem.Click += new System.EventHandler(this.openToolStripMenuItem_Click);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(120, 26);
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
@@ -139,8 +119,6 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(282, 153);
-            this.Controls.Add(this.reportComboBox);
-            this.Controls.Add(this.reportLabel);
             this.Controls.Add(this.addUserButton);
             this.Controls.Add(this.backupButton);
             this.Controls.Add(this.reportButton);
@@ -152,7 +130,6 @@
             this.Move += new System.EventHandler(this.AdminForm_Move);
             this.contextMenuStrip1.ResumeLayout(false);
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -162,8 +139,6 @@
         private System.Windows.Forms.Button reportButton;
         private System.Windows.Forms.Button backupButton;
         private System.Windows.Forms.Button addUserButton;
-        private System.Windows.Forms.Label reportLabel;
-        private System.Windows.Forms.ComboBox reportComboBox;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.ToolStripMenuItem openToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
