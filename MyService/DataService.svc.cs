@@ -144,8 +144,8 @@ namespace MyService
         public void saveFileDataToDB(string name, string path, long time, string type, string comp, string user)
         {
             sql.Open();
-            SQLiteCommand scComp = new SQLiteCommand("SELECT ID FROM COMPUTER WHERE NAME = " + comp + ";", sql);
-            SQLiteCommand scUser = new SQLiteCommand("SELECT ID FROM USER WHERE NAME = " + user + ";", sql);
+            SQLiteCommand scComp = new SQLiteCommand("SELECT ID FROM COMPUTER WHERE NAME = '" + comp + "';", sql);
+            SQLiteCommand scUser = new SQLiteCommand("SELECT ID FROM USER WHERE NAME = '" + user + "';", sql);
             execute(String.Format("INSERT INTO FILE VALUES( NULL, '{0}', '{1}', {2}, '{3}', {4}, {5});", name, path, time, type, Convert.ToInt32(scComp.ExecuteScalar()), Convert.ToInt32(scUser.ExecuteScalar())), sql);
             sql.Close();
         }
@@ -153,9 +153,9 @@ namespace MyService
         public void saveTrafficDataToDB(string URL, long time, string comp, string user)
         {
             sql.Open();
-            SQLiteCommand scComp = new SQLiteCommand("SELECT ID FROM COMPUTER WHERE NAME = " + comp + ";", sql);
-            SQLiteCommand scUser = new SQLiteCommand("SELECT ID FROM USER WHERE NAME = " + user + ";", sql);
-            execute("INSERT INTO TRAFFIC VALUES( NULL, '" + URL + "'," + time + "," + scComp.ExecuteScalar().ToString() + "," + scUser.ExecuteScalar().ToString() + ");", sql);
+            SQLiteCommand scComp = new SQLiteCommand("SELECT ID FROM COMPUTER WHERE NAME = '" + comp + "';", sql);
+            SQLiteCommand scUser = new SQLiteCommand("SELECT ID FROM USER WHERE NAME = '" + user + "';", sql);
+            execute("INSERT INTO TRAFFIC VALUES( NULL, '" + URL + "'," + time + "," + Convert.ToInt32(scComp.ExecuteScalar()) + "," + Convert.ToInt32(scUser.ExecuteScalar()) + ");", sql);
             sql.Close();
         }
         public void SaveActivityToDB(DateTime AllTime, DateTime ActivityTime, DateTime NotActivityTime, int compID, int userID)

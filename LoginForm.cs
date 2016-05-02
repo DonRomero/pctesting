@@ -24,9 +24,8 @@ namespace pctesting
             { 
                 using (System.IO.StreamWriter file = new System.IO.StreamWriter(diskLetter + @"pctesting\guid.txt"))
                 {
-                    Guid guid = new Guid();
-                    file.WriteLine(guid.ToString());
-                    compName = guid.ToString();
+                    compName = Guid.NewGuid().ToString();
+                    file.WriteLine(compName);
                 }
             }
             else

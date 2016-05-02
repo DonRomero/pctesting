@@ -7,7 +7,7 @@ namespace pctesting
     class FileManager
     {
         static string comp, user;
-        public FileManager(string c, string u)
+        public FileManager(string u, string c)
         {
             comp = c;
             user = u;
