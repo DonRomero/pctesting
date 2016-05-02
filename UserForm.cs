@@ -50,7 +50,7 @@ namespace pctesting
             }
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void testButton_Click(object sender, EventArgs e)
         {
             CheckEnable enable = new CheckEnable();
             HardwareInfo hardware = new HardwareInfo();
@@ -196,7 +196,12 @@ namespace pctesting
         private void UserForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             trafficWatcher.Stop();
-            Application.Exit();
+        }
+
+        private void exitButton_Click(object sender, EventArgs e)
+        {
+            new LoginForm().Show();
+            this.Close();
         }
     }
 }

@@ -34,8 +34,9 @@
             this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pctestingIcon = new System.Windows.Forms.NotifyIcon(this.components);
-            this.button1 = new System.Windows.Forms.Button();
+            this.testButton = new System.Windows.Forms.Button();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.exitButton = new System.Windows.Forms.Button();
             this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -46,19 +47,19 @@
             this.openToolStripMenuItem,
             this.exitToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(104, 48);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(121, 56);
             // 
             // openToolStripMenuItem
             // 
             this.openToolStripMenuItem.Name = "openToolStripMenuItem";
-            this.openToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
+            this.openToolStripMenuItem.Size = new System.Drawing.Size(120, 26);
             this.openToolStripMenuItem.Text = "Open";
             this.openToolStripMenuItem.Click += new System.EventHandler(this.openToolStripMenuItem_Click);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(120, 26);
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
@@ -70,15 +71,16 @@
             this.pctestingIcon.Visible = true;
             this.pctestingIcon.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.pctetingIcon_MouseDoubleClick);
             // 
-            // button1
+            // testButton
             // 
-            this.button1.Location = new System.Drawing.Point(11, 31);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(188, 21);
-            this.button1.TabIndex = 1;
-            this.button1.Text = "Тестировать пк";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.testButton.Location = new System.Drawing.Point(15, 13);
+            this.testButton.Margin = new System.Windows.Forms.Padding(4);
+            this.testButton.Name = "testButton";
+            this.testButton.Size = new System.Drawing.Size(251, 30);
+            this.testButton.TabIndex = 1;
+            this.testButton.Text = "Тестировать компьютер";
+            this.testButton.UseVisualStyleBackColor = true;
+            this.testButton.Click += new System.EventHandler(this.testButton_Click);
             // 
             // timer1
             // 
@@ -86,12 +88,24 @@
             this.timer1.Interval = 1000;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
+            // exitButton
+            // 
+            this.exitButton.Location = new System.Drawing.Point(15, 50);
+            this.exitButton.Name = "exitButton";
+            this.exitButton.Size = new System.Drawing.Size(251, 30);
+            this.exitButton.TabIndex = 2;
+            this.exitButton.Text = "Назад";
+            this.exitButton.UseVisualStyleBackColor = true;
+            this.exitButton.Click += new System.EventHandler(this.exitButton_Click);
+            // 
             // UserForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(212, 84);
-            this.Controls.Add(this.button1);
+            this.ClientSize = new System.Drawing.Size(283, 88);
+            this.Controls.Add(this.exitButton);
+            this.Controls.Add(this.testButton);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "UserForm";
             this.Text = "User";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.UserForm_FormClosing);
@@ -108,8 +122,9 @@
         private System.Windows.Forms.ToolStripMenuItem openToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
         private System.Windows.Forms.NotifyIcon pctestingIcon;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button testButton;
         private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.Button exitButton;
     }
 }
 

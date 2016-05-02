@@ -24,7 +24,7 @@ namespace pctesting
             { 
                 using (System.IO.StreamWriter file = new System.IO.StreamWriter(diskLetter + @"pctesting\guid.txt"))
                 {
-                    Guid guid = new Guid(Environment.MachineName);
+                    Guid guid = new Guid();
                     file.WriteLine(guid.ToString());
                     compName = guid.ToString();
                 }
@@ -60,6 +60,16 @@ namespace pctesting
                 {
                     MessageBox.Show("Возникла ошибка подключения!\nПроверьте работоспособность сервера.", "Ошибка подключения", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
+        }
+
+        private void exitButton_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
+        private void LoginForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Application.Exit();
         }
     }
 }

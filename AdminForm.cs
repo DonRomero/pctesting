@@ -17,43 +17,6 @@ namespace pctesting
         public AdminForm(string userName)
         {
             InitializeComponent();
-            getUsers();
-        }
-
-        private void getUsers()
-        {
-            string[] users = client.getUsers();
-            reportComboBox.DataSource = users;
-        }
-
-        private void AdminForm_FormClosed(object sender, FormClosedEventArgs e)
-        {
-            Application.Exit();
-        }
-
-        private void reportButton_Click(object sender, EventArgs e)
-        {
-            if (reportComboBox.Items.Count == 0)
-            {
-                MessageBox.Show("В системе отсутствуют пользователи!", "Нет пользователей", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-            }
-            else
-            {
-                if (client.makeReport(reportComboBox.SelectedItem.ToString()))
-                {
-                    MessageBox.Show("Отчёты успешно сохранены.", "Отчёты сохранены");
-                }
-                else
-                {
-                    MessageBox.Show("Возникла ошибка сохранения отчётов!", "Ошибка сохранения", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-            }
-        }
-
-        private void addUserButton_Click(object sender, EventArgs e)
-        {
-            new AddUserForm().ShowDialog();
-            getUsers();
         }
 
         private void openToolStripMenuItem_Click(object sender, EventArgs e)
@@ -77,6 +40,12 @@ namespace pctesting
             {
                 this.Hide();
             }
+        }
+
+        private void exitButton_Click(object sender, EventArgs e)
+        {
+            new LoginForm().Show();
+            this.Close();
         }
     }
 }

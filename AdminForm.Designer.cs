@@ -38,6 +38,7 @@
             this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pctestingIcon = new System.Windows.Forms.NotifyIcon(this.components);
+            this.exitButton = new System.Windows.Forms.Button();
             this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -60,7 +61,6 @@
             this.reportButton.TabIndex = 1;
             this.reportButton.Text = "Сформировать отчёты";
             this.reportButton.UseVisualStyleBackColor = true;
-            this.reportButton.Click += new System.EventHandler(this.reportButton_Click);
             // 
             // backupButton
             // 
@@ -81,7 +81,6 @@
             this.addUserButton.TabIndex = 3;
             this.addUserButton.Text = "Добавить пользователя";
             this.addUserButton.UseVisualStyleBackColor = true;
-            this.addUserButton.Click += new System.EventHandler(this.addUserButton_Click);
             // 
             // contextMenuStrip1
             // 
@@ -114,11 +113,22 @@
             this.pctestingIcon.Visible = true;
             this.pctestingIcon.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.pctestingIcon_MouseDoubleClick);
             // 
+            // exitButton
+            // 
+            this.exitButton.Location = new System.Drawing.Point(15, 151);
+            this.exitButton.Name = "exitButton";
+            this.exitButton.Size = new System.Drawing.Size(251, 30);
+            this.exitButton.TabIndex = 4;
+            this.exitButton.Text = "Назад";
+            this.exitButton.UseVisualStyleBackColor = true;
+            this.exitButton.Click += new System.EventHandler(this.exitButton_Click);
+            // 
             // AdminForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(282, 153);
+            this.ClientSize = new System.Drawing.Size(282, 188);
+            this.Controls.Add(this.exitButton);
             this.Controls.Add(this.addUserButton);
             this.Controls.Add(this.backupButton);
             this.Controls.Add(this.reportButton);
@@ -126,7 +136,6 @@
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "AdminForm";
             this.Text = "AdminForm";
-            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.AdminForm_FormClosed);
             this.Move += new System.EventHandler(this.AdminForm_Move);
             this.contextMenuStrip1.ResumeLayout(false);
             this.ResumeLayout(false);
@@ -143,5 +152,6 @@
         private System.Windows.Forms.ToolStripMenuItem openToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
         private System.Windows.Forms.NotifyIcon pctestingIcon;
+        private System.Windows.Forms.Button exitButton;
     }
 }
