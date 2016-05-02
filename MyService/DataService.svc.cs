@@ -48,7 +48,7 @@ namespace MyService
                 SQLiteCommand sc = new SQLiteCommand("SELECT COUNT(*) FROM USER WHERE NAME = '" + name + "';", sql);
                 if (Convert.ToInt32(sc.ExecuteScalar()) > 0)
                     return false;
-                sc = new SQLiteCommand(String.Format("INSERT INTO USER VALUES(NULL, '{0}', '{1}', {2})", name, password, 0), sql);
+                execute(String.Format("INSERT INTO USER VALUES(NULL, '{0}', '{1}', {2});", name, password, 0), sql);
                 sql.Close();
                 return true;
             }
@@ -58,12 +58,12 @@ namespace MyService
             }
         }
 
-        public bool makeReport()
+        public bool makeReport(string name)
         {
             try
             {
-                report.makeFileReport();
-                report.makeTrafficReport();
+                report.makeFileReport(name);
+                report.makeTrafficReport(name);
                 return true;
             }
             catch (Exception ex)
@@ -112,7 +112,11 @@ namespace MyService
                 //    SQLiteConnection.CreateFile(@"mydb.sqlite");//файл хранится в папке с IIS Express
                 execute("CREATE TABLE IF NOT EXISTS COMPUTER(id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT);", sql);
                 execute("CREATE TABLE IF NOT EXISTS USER(id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, password TEXT, admin INTEGER);", sql);
-                execute("INSERT INTO USER VALUES(NULL, '" + adminLogin + "', '" + adminPassword + "', " + 1 + ");", sql);
+                SQLiteCommand sc = new SQLiteCommand("SELECT COUNT(*) FROM USER WHERE NAME = 'admin';", sql);
+                if(Convert.ToInt32(sc.ExecuteScalar())==0)
+                {
+                    execute("INSERT INTO USER VALUES(NULL, '" + adminLogin + "', '" + adminPassword + "', " + 1 + ");", sql);
+                }
                 execute("CREATE TABLE IF NOT EXISTS FILE(id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, path TEXT, time INTEGER, type TEXT, computerID INTEGER, userID INTEGER, " +
                     fk_computer + ", " +
                     fk_user + ";", sql);

@@ -46,10 +46,10 @@ namespace pctesting.DBService {
         System.Threading.Tasks.Task SaveProcessesToDBAsync(string Name, System.DateTime StartTime, System.DateTime ExitTime, System.DateTime GeneralTime, int compID, int userID);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDataService/makeReport", ReplyAction="http://tempuri.org/IDataService/makeReportResponse")]
-        bool makeReport();
+        bool makeReport(string name);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDataService/makeReport", ReplyAction="http://tempuri.org/IDataService/makeReportResponse")]
-        System.Threading.Tasks.Task<bool> makeReportAsync();
+        System.Threading.Tasks.Task<bool> makeReportAsync(string name);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDataService/addUser", ReplyAction="http://tempuri.org/IDataService/addUserResponse")]
         bool addUser(string name, string password);
@@ -131,12 +131,12 @@ namespace pctesting.DBService {
             return base.Channel.SaveProcessesToDBAsync(Name, StartTime, ExitTime, GeneralTime, compID, userID);
         }
         
-        public bool makeReport() {
-            return base.Channel.makeReport();
+        public bool makeReport(string name) {
+            return base.Channel.makeReport(name);
         }
         
-        public System.Threading.Tasks.Task<bool> makeReportAsync() {
-            return base.Channel.makeReportAsync();
+        public System.Threading.Tasks.Task<bool> makeReportAsync(string name) {
+            return base.Channel.makeReportAsync(name);
         }
         
         public bool addUser(string name, string password) {
