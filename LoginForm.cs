@@ -44,11 +44,11 @@ namespace pctesting
                     switch (client.login(loginTextBox.Text, passwordTextBox.Text, compName))
                     {
                         case "user":
-                            new UserForm(loginTextBox.Text).Show();
+                            new UserForm(loginTextBox.Text, compName).Show();
                             this.Hide();
                             break;
                         case "admin":
-                            new AdminForm(loginTextBox.Text).Show();
+                            new AdminForm(loginTextBox.Text, compName).Show();
                             this.Hide();
                             break;
                         default:
