@@ -45,20 +45,20 @@
             // 
             // testButton
             // 
-            this.testButton.Location = new System.Drawing.Point(11, 10);
-            this.testButton.Margin = new System.Windows.Forms.Padding(2);
+            this.testButton.Location = new System.Drawing.Point(15, 12);
+            this.testButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.testButton.Name = "testButton";
-            this.testButton.Size = new System.Drawing.Size(188, 24);
+            this.testButton.Size = new System.Drawing.Size(251, 30);
             this.testButton.TabIndex = 0;
             this.testButton.Text = "Тестировать компьютер";
             this.testButton.UseVisualStyleBackColor = true;
             // 
             // reportButton
             // 
-            this.reportButton.Location = new System.Drawing.Point(11, 152);
-            this.reportButton.Margin = new System.Windows.Forms.Padding(2);
+            this.reportButton.Location = new System.Drawing.Point(15, 116);
+            this.reportButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.reportButton.Name = "reportButton";
-            this.reportButton.Size = new System.Drawing.Size(188, 24);
+            this.reportButton.Size = new System.Drawing.Size(251, 30);
             this.reportButton.TabIndex = 1;
             this.reportButton.Text = "Сформировать отчёты";
             this.reportButton.UseVisualStyleBackColor = true;
@@ -66,20 +66,20 @@
             // 
             // backupButton
             // 
-            this.backupButton.Location = new System.Drawing.Point(11, 37);
-            this.backupButton.Margin = new System.Windows.Forms.Padding(2);
+            this.backupButton.Location = new System.Drawing.Point(15, 46);
+            this.backupButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.backupButton.Name = "backupButton";
-            this.backupButton.Size = new System.Drawing.Size(188, 24);
+            this.backupButton.Size = new System.Drawing.Size(251, 30);
             this.backupButton.TabIndex = 2;
             this.backupButton.Text = "Бекап Базы Данных";
             this.backupButton.UseVisualStyleBackColor = true;
             // 
             // addUserButton
             // 
-            this.addUserButton.Location = new System.Drawing.Point(11, 66);
+            this.addUserButton.Location = new System.Drawing.Point(15, 81);
             this.addUserButton.Margin = new System.Windows.Forms.Padding(2);
             this.addUserButton.Name = "addUserButton";
-            this.addUserButton.Size = new System.Drawing.Size(188, 24);
+            this.addUserButton.Size = new System.Drawing.Size(251, 30);
             this.addUserButton.TabIndex = 3;
             this.addUserButton.Text = "Добавить пользователя";
             this.addUserButton.UseVisualStyleBackColor = true;
@@ -136,16 +136,16 @@
             // 
             // AdminForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(212, 185);
+            this.ClientSize = new System.Drawing.Size(282, 153);
             this.Controls.Add(this.reportComboBox);
             this.Controls.Add(this.reportLabel);
             this.Controls.Add(this.addUserButton);
             this.Controls.Add(this.backupButton);
             this.Controls.Add(this.reportButton);
             this.Controls.Add(this.testButton);
-            this.Margin = new System.Windows.Forms.Padding(2);
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "AdminForm";
             this.Text = "AdminForm";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.AdminForm_FormClosed);

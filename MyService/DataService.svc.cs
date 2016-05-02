@@ -58,12 +58,11 @@ namespace MyService
             }
         }
 
-        public bool makeReport(string name)
+        public bool makeReport()
         {
             try
             {
-                report.makeFileReport(name);
-                report.makeTrafficReport(name);
+                report.makeReport();
                 return true;
             }
             catch (Exception ex)

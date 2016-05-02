@@ -25,9 +25,29 @@ namespace MyService
             sql = new SQLiteConnection("DataSource = " + root + @"pctesting\mydb.sqlite;Version=3");
         }
 
-        public void makeTrafficReport(string name)
+        public void makeReport()
         {
-            SQLiteCommand sc = new SQLiteCommand("SELECT * FROM TRAFFIC T JOIN USER U ON T.USERID = U.ID JOIN COMPUTER C ON C.ID = T.COMPUTERID WHERE U.NAME = '" + name + "';", sql);
+            SQLiteCommand sc = new SQLiteCommand("SELECT NAME FROM USERS;", sql);
+            SQLiteDataReader reader = sc.ExecuteReader();
+            while(reader.Read())
+            {
+                string name = reader.GetString(0);
+                makeTrafficReport(name, "user");
+                makeFileReport(name, "user");
+            }
+            sc = new SQLiteCommand("SELECT NAME FROM COMPUTERS;", sql);
+            reader = sc.ExecuteReader();
+            while (reader.Read())
+            {
+                string name = reader.GetString(0);
+                makeTrafficReport(name, "computer");
+                makeFileReport(name, "computer");
+            }
+        }
+
+        private void makeTrafficReport(string name, string type)
+        {
+            SQLiteCommand sc = new SQLiteCommand("SELECT * FROM TRAFFIC T JOIN USER U ON T.USERID = U.ID WHERE U.NAME = '" + name + "';", sql);
             sql.Open();
             SQLiteDataReader sdr = sc.ExecuteReader();
             DataTable dt = new DataTable();
@@ -59,7 +79,7 @@ namespace MyService
             sql.Close();
         }
 
-        public void makeFileReport(string name)
+        private void makeFileReport(string name, string type)
         {
             SQLiteCommand sc = new SQLiteCommand("SELECT * FROM FILE;", sql);
             sql.Open();
