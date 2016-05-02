@@ -82,6 +82,7 @@
             this.addUserButton.TabIndex = 3;
             this.addUserButton.Text = "Добавить пользователя";
             this.addUserButton.UseVisualStyleBackColor = true;
+            this.addUserButton.Click += new System.EventHandler(this.addUserButton_Click);
             // 
             // contextMenuStrip1
             // 

@@ -61,5 +61,10 @@ namespace pctesting
                 this.Hide();
             }
         }
+
+        private void addUserButton_Click(object sender, EventArgs e)
+        {
+            new AddUserForm().ShowDialog();
+        }
     }
 }
