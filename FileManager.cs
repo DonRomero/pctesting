@@ -48,13 +48,13 @@ namespace pctesting
         private static void OnChanged(object source, FileSystemEventArgs e)
         {
             DBService.DataServiceClient client = new DataServiceClient();
-            client.saveFileDataToDB(e.Name, e.FullPath, (int)DateTime.Now.Ticks/10000, e.ChangeType.ToString(), comp, user);
+            client.saveFileDataToDB(e.Name, e.FullPath, (long)DateTime.Now.Ticks/10000, e.ChangeType.ToString(), comp, user);
         }
 
         private static void OnRenamed(object source, RenamedEventArgs e)
         {
             DBService.DataServiceClient client = new DataServiceClient();
-            client.saveFileDataToDB(e.Name, e.FullPath, (int)DateTime.Now.Ticks/10000, e.ChangeType.ToString(), comp, user);
+            client.saveFileDataToDB(e.Name, e.FullPath, (long)DateTime.Now.Ticks/10000, e.ChangeType.ToString(), comp, user);
         }
     }
 }
