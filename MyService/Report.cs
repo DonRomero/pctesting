@@ -109,7 +109,6 @@ namespace MyService
                 table.AddCell(dt.Rows[i][1].ToString());
                 table.AddCell(new DateTime(Convert.ToInt64(dt.Rows[i][2])).ToString());
                 //TODO добавить типы работы с файлами
-                string type = "";
                 switch(dt.Rows[i][3].ToString())
                 {
                     case "":

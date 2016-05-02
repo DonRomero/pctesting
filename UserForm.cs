@@ -18,11 +18,11 @@ namespace pctesting
         TrafficManager trafficWatcher;
         ProcessControl process = new ProcessControl();
         KeyHook kh = new KeyHook();
-        public UserForm(string userName)
+        public UserForm(string userName, string compName)
         {
             InitializeComponent();
-            fileWatcher = new FileManager(Environment.MachineName, userName);
-            trafficWatcher = new TrafficManager(Environment.MachineName, userName);
+            fileWatcher = new FileManager(userName, compName);
+            trafficWatcher = new TrafficManager(userName, compName);
             fileWatcher.watch();
             trafficWatcher.Start();
         }
@@ -200,6 +200,7 @@ namespace pctesting
 
         private void exitButton_Click(object sender, EventArgs e)
         {
+            trafficWatcher.Stop();
             new LoginForm().Show();
             this.Close();
         }

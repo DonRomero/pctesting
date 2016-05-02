@@ -10,7 +10,7 @@ namespace pctesting
         private UrlCaptureConfiguration CaptureConfiguration { get; set; }
         string comp, user;
 
-        public TrafficManager(string comp, string user)
+        public TrafficManager(string user, string comp)
         {
             CaptureConfiguration = new UrlCaptureConfiguration();  // this usually comes from configuration settings
             this.comp = comp;
