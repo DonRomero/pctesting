@@ -14,7 +14,7 @@ namespace pctesting
     public partial class AdminForm : Form
     {
         DBService.DataServiceClient client = new DataServiceClient();
-        public AdminForm(string userName)
+        public AdminForm(string userName, string compName)
         {
             InitializeComponent();
         }
