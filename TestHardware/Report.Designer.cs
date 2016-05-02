@@ -38,6 +38,7 @@
             this.textBox3 = new System.Windows.Forms.TextBox();
             this.textBox4 = new System.Windows.Forms.TextBox();
             this.textBox5 = new System.Windows.Forms.TextBox();
+            this.FinalReport = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label1
@@ -125,11 +126,21 @@
             this.textBox5.Size = new System.Drawing.Size(148, 20);
             this.textBox5.TabIndex = 9;
             // 
+            // FinalReport
+            // 
+            this.FinalReport.AutoSize = true;
+            this.FinalReport.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.FinalReport.Location = new System.Drawing.Point(29, 201);
+            this.FinalReport.Name = "FinalReport";
+            this.FinalReport.Size = new System.Drawing.Size(0, 20);
+            this.FinalReport.TabIndex = 10;
+            // 
             // Report
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(506, 285);
+            this.ClientSize = new System.Drawing.Size(624, 348);
+            this.Controls.Add(this.FinalReport);
             this.Controls.Add(this.textBox5);
             this.Controls.Add(this.textBox4);
             this.Controls.Add(this.textBox3);
@@ -160,5 +171,6 @@
         private System.Windows.Forms.TextBox textBox3;
         private System.Windows.Forms.TextBox textBox4;
         private System.Windows.Forms.TextBox textBox5;
+        private System.Windows.Forms.Label FinalReport;
     }
 }

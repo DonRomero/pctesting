@@ -107,6 +107,7 @@
     </Compile>
     <Compile Include="FileManager.cs" />
     <Compile Include="KeyHook.cs" />
+    <Compile Include="TestHardware\Algorithm.cs" />
     <Compile Include="TestHardware\CheckEnable.cs" />
     <Compile Include="TestHardware\HardwareInfo.cs" />
     <Compile Include="TestHardware\MyThread.cs" />
@@ -212,6 +213,9 @@
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="DirectXdll\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

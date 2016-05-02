@@ -47,5 +47,10 @@ namespace pctesting
             new LoginForm().Show();
             this.Close();
         }
+
+        private void testButton_Click(object sender, EventArgs e)
+        {
+            TestHardware.Algorithm.BeginTest();
+        }
     }
 }
