@@ -158,16 +158,20 @@ namespace MyService
             execute("INSERT INTO TRAFFIC VALUES( NULL, '" + URL + "'," + time + "," + Convert.ToInt32(scComp.ExecuteScalar()) + "," + Convert.ToInt32(scUser.ExecuteScalar()) + ");", sql);
             sql.Close();
         }
-        public void SaveActivityToDB(DateTime AllTime, DateTime ActivityTime, DateTime NotActivityTime, int compID, int userID)
+        public void SaveActivityToDB(DateTime AllTime, DateTime ActivityTime, DateTime NotActivityTime, string comp, string user)
         {
             sql.Open();
-            execute("INSERT INTO TRAFFIC VALUES(NULL, " + AllTime + ", " + ActivityTime + ", " + NotActivityTime + ", " + compID + ", " + userID + ");", sql);
+            SQLiteCommand scComp = new SQLiteCommand("SELECT ID FROM COMPUTER WHERE NAME = '" + comp + "';", sql);
+            SQLiteCommand scUser = new SQLiteCommand("SELECT ID FROM USER WHERE NAME = '" + user + "';", sql);
+            execute("INSERT INTO TRAFFIC VALUES(NULL, " + AllTime + ", " + ActivityTime + ", " + NotActivityTime + ", " + Convert.ToInt32(scComp.ExecuteScalar()) + ", " + Convert.ToInt32(scUser.ExecuteScalar()) + ");", sql);
             sql.Close();
         }
-        public void SaveProcessesToDB(string Name, DateTime StartTime, DateTime FinishTime, DateTime AllTime,int compID, int userID)
+        public void SaveProcessesToDB(string Name, DateTime StartTime, DateTime FinishTime, TimeSpan GeneralTime,string comp, string user)
         {
             sql.Open();
-            execute("INSERT INTO TRAFFIC VALUES(NULL, '" + Name + "', " + StartTime + ", " + FinishTime + ", " + AllTime + "," + compID + "," + userID + ");", sql);
+            SQLiteCommand scComp = new SQLiteCommand("SELECT ID FROM COMPUTER WHERE NAME = '" + comp + "';", sql);
+            SQLiteCommand scUser = new SQLiteCommand("SELECT ID FROM USER WHERE NAME = '" + user + "';", sql);
+            execute("INSERT INTO TRAFFIC VALUES(NULL, '" + Name + "', " + StartTime + ", " + FinishTime + ", " + GeneralTime + "," + Convert.ToInt32(scComp.ExecuteScalar()) + "," + Convert.ToInt32(scUser.ExecuteScalar()) + ");", sql);
             sql.Close();
         }
     }

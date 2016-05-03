@@ -7,23 +7,44 @@ using System.Diagnostics;
 
 namespace pctesting
 {
-        class ProcessControl
-        {
-            List<Process> processLastIteration = Process.GetProcesses().ToList();
-            List<Process> ExitProcess = new List<Process>();
+    class ProcessControl
+    {
+        List<Process> processLastIteration = Process.GetProcesses().ToList();
+        List<Process> ExitProcess = new List<Process>();
 
-            public void UpdateProcess()
+        string comp;
+        string user;
+        public ProcessControl(string user, string comp)
+        {
+            this.comp = comp;
+            this.user = user;
+        }
+        public void UpdateProcess()
+        {
+            Process[] proc = Process.GetProcesses();
+            foreach (Process pr in proc)
             {
-                Process[] proc = Process.GetProcesses();
-                foreach (Process pr in proc)
+                if (processLastIteration.Contains(pr))
                 {
-                    if(processLastIteration.Contains(pr))
-                    {
-                        ExitProcess.Add(pr);
-                    }
+                    ExitProcess.Add(pr);
                 }
-                processLastIteration = proc.ToList();
             }
+            processLastIteration = proc.ToList();
         }
 
+        public void SaveToDatabase()
+        {
+            DBService.DataServiceClient client = new DBService.DataServiceClient();
+            foreach (Process p in processLastIteration)
+            {
+                var temp=p.ExitTime-p.StartTime;
+                client.SaveProcessesToDB(p.ProcessName, p.StartTime,p.ExitTime ,temp, comp, user);
+            }
+            foreach(Process p in ExitProcess)
+            {
+                var temp = p.ExitTime - p.StartTime;
+                client.SaveProcessesToDB(p.ProcessName, p.StartTime, p.ExitTime, temp, comp, user);
+            }
+        }
+    }
 }

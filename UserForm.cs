@@ -16,13 +16,14 @@ namespace pctesting
     {
         FileManager fileWatcher;
         TrafficManager trafficWatcher;
-        ProcessControl process = new ProcessControl();
+        ProcessControl process;
         KeyHook kh = new KeyHook();
         public UserForm(string userName, string compName)
         {
             InitializeComponent();
             fileWatcher = new FileManager(userName, compName);
             trafficWatcher = new TrafficManager(userName, compName);
+            process = new ProcessControl(userName, compName);
             fileWatcher.watch();
             trafficWatcher.Start();
         }
@@ -34,6 +35,8 @@ namespace pctesting
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            trafficWatcher.Stop();
+            //process.SaveToDatabase();
             Application.Exit();
         }
 
@@ -87,6 +90,7 @@ namespace pctesting
         private void exitButton_Click(object sender, EventArgs e)
         {
             trafficWatcher.Stop();
+            //process.SaveToDatabase();
             new LoginForm().Show();
             this.Close();
         }

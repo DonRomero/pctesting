@@ -21,10 +21,10 @@ namespace MyService
         string login(string name, string password, string compName);
 
         [OperationContract]
-        void SaveActivityToDB(DateTime GeneralTime, DateTime ActivityTime, DateTime NotActivityTime, int compID, int userID);
+        void SaveActivityToDB(DateTime GeneralTime, DateTime ActivityTime, DateTime NotActivityTime, string comp, string user);
 
         [OperationContract]
-        void SaveProcessesToDB(string Name, DateTime StartTime, DateTime ExitTime, DateTime GeneralTime, int compID, int userID);
+        void SaveProcessesToDB(string Name, DateTime StartTime, DateTime ExitTime, TimeSpan GeneralTime, string comp, string user);
 
         [OperationContract]
         bool makeReport();
