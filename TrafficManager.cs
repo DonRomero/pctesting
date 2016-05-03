@@ -67,6 +67,7 @@ namespace pctesting
         public void Start()
         {
             CaptureConfiguration.IgnoreResources = true;
+            InstallCertificate();
 
             FiddlerApplication.AfterSessionComplete += AfterSession;
             FiddlerApplication.Startup(8888, true, true, true);
@@ -80,19 +81,19 @@ namespace pctesting
                 FiddlerApplication.Shutdown();
         }
 
-        //public static bool InstallCertificate()
-        //{
-        //    if (!CertMaker.rootCertExists())
-        //    {
-        //        if (!CertMaker.createRootCert())
-        //            return false;
+        public static bool InstallCertificate()
+        {
+            if (!CertMaker.rootCertExists())
+            {
+                if (!CertMaker.createRootCert())
+                    return false;
 
-        //        if (!CertMaker.trustRootCert())
-        //            return false;
-        //    }
+                if (!CertMaker.trustRootCert())
+                    return false;
+            }
 
-        //    return true;
-        //}
+            return true;
+        }
 
         //public static bool UninstallCertificate()
         //{
