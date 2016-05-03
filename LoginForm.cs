@@ -2,6 +2,7 @@
 using System.Windows.Forms;
 using pctesting.DBService;
 using System.IO;
+using System.Management;
 
 namespace pctesting
 {
@@ -17,23 +18,14 @@ namespace pctesting
         private void LoginButton_Click(object sender, EventArgs e)
         {
             DBService.DataServiceClient client = new DataServiceClient();
-            string compName;// = System.Net.Dns.GetHostEntry(System.Net.Dns.GetHostName()).AddressList[0].ToString();
-            if (!Directory.Exists(diskLetter + @"pctesting"))
-                Directory.CreateDirectory(diskLetter + @"pctesting");
-            if (!File.Exists(diskLetter + @"pctesting\guid.txt"))
-            { 
-                using (System.IO.StreamWriter file = new System.IO.StreamWriter(diskLetter + @"pctesting\guid.txt"))
-                {
-                    compName = Guid.NewGuid().ToString();
-                    file.WriteLine(compName);
-                }
-            }
-            else
+            string compName = "";// = System.Net.Dns.GetHostEntry(System.Net.Dns.GetHostName()).AddressList[0].ToString();
+            ManagementClass mc = new ManagementClass("Win32_NetworkAdapter");
+            ManagementObjectCollection col = mc.GetInstances();
+            foreach (ManagementObject mo in col)
             {
-                using (System.IO.StreamReader file = new System.IO.StreamReader(diskLetter + @"pctesting\guid.txt"))
-                {
-                    compName = file.ReadLine();
-                }
+                string macAddr = mo["MACAddress"] as string;
+                if (macAddr != null && macAddr.Trim() != "")
+                    compName = macAddr;
             }
             if (loginTextBox.Text.Equals("") | passwordTextBox.Text.Equals(""))
                 MessageBox.Show("Введите корректные данные!", "Некорректный ввод", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
