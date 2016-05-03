@@ -27,7 +27,8 @@ namespace MyService
 
         public void makeReport()
         {
-            SQLiteCommand sc = new SQLiteCommand("SELECT NAME FROM USERS;", sql);
+            sql.Open();
+            SQLiteCommand sc = new SQLiteCommand("SELECT NAME FROM USER;", sql);
             SQLiteDataReader reader = sc.ExecuteReader();
             while(reader.Read())
             {
@@ -35,7 +36,7 @@ namespace MyService
                 makeTrafficReport(name, "user");
                 makeFileReport(name, "user");
             }
-            sc = new SQLiteCommand("SELECT NAME FROM COMPUTERS;", sql);
+            sc = new SQLiteCommand("SELECT NAME FROM COMPUTER;", sql);
             reader = sc.ExecuteReader();
             while (reader.Read())
             {
@@ -43,12 +44,21 @@ namespace MyService
                 makeTrafficReport(name, "computer");
                 makeFileReport(name, "computer");
             }
+            sql.Close();
         }
 
         private void makeTrafficReport(string name, string type)
         {
-            SQLiteCommand sc = new SQLiteCommand("SELECT * FROM TRAFFIC T JOIN USER U ON T.USERID = U.ID WHERE U.NAME = '" + name + "';", sql);
-            sql.Open();
+            SQLiteCommand sc = new SQLiteCommand("");
+            switch(type)
+            {
+                case "computer":
+                    sc = new SQLiteCommand("SELECT URL, TIME, USERID FROM TRAFFIC T JOIN COMPUTER C ON T.COMPUTERID = C.ID WHERE C.NAME = '" + name + "';", sql);
+                    break;
+                case "user":
+                    sc = new SQLiteCommand("SELECT URL, TIME, COMPUTERID FROM TRAFFIC T JOIN USER U ON T.USERID = U.ID WHERE U.NAME = '" + name + "' AND ADMIN NOT LIKE 1;", sql);
+                    break;
+            }
             SQLiteDataReader sdr = sc.ExecuteReader();
             DataTable dt = new DataTable();
             dt.Load(sdr);
@@ -56,33 +66,45 @@ namespace MyService
             var doc = new Document();
             PdfWriter.GetInstance(doc, new FileStream(root + @"pctesting\traffic.pdf", FileMode.Create));
             doc.Open();
+            doc.Add(new Paragraph(name));
             PdfPTable table = new PdfPTable(dt.Columns.Count);
             PdfPCell cell = new PdfPCell(new Phrase("URL"));
             table.AddCell(cell);
             cell = new PdfPCell(new Phrase("Время"));
             table.AddCell(cell);
-            cell = new PdfPCell(new Phrase("Компьютер"));
-            table.AddCell(cell);
-            cell = new PdfPCell(new Phrase("Пользователь"));
-            table.AddCell(cell);
+            switch (type)
+            {
+                case "computer":
+                    cell = new PdfPCell(new Phrase("Пользователь"));
+                    table.AddCell(cell);
+                    break;
+                case "user":
+                    cell = new PdfPCell(new Phrase("Компьютер"));
+                    table.AddCell(cell);
+                    break;
+            }
             for (int i = 0; i < dt.Rows.Count; i++)
             {
                 table.AddCell(dt.Rows[i][0].ToString());
                 table.AddCell(new DateTime(Convert.ToInt64(dt.Rows[i][1])).ToString());
-                SQLiteCommand scComp = new SQLiteCommand("SELECT NAME FROM COMPUTER WHERE ID = " + dt.Rows[i][2].ToString() + ";", sql);
-                table.AddCell(scComp.ExecuteScalar().ToString());
-                SQLiteCommand scUser = new SQLiteCommand("SELECT NAME FROM USER WHERE ID = " + dt.Rows[i][3].ToString() + ";", sql);
-                table.AddCell(scUser.ExecuteScalar().ToString());
+                table.AddCell(dt.Rows[i][2].ToString());
             }
             doc.Add(table);
             doc.Close();
-            sql.Close();
         }
 
         private void makeFileReport(string name, string type)
         {
-            SQLiteCommand sc = new SQLiteCommand("SELECT * FROM FILE;", sql);
-            sql.Open();
+            SQLiteCommand sc = new SQLiteCommand("");
+            switch (type)
+            {
+                case "computer":
+                    sc = new SQLiteCommand("SELECT NAME, PATH, TIME, TYPE, USERID FROM TRAFFIC T JOIN COMPUTER C ON T.COMPUTERID = C.ID WHERE C.NAME = '" + name + "';", sql);
+                    break;
+                case "user":
+                    sc = new SQLiteCommand("SELECT NAME, PATH, TIME, TYPE, COMPUTERID FROM TRAFFIC T JOIN USER U ON T.USERID = U.ID WHERE U.NAME = '" + name + "' AND ADMIN NOT LIKE 1;", sql);
+                    break;
+            }
             SQLiteDataReader sdr = sc.ExecuteReader();
             DataTable dt = new DataTable();
             dt.Load(sdr);
@@ -90,6 +112,7 @@ namespace MyService
             var doc = new Document();
             PdfWriter.GetInstance(doc, new FileStream(root + @"pctesting\file.pdf", FileMode.Create));
             doc.Open();
+            doc.Add(new Paragraph(name));
             PdfPTable table = new PdfPTable(dt.Columns.Count);
             PdfPCell cell = new PdfPCell(new Phrase("Имя"));
             table.AddCell(cell);
@@ -99,30 +122,41 @@ namespace MyService
             table.AddCell(cell);
             cell = new PdfPCell(new Phrase("Тип"));
             table.AddCell(cell);
-            cell = new PdfPCell(new Phrase("Компьютер"));
-            table.AddCell(cell);
-            cell = new PdfPCell(new Phrase("Пользователь"));
-            table.AddCell(cell);
+            switch (type)
+            {
+                case "computer":
+                    cell = new PdfPCell(new Phrase("Пользователь"));
+                    table.AddCell(cell);
+                    break;
+                case "user":
+                    cell = new PdfPCell(new Phrase("Компьютер"));
+                    table.AddCell(cell);
+                    break;
+            }
             for (int i = 0; i < dt.Rows.Count; i++)
             {
                 table.AddCell(dt.Rows[i][0].ToString());
                 table.AddCell(dt.Rows[i][1].ToString());
                 table.AddCell(new DateTime(Convert.ToInt64(dt.Rows[i][2])).ToString());
-                //TODO добавить типы работы с файлами
                 switch(dt.Rows[i][3].ToString())
                 {
-                    case "":
+                    case "Renamed":
+                        table.AddCell("Переименован");
+                        break;
+                    case "Changed":
+                        table.AddCell("Изменён");
+                        break;
+                    case "Created":
+                        table.AddCell("Создан");
+                        break;
+                    case "Deleted":
+                        table.AddCell("Удалён");
                         break;
                 }
-                table.AddCell(type);
-                SQLiteCommand scComp = new SQLiteCommand("SELECT NAME FROM COMPUTER WHERE ID = " + dt.Rows[i][4].ToString() + ";", sql);
-                table.AddCell(scComp.ExecuteScalar().ToString());
-                SQLiteCommand scUser = new SQLiteCommand("SELECT NAME FROM USER WHERE ID = " + dt.Rows[i][5].ToString() + ";", sql);
-                table.AddCell(scUser.ExecuteScalar().ToString());
+                table.AddCell(dt.Rows[i][4].ToString());
             }
             doc.Add(table);
             doc.Close();
-            sql.Close();
         }
     }
 }
