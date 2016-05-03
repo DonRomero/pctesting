@@ -31,6 +31,7 @@ namespace pctesting
         private void openToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.Show();
+            pctestingIcon.Visible = false;
         }
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
@@ -43,6 +44,7 @@ namespace pctesting
         private void pctetingIcon_MouseDoubleClick(object sender, MouseEventArgs e)
         {
             this.Show();
+            pctestingIcon.Visible = false;
         }
 
         private void UserForm_Move(object sender, EventArgs e)
@@ -50,6 +52,7 @@ namespace pctesting
             if (this.WindowState == FormWindowState.Minimized)
             {
                 this.Hide();
+                pctestingIcon.Visible = true;
             }
         }
 
@@ -84,6 +87,7 @@ namespace pctesting
             {
                 e.Cancel = true;
                 this.Hide();
+                pctestingIcon.Visible = true;
             }
         }
 
