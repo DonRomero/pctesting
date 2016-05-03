@@ -34,7 +34,14 @@ namespace pctesting
             foreach (Process pr in proc)
             {
                 //FILETIME ftCreation, ftExit, ftKernel, ftUser;
-                //GetProcessTimes(pr.Handle, out ftCreation, out ftExit, out ftKernel, out ftUser);
+                //try
+                //{                   
+                //    GetProcessTimes(pr.Handle, out ftCreation, out ftExit, out ftKernel, out ftUser);
+                //}
+                //catch(Exception e)
+                //{
+
+                //}
                 if (!processLastIteration.Exists(lp=>lp.Id==pr.Id))
                 {
                     ExitProcess.Add(pr);
