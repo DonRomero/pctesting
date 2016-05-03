@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Diagnostics;
+using System.Runtime.InteropServices;
 
 namespace pctesting
 {
@@ -14,6 +15,14 @@ namespace pctesting
 
         string comp;
         string user;
+
+        [DllImport("kernel32.dll")]
+        static extern bool GetProcessTimes(IntPtr handle,
+            out System.Runtime.InteropServices.FILETIME lpCreationTime, 
+            out System.Runtime.InteropServices.FILETIME lpExitTime, 
+            out System.Runtime.InteropServices.FILETIME lpKernelTime,
+            out System.Runtime.InteropServices.FILETIME lpUserTime);
+
         public ProcessControl(string user, string comp)
         {
             this.comp = comp;
@@ -24,7 +33,9 @@ namespace pctesting
             Process[] proc = Process.GetProcesses();
             foreach (Process pr in proc)
             {
-                if (processLastIteration.Contains(pr))
+                //FILETIME ftCreation, ftExit, ftKernel, ftUser;
+                //GetProcessTimes(pr.Handle, out ftCreation, out ftExit, out ftKernel, out ftUser);
+                if (!processLastIteration.Exists(lp=>lp.Id==pr.Id))
                 {
                     ExitProcess.Add(pr);
                 }
@@ -35,11 +46,11 @@ namespace pctesting
         public void SaveToDatabase()
         {
             DBService.DataServiceClient client = new DBService.DataServiceClient();
-            foreach (Process p in processLastIteration)
-            {
-                var temp=p.ExitTime-p.StartTime;
-                client.SaveProcessesToDB(p.ProcessName, p.StartTime,p.ExitTime ,temp, comp, user);
-            }
+            //foreach (Process p in processLastIteration)
+            //{
+            //    var temp=p.ExitTime-p.StartTime;
+            //    client.SaveProcessesToDB(p.ProcessName, p.StartTime,p.ExitTime ,temp, comp, user);
+            //}
             foreach(Process p in ExitProcess)
             {
                 var temp = p.ExitTime - p.StartTime;
