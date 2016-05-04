@@ -175,7 +175,7 @@ namespace MyService
         {
             sql.Open();
             int[] IDs = selectIDs(comp, user);
-            execute("INSERT INTO PROCESS VALUES(NULL, '" + Name + "', " + StartTime + ", " + FinishTime + ", " + GeneralTime + "," + IDs[0] + "," + IDs[1] + ");", sql);
+            execute("INSERT INTO PROCESS VALUES(NULL, '" + Name + "', " + (long)StartTime.Ticks / 10000 + ", " + (long)FinishTime.Ticks / 10000 + ", " + (long)GeneralTime.Ticks / 10000 + "," + IDs[0] + "," + IDs[1] + ");", sql);
             sql.Close();
         }
     }

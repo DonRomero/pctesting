@@ -46,7 +46,7 @@ namespace pctesting
                 if (!processLastIteration.Exists(lp=>lp.Id==pr.Id))
                 {
                     var temp = DateTime.Now - pr.StartTime;
-                    //client.SaveProcessesToDB(pr.ProcessName, pr.StartTime, DateTime.Now, temp, comp, user);
+                    client.SaveProcessesToDB(pr.ProcessName, pr.StartTime, DateTime.Now, temp, comp, user);
                 }
             }
             processLastIteration = proc.ToList();
