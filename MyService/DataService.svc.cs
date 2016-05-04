@@ -168,14 +168,14 @@ namespace MyService
         {
             sql.Open();
             int[] IDs = selectIDs(comp, user);
-            execute("INSERT INTO TRAFFIC VALUES(NULL, " + AllTime + ", " + ActivityTime + ", " + NotActivityTime + ", " + IDs[0] + ", " + IDs[1] + ");", sql);
+            execute("INSERT INTO ACTIVITY VALUES(NULL, " + AllTime + ", " + ActivityTime + ", " + NotActivityTime + ", " + IDs[0] + ", " + IDs[1] + ");", sql);
             sql.Close();
         }
         public void SaveProcessesToDB(string Name, DateTime StartTime, DateTime FinishTime, TimeSpan GeneralTime, string comp, string user)
         {
             sql.Open();
             int[] IDs = selectIDs(comp, user);
-            execute("INSERT INTO TRAFFIC VALUES(NULL, '" + Name + "', " + StartTime + ", " + FinishTime + ", " + GeneralTime + "," + IDs[0] + "," + IDs[1] + ");", sql);
+            execute("INSERT INTO PROCESS VALUES(NULL, '" + Name + "', " + StartTime + ", " + FinishTime + ", " + GeneralTime + "," + IDs[0] + "," + IDs[1] + ");", sql);
             sql.Close();
         }
     }

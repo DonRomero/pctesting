@@ -12,6 +12,7 @@ namespace pctesting
     {
         List<Process> processLastIteration = Process.GetProcesses().ToList();
         List<Process> ExitProcess = new List<Process>();
+        DBService.DataServiceClient client = new DBService.DataServiceClient();
 
         string comp;
         string user;
@@ -44,7 +45,8 @@ namespace pctesting
                 //}
                 if (!processLastIteration.Exists(lp=>lp.Id==pr.Id))
                 {
-                    ExitProcess.Add(pr);
+                    var temp = DateTime.Now - pr.StartTime;
+                    //client.SaveProcessesToDB(pr.ProcessName, pr.StartTime, DateTime.Now, temp, comp, user);
                 }
             }
             processLastIteration = proc.ToList();
@@ -58,11 +60,11 @@ namespace pctesting
             //    var temp=p.ExitTime-p.StartTime;
             //    client.SaveProcessesToDB(p.ProcessName, p.StartTime,p.ExitTime ,temp, comp, user);
             //}
-            foreach(Process p in ExitProcess)
-            {
-                var temp = p.ExitTime - p.StartTime;
-                client.SaveProcessesToDB(p.ProcessName, p.StartTime, p.ExitTime, temp, comp, user);
-            }
+            //foreach(Process p in ExitProcess)
+            //{
+            //    var temp = p.ExitTime - p.StartTime;
+            //    client.SaveProcessesToDB(p.ProcessName, p.StartTime, p.ExitTime, temp, comp, user);
+            //}
         }
     }
 }
