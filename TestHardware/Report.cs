@@ -37,23 +37,23 @@ namespace pctesting.TestHardware
             textBox5.Text = _VideoRAM + "Байт";
             if (_ColichChain < 20)
             {
-                FinalReport.Text = "Ваш компьютер имеет очень низкую производительность производительность.";
+                FinalReport.Text = "Ваш компьютер имеет очень низкую производительность.";
             }
             if (_ColichChain >= 20 && _ColichChain <= 65)
             {
-                FinalReport.Text = "Ваш компьютер имеет низкую производительность производительность.";
+                FinalReport.Text = "Ваш компьютер имеет низкую производительность.";
             }
             if (_ColichChain > 65 && _ColichChain <= 120)
             {
-               FinalReport.Text = "Ваш компьютер имеет среднюю производительность производительность.";
+               FinalReport.Text = "Ваш компьютер имеет среднюю производительность.";
             }
             if (_ColichChain > 120 && _ColichChain <= 150)
             {
-                FinalReport.Text = "Ваш компьютер имеет хорошую производительность производительность.";
+                FinalReport.Text = "Ваш компьютер имеет хорошую производительность.";
             }
             if (_ColichChain > 150)
             {
-                FinalReport.Text = "Ваш компьютер имеет отличную производительность производительность.";
+                FinalReport.Text = "Ваш компьютер имеет отличную производительность.";
             }
         }
     }

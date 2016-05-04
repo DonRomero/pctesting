@@ -71,9 +71,10 @@ namespace pctesting.TestHardware
         {
             find = new ManagementObjectSearcher(QueryWin32Processor);
             ManagementObjectCollection.ManagementObjectEnumerator it = find.Get().GetEnumerator();
+            it.Reset();
             while (it.MoveNext())
             {
-                //hardwareInfo.Add(String.Format("Загрузка процессора: {0}%", it.Current["LoadPercentage"]));
+               
             }
             return Convert.ToInt32(it.Current["LoadPercentage"]);
         }

@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace pctesting.TestHardware
 {
@@ -14,13 +12,16 @@ namespace pctesting.TestHardware
             HardwareInfo hardware = new HardwareInfo();
             List<myThread> threads = new List<myThread>();
             int i = 0;
-            int width = 1360;
-            int height = 800;
-            int width1 = 1360;
-            int height1 = 800;
+            int width = Screen.PrimaryScreen.WorkingArea.Width;
+            int height = Screen.PrimaryScreen.WorkingArea.Height;
+            int width1 = width;
+            int height1 = height;
             int ColichChain = 0;
-            while (hardware.GetProcessorInformation() < 100)
+            int maxCPU = 80;
+
+            while (hardware.GetProcessorInformation() < maxCPU)
             {
+                int hw = hardware.GetProcessorInformation();
                 if (i % 2 == 1)
                 {
                     height1 = height1 / 2;
@@ -34,7 +35,8 @@ namespace pctesting.TestHardware
                             {
                                 threads.Add(new myThread(w, h, width1, height1, enable));
                                 ColichChain++;
-                                if (hardware.GetProcessorInformation() == 100)
+                                hw = hardware.GetProcessorInformation();
+                                if ( hw>= maxCPU)
                                 {
                                     string CPU_load = Convert.ToString(hardware.GetProcessorInformation());
                                     string Ram = hardware.GetMemoryInformation();
@@ -82,7 +84,8 @@ namespace pctesting.TestHardware
                             {
                                 threads.Add(new myThread(w, h, width1, height1, enable));
                                 ColichChain++;
-                                if (hardware.GetProcessorInformation() == 100)
+                                hw = hardware.GetProcessorInformation();
+                                if (hw >=maxCPU)
                                 {
                                     string CPU_load = Convert.ToString(hardware.GetProcessorInformation());
                                     string Ram = hardware.GetMemoryInformation();
