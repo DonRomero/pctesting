@@ -28,10 +28,10 @@ namespace pctesting.DBService {
         System.Threading.Tasks.Task saveTrafficDataToDBAsync(string URL, long time, string comp, string user);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDataService/login", ReplyAction="http://tempuri.org/IDataService/loginResponse")]
-        string login(string name, string password, string compName);
+        string login(string name, string password, string compMAC, string compName);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDataService/login", ReplyAction="http://tempuri.org/IDataService/loginResponse")]
-        System.Threading.Tasks.Task<string> loginAsync(string name, string password, string compName);
+        System.Threading.Tasks.Task<string> loginAsync(string name, string password, string compMAC, string compName);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDataService/SaveActivityToDB", ReplyAction="http://tempuri.org/IDataService/SaveActivityToDBResponse")]
         void SaveActivityToDB(System.DateTime GeneralTime, System.DateTime ActivityTime, System.DateTime NotActivityTime, string comp, string user);
@@ -107,16 +107,15 @@ namespace pctesting.DBService {
             return base.Channel.saveTrafficDataToDBAsync(URL, time, comp, user);
         }
         
-        public string login(string name, string password, string compName) {
-            return base.Channel.login(name, password, compName);
+        public string login(string name, string password, string compMAC, string compName) {
+            return base.Channel.login(name, password, compMAC, compName);
         }
         
-        public System.Threading.Tasks.Task<string> loginAsync(string name, string password, string compName) {
-            return base.Channel.loginAsync(name, password, compName);
+        public System.Threading.Tasks.Task<string> loginAsync(string name, string password, string compMAC, string compName) {
+            return base.Channel.loginAsync(name, password, compMAC, compName);
         }
-
-        public void SaveActivityToDB(System.DateTime GeneralTime, System.DateTime ActivityTime, System.DateTime NotActivityTime, string comp, string user)
-        {
+        
+        public void SaveActivityToDB(System.DateTime GeneralTime, System.DateTime ActivityTime, System.DateTime NotActivityTime, string comp, string user) {
             base.Channel.SaveActivityToDB(GeneralTime, ActivityTime, NotActivityTime, comp, user);
         }
         
@@ -127,9 +126,8 @@ namespace pctesting.DBService {
         public void SaveProcessesToDB(string Name, System.DateTime StartTime, System.DateTime ExitTime, System.TimeSpan GeneralTime, string comp, string user) {
             base.Channel.SaveProcessesToDB(Name, StartTime, ExitTime, GeneralTime, comp, user);
         }
-
-        public System.Threading.Tasks.Task SaveProcessesToDBAsync(string Name, System.DateTime StartTime, System.DateTime ExitTime, System.TimeSpan GeneralTime, string comp, string user)
-        {
+        
+        public System.Threading.Tasks.Task SaveProcessesToDBAsync(string Name, System.DateTime StartTime, System.DateTime ExitTime, System.TimeSpan GeneralTime, string comp, string user) {
             return base.Channel.SaveProcessesToDBAsync(Name, StartTime, ExitTime, GeneralTime, comp, user);
         }
         

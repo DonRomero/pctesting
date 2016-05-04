@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xs:schema xmlns:tns="http://tempuri.org/" elementFormDefault="qualified" targetNamespace="http://tempuri.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="http://localhost:18336/DataService.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
   <xs:import schemaLocation="http://localhost:18336/DataService.svc?xsd=xsd2" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
   <xs:element name="saveFileDataToDB">
     <xs:complexType>
@@ -38,6 +39,7 @@
       <xs:sequence>
         <xs:element minOccurs="0" name="name" nillable="true" type="xs:string" />
         <xs:element minOccurs="0" name="password" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="compMAC" nillable="true" type="xs:string" />
         <xs:element minOccurs="0" name="compName" nillable="true" type="xs:string" />
       </xs:sequence>
     </xs:complexType>
@@ -55,8 +57,8 @@
         <xs:element minOccurs="0" name="GeneralTime" type="xs:dateTime" />
         <xs:element minOccurs="0" name="ActivityTime" type="xs:dateTime" />
         <xs:element minOccurs="0" name="NotActivityTime" type="xs:dateTime" />
-        <xs:element minOccurs="0" name="compID" type="xs:int" />
-        <xs:element minOccurs="0" name="userID" type="xs:int" />
+        <xs:element minOccurs="0" name="comp" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="user" nillable="true" type="xs:string" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -71,9 +73,9 @@
         <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
         <xs:element minOccurs="0" name="StartTime" type="xs:dateTime" />
         <xs:element minOccurs="0" name="ExitTime" type="xs:dateTime" />
-        <xs:element minOccurs="0" name="GeneralTime" type="xs:dateTime" />
-        <xs:element minOccurs="0" name="compID" type="xs:int" />
-        <xs:element minOccurs="0" name="userID" type="xs:int" />
+        <xs:element xmlns:q1="http://schemas.microsoft.com/2003/10/Serialization/" minOccurs="0" name="GeneralTime" type="q1:duration" />
+        <xs:element minOccurs="0" name="comp" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="user" nillable="true" type="xs:string" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -117,7 +119,7 @@
   <xs:element name="getUsersResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="getUsersResult" nillable="true" type="q1:ArrayOfstring" />
+        <xs:element xmlns:q2="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="getUsersResult" nillable="true" type="q2:ArrayOfstring" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

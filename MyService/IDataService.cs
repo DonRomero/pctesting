@@ -18,7 +18,7 @@ namespace MyService
         void saveTrafficDataToDB(string URL, long time, string comp, string user);
 
         [OperationContract]
-        string login(string name, string password, string compName);
+        string login(string name, string password, string compMAC, string compName);
 
         [OperationContract]
         void SaveActivityToDB(DateTime GeneralTime, DateTime ActivityTime, DateTime NotActivityTime, string comp, string user);
