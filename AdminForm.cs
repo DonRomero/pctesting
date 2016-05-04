@@ -1,22 +1,18 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using pctesting.DBService;
+using System.Diagnostics;
 
 namespace pctesting
 {
     public partial class AdminForm : Form
     {
         DBService.DataServiceClient client = new DataServiceClient();
-        public AdminForm(string userName, string compName)
+        string diskLetter = "";
+        public AdminForm(string userName, string compMAC, string diskLetter)
         {
             InitializeComponent();
+            this.diskLetter = diskLetter;
         }
 
         private void openToolStripMenuItem_Click(object sender, EventArgs e)
@@ -69,6 +65,12 @@ namespace pctesting
         private void addUserButton_Click(object sender, EventArgs e)
         {
             new AddUserForm().ShowDialog();
+        }
+
+        private void reportButton_Click(object sender, EventArgs e)
+        {
+            client.makeReport();
+            Process.Start(diskLetter+@"pctesting\report\");
         }
     }
 }
