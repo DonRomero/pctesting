@@ -73,6 +73,7 @@
             this.backupButton.TabIndex = 2;
             this.backupButton.Text = "Бекап Базы Данных";
             this.backupButton.UseVisualStyleBackColor = true;
+            this.backupButton.Click += new System.EventHandler(this.backupButton_Click);
             // 
             // addUserButton
             // 

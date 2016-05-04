@@ -2,6 +2,7 @@
 using System.Windows.Forms;
 using pctesting.DBService;
 using System.Diagnostics;
+using System.IO;
 
 namespace pctesting
 {
@@ -71,6 +72,28 @@ namespace pctesting
         {
             client.makeReport();
             Process.Start(diskLetter+@"pctesting\report\");
+        }
+
+        private void backupButton_Click(object sender, EventArgs e)
+        {
+            if (!Directory.Exists(diskLetter + @"pctesting") || !File.Exists(diskLetter + @"pctesting\mydb.sqlite"))
+            {
+                MessageBox.Show("Файлы базы данных отсутствуют!", "Отсутствует файл", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else
+            {
+                try
+                {
+                    Directory.CreateDirectory(diskLetter + @"pctesting\backup");
+                    File.Copy(diskLetter + @"\pctesting\mydb.sqlite", diskLetter + @"\pctesting\backup\mydb-backup_" + DateTime.Now.ToString().Replace('.', '-').Replace(' ', '-').Replace(':', '-') + ".sqlite");
+                    MessageBox.Show("База данных успешно сохранена.", "Бекап");
+                    Process.Start(diskLetter + @"pctesting\backup\");
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Возникла ошибка при сохранении базы данных.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
         }
     }
 }
