@@ -15,7 +15,7 @@ namespace MyService
     public class DataService : IDataService
     {
         static string diskLetter = Path.GetPathRoot(Environment.GetFolderPath(Environment.SpecialFolder.System));
-        Report report = new Report(diskLetter);
+        Report report = new Report(diskLetter + @"\pctesting\");
         SQLiteConnection sql = new SQLiteConnection("DataSource = " + diskLetter + @"pctesting\mydb.sqlite;Version=3");
         string adminLogin = "admin";
         string adminPassword = "admin";
@@ -32,7 +32,7 @@ namespace MyService
             SQLiteCommand sc = new SQLiteCommand("SELECT NAME FROM USER;", sql);
             SQLiteDataReader reader = sc.ExecuteReader();
             List<string> list = new List<string>();
-            while(reader.Read())
+            while (reader.Read())
             {
                 list.Add(reader[0].ToString());
             }
@@ -52,7 +52,7 @@ namespace MyService
                 sql.Close();
                 return true;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return false;
             }
@@ -60,38 +60,45 @@ namespace MyService
 
         public bool makeReport()
         {
-            try
-            {
-                report.makeReport();
-                return true;
-            }
-            catch (Exception ex)
-            {
-                return false;
-            }
+            //try
+            //{
+            report.makeReport();
+            return true;
+            //}
+            //catch (Exception ex)
+            //{
+            //    return false;
+            //}
         }
 
-        public string login(string name, string password, string compName)
-        {              
-                string ansString = "denied";
-                sql.Open();
-                setConnection();
-                SQLiteCommand sc = new SQLiteCommand("SELECT COUNT(*) FROM USER WHERE name = '" + name + "' AND password = '" + password + "';", sql);
-                if (Convert.ToInt32(sc.ExecuteScalar()) > 0)
+        public string login(string name, string password, string compMAC, string compName)
+        {
+
+            if (!Directory.Exists(diskLetter + @"pctesting"))
+                Directory.CreateDirectory(diskLetter + @"pctesting");
+            if (!File.Exists(diskLetter + @"pctesting\mydb.sqlite"))
+                SQLiteConnection.CreateFile(diskLetter + @"pctesting\mydb.sqlite");
+            //if (!File.Exists(@"mydb.sqlite"))
+            //    SQLiteConnection.CreateFile(@"mydb.sqlite");//файл хранится в папке с IIS Express
+            string ansString = "denied";
+            sql.Open();
+            setConnection();
+            SQLiteCommand sc = new SQLiteCommand("SELECT COUNT(*) FROM USER WHERE name = '" + name + "' AND password = '" + password + "';", sql);
+            if (Convert.ToInt32(sc.ExecuteScalar()) > 0)
+            {
+                sc = new SQLiteCommand("SELECT COUNT(*) FROM COMPUTER WHERE MAC = '" + compMAC + "';", sql);
+                if (Convert.ToInt32(sc.ExecuteScalar()) == 0)
                 {
-                    sc = new SQLiteCommand("SELECT COUNT(*) FROM COMPUTER WHERE name = '" + compName + "';", sql);
-                    if (Convert.ToInt32(sc.ExecuteScalar()) == 0)
-                    {
-                        execute("INSERT INTO COMPUTER VALUES(NULL, '" + compName + "');", sql);
-                    }
-                    sc = new SQLiteCommand(String.Format("SELECT COUNT(*) FROM USER WHERE name = '{0}' AND password = '{1}' AND admin = 1;", name, password), sql);
-                    if (Convert.ToInt32(sc.ExecuteScalar()) > 0)
-                        ansString = "admin";
-                    else
-                        ansString = "user";
+                    execute("INSERT INTO COMPUTER VALUES(NULL, '" + compMAC + "' , '" + compName + "');", sql);
                 }
-                sql.Close();
-                return ansString;
+                sc = new SQLiteCommand(String.Format("SELECT COUNT(*) FROM USER WHERE name = '{0}' AND password = '{1}' AND admin = 1;", name, password), sql);
+                if (Convert.ToInt32(sc.ExecuteScalar()) > 0)
+                    ansString = "admin";
+                else
+                    ansString = "user";
+            }
+            sql.Close();
+            return ansString;
         }
         public void execute(string query, SQLiteConnection sql)
         {
@@ -103,16 +110,10 @@ namespace MyService
         {
             try
             {
-                if (!Directory.Exists(diskLetter + @"pctesting"))
-                    Directory.CreateDirectory(diskLetter + @"pctesting");
-                if (!File.Exists(diskLetter + @"pctesting\mydb.sqlite"))
-                    SQLiteConnection.CreateFile(diskLetter + @"pctesting\mydb.sqlite");
-                //if (!File.Exists(@"mydb.sqlite"))
-                //    SQLiteConnection.CreateFile(@"mydb.sqlite");//файл хранится в папке с IIS Express
-                execute("CREATE TABLE IF NOT EXISTS COMPUTER(id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT);", sql);
+                execute("CREATE TABLE IF NOT EXISTS COMPUTER(id INTEGER PRIMARY KEY AUTOINCREMENT, MAC TEXT, name TEXT);", sql);
                 execute("CREATE TABLE IF NOT EXISTS USER(id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, password TEXT, admin INTEGER);", sql);
                 SQLiteCommand sc = new SQLiteCommand("SELECT COUNT(*) FROM USER WHERE NAME = 'admin';", sql);
-                if(Convert.ToInt32(sc.ExecuteScalar())==0)
+                if (Convert.ToInt32(sc.ExecuteScalar()) == 0)
                 {
                     execute("INSERT INTO USER VALUES(NULL, '" + adminLogin + "', '" + adminPassword + "', " + 1 + ");", sql);
                 }
@@ -141,37 +142,40 @@ namespace MyService
             }
         }
 
+        private int[] selectIDs(string comp, string user)
+        {
+            SQLiteCommand scComp = new SQLiteCommand("SELECT ID FROM COMPUTER WHERE MAC = '" + comp + "';", sql);
+            SQLiteCommand scUser = new SQLiteCommand("SELECT ID FROM USER WHERE NAME = '" + user + "';", sql);
+            return new int[] { Convert.ToInt32(scComp.ExecuteScalar()), Convert.ToInt32(scUser.ExecuteScalar()) };
+        }
+
         public void saveFileDataToDB(string name, string path, long time, string type, string comp, string user)
         {
             sql.Open();
-            SQLiteCommand scComp = new SQLiteCommand("SELECT ID FROM COMPUTER WHERE NAME = '" + comp + "';", sql);
-            SQLiteCommand scUser = new SQLiteCommand("SELECT ID FROM USER WHERE NAME = '" + user + "';", sql);
-            execute(String.Format("INSERT INTO FILE VALUES( NULL, '{0}', '{1}', {2}, '{3}', {4}, {5});", name, path, time, type, Convert.ToInt32(scComp.ExecuteScalar()), Convert.ToInt32(scUser.ExecuteScalar())), sql);
+            int[] IDs = selectIDs(comp, user);
+            execute(String.Format("INSERT INTO FILE VALUES( NULL, '{0}', '{1}', {2}, '{3}', {4}, {5});", name, path, time, type, IDs[0], IDs[1]), sql);
             sql.Close();
         }
 
         public void saveTrafficDataToDB(string URL, long time, string comp, string user)
         {
             sql.Open();
-            SQLiteCommand scComp = new SQLiteCommand("SELECT ID FROM COMPUTER WHERE NAME = '" + comp + "';", sql);
-            SQLiteCommand scUser = new SQLiteCommand("SELECT ID FROM USER WHERE NAME = '" + user + "';", sql);
-            execute("INSERT INTO TRAFFIC VALUES( NULL, '" + URL + "'," + time + "," + Convert.ToInt32(scComp.ExecuteScalar()) + "," + Convert.ToInt32(scUser.ExecuteScalar()) + ");", sql);
+            int[] IDs = selectIDs(comp, user);
+            execute("INSERT INTO TRAFFIC VALUES( NULL, '" + URL + "'," + time + "," + IDs[0] + "," + IDs[1] + ");", sql);
             sql.Close();
         }
         public void SaveActivityToDB(DateTime AllTime, DateTime ActivityTime, DateTime NotActivityTime, string comp, string user)
         {
             sql.Open();
-            SQLiteCommand scComp = new SQLiteCommand("SELECT ID FROM COMPUTER WHERE NAME = '" + comp + "';", sql);
-            SQLiteCommand scUser = new SQLiteCommand("SELECT ID FROM USER WHERE NAME = '" + user + "';", sql);
-            execute("INSERT INTO TRAFFIC VALUES(NULL, " + AllTime + ", " + ActivityTime + ", " + NotActivityTime + ", " + Convert.ToInt32(scComp.ExecuteScalar()) + ", " + Convert.ToInt32(scUser.ExecuteScalar()) + ");", sql);
+            int[] IDs = selectIDs(comp, user);
+            execute("INSERT INTO TRAFFIC VALUES(NULL, " + AllTime + ", " + ActivityTime + ", " + NotActivityTime + ", " + IDs[0] + ", " + IDs[1] + ");", sql);
             sql.Close();
         }
-        public void SaveProcessesToDB(string Name, DateTime StartTime, DateTime FinishTime, TimeSpan GeneralTime,string comp, string user)
+        public void SaveProcessesToDB(string Name, DateTime StartTime, DateTime FinishTime, TimeSpan GeneralTime, string comp, string user)
         {
             sql.Open();
-            SQLiteCommand scComp = new SQLiteCommand("SELECT ID FROM COMPUTER WHERE NAME = '" + comp + "';", sql);
-            SQLiteCommand scUser = new SQLiteCommand("SELECT ID FROM USER WHERE NAME = '" + user + "';", sql);
-            execute("INSERT INTO TRAFFIC VALUES(NULL, '" + Name + "', " + StartTime + ", " + FinishTime + ", " + GeneralTime + "," + Convert.ToInt32(scComp.ExecuteScalar()) + "," + Convert.ToInt32(scUser.ExecuteScalar()) + ");", sql);
+            int[] IDs = selectIDs(comp, user);
+            execute("INSERT INTO TRAFFIC VALUES(NULL, '" + Name + "', " + StartTime + ", " + FinishTime + ", " + GeneralTime + "," + IDs[0] + "," + IDs[1] + ");", sql);
             sql.Close();
         }
     }
