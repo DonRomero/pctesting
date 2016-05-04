@@ -18,28 +18,28 @@ namespace pctesting
         private void LoginButton_Click(object sender, EventArgs e)
         {
             DBService.DataServiceClient client = new DataServiceClient();
-            string compName = "";// = System.Net.Dns.GetHostEntry(System.Net.Dns.GetHostName()).AddressList[0].ToString();
+            string macAddress = "", compName = Environment.MachineName;// = System.Net.Dns.GetHostEntry(System.Net.Dns.GetHostName()).AddressList[0].ToString();
             ManagementClass mc = new ManagementClass("Win32_NetworkAdapter");
             ManagementObjectCollection col = mc.GetInstances();
             foreach (ManagementObject mo in col)
             {
                 string macAddr = mo["MACAddress"] as string;
                 if (macAddr != null && macAddr.Trim() != "")
-                    compName = macAddr;
+                    macAddress = macAddr;
             }
             if (loginTextBox.Text.Equals("") | passwordTextBox.Text.Equals(""))
                 MessageBox.Show("Введите корректные данные!", "Некорректный ввод", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             else
                 try
                 {
-                    switch (client.login(loginTextBox.Text, passwordTextBox.Text, compName))
+                    switch (client.login(loginTextBox.Text, passwordTextBox.Text, macAddress, compName))
                     {
                         case "user":
-                            new UserForm(loginTextBox.Text, compName).Show();
+                            new UserForm(loginTextBox.Text, macAddress).Show();
                             this.Hide();
                             break;
                         case "admin":
-                            new AdminForm(loginTextBox.Text, compName).Show();
+                            new AdminForm(loginTextBox.Text, macAddress, diskLetter).Show();
                             this.Hide();
                             break;
                         default:
