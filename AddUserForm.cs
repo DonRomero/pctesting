@@ -17,12 +17,12 @@ namespace pctesting
             if(client.addUser(userNameTextBox.Text, userPasswordTextBox.Text))
             {
                 MessageBox.Show("Пользователь успешно добавлен", "Пользователь добавлен");
+                this.Hide();
             }
             else
             {
-                MessageBox.Show("Возникла ошибка добавления пользователя!\nВозможно пользователь с таким именем уже существует.", "Ошибка добавления", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Возникла ошибка добавления пользователя!\nВозможно, пользователь с таким именем уже существует.", "Ошибка добавления", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            this.Hide();
         }
     }
 }
