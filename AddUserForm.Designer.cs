@@ -41,7 +41,7 @@
             this.userNameLabel.Location = new System.Drawing.Point(12, 9);
             this.userNameLabel.Name = "userNameLabel";
             this.userNameLabel.Size = new System.Drawing.Size(135, 17);
-            this.userNameLabel.TabIndex = 0;
+            this.userNameLabel.TabIndex = 3;
             this.userNameLabel.Text = "Имя пользователя:";
             // 
             // userNameTextBox
@@ -49,7 +49,7 @@
             this.userNameTextBox.Location = new System.Drawing.Point(15, 29);
             this.userNameTextBox.Name = "userNameTextBox";
             this.userNameTextBox.Size = new System.Drawing.Size(251, 22);
-            this.userNameTextBox.TabIndex = 1;
+            this.userNameTextBox.TabIndex = 0;
             // 
             // userPasswordLabel
             // 
@@ -57,7 +57,7 @@
             this.userPasswordLabel.Location = new System.Drawing.Point(12, 54);
             this.userPasswordLabel.Name = "userPasswordLabel";
             this.userPasswordLabel.Size = new System.Drawing.Size(61, 17);
-            this.userPasswordLabel.TabIndex = 2;
+            this.userPasswordLabel.TabIndex = 4;
             this.userPasswordLabel.Text = "Пароль:";
             // 
             // userPasswordTextBox
@@ -66,14 +66,14 @@
             this.userPasswordTextBox.Name = "userPasswordTextBox";
             this.userPasswordTextBox.PasswordChar = '*';
             this.userPasswordTextBox.Size = new System.Drawing.Size(251, 22);
-            this.userPasswordTextBox.TabIndex = 3;
+            this.userPasswordTextBox.TabIndex = 1;
             // 
             // saveButton
             // 
             this.saveButton.Location = new System.Drawing.Point(166, 118);
             this.saveButton.Name = "saveButton";
             this.saveButton.Size = new System.Drawing.Size(100, 23);
-            this.saveButton.TabIndex = 4;
+            this.saveButton.TabIndex = 2;
             this.saveButton.Text = "Сохранить";
             this.saveButton.UseVisualStyleBackColor = true;
             this.saveButton.Click += new System.EventHandler(this.saveButton_Click);

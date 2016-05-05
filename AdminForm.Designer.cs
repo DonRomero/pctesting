@@ -59,7 +59,7 @@
             this.reportButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.reportButton.Name = "reportButton";
             this.reportButton.Size = new System.Drawing.Size(251, 30);
-            this.reportButton.TabIndex = 1;
+            this.reportButton.TabIndex = 3;
             this.reportButton.Text = "Сформировать отчёты";
             this.reportButton.UseVisualStyleBackColor = true;
             this.reportButton.Click += new System.EventHandler(this.reportButton_Click);
@@ -70,7 +70,7 @@
             this.backupButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.backupButton.Name = "backupButton";
             this.backupButton.Size = new System.Drawing.Size(251, 30);
-            this.backupButton.TabIndex = 2;
+            this.backupButton.TabIndex = 1;
             this.backupButton.Text = "Бекап Базы Данных";
             this.backupButton.UseVisualStyleBackColor = true;
             this.backupButton.Click += new System.EventHandler(this.backupButton_Click);
@@ -81,7 +81,7 @@
             this.addUserButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.addUserButton.Name = "addUserButton";
             this.addUserButton.Size = new System.Drawing.Size(251, 30);
-            this.addUserButton.TabIndex = 3;
+            this.addUserButton.TabIndex = 2;
             this.addUserButton.Text = "Добавить пользователя";
             this.addUserButton.UseVisualStyleBackColor = true;
             this.addUserButton.Click += new System.EventHandler(this.addUserButton_Click);
@@ -93,20 +93,20 @@
             this.openToolStripMenuItem,
             this.exitToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(115, 52);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(182, 84);
             // 
             // openToolStripMenuItem
             // 
             this.openToolStripMenuItem.Name = "openToolStripMenuItem";
-            this.openToolStripMenuItem.Size = new System.Drawing.Size(114, 24);
-            this.openToolStripMenuItem.Text = "Open";
+            this.openToolStripMenuItem.Size = new System.Drawing.Size(181, 26);
+            this.openToolStripMenuItem.Text = "Открыть";
             this.openToolStripMenuItem.Click += new System.EventHandler(this.openToolStripMenuItem_Click);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(114, 24);
-            this.exitToolStripMenuItem.Text = "Exit";
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(181, 26);
+            this.exitToolStripMenuItem.Text = "Выйти";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
             // pctestingIcon

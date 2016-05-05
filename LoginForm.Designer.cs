@@ -42,7 +42,7 @@
             this.loginButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.loginButton.Name = "loginButton";
             this.loginButton.Size = new System.Drawing.Size(125, 30);
-            this.loginButton.TabIndex = 0;
+            this.loginButton.TabIndex = 2;
             this.loginButton.Text = "Войти";
             this.loginButton.UseVisualStyleBackColor = true;
             this.loginButton.Click += new System.EventHandler(this.LoginButton_Click);
@@ -53,7 +53,7 @@
             this.loginTextBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.loginTextBox.Name = "loginTextBox";
             this.loginTextBox.Size = new System.Drawing.Size(165, 22);
-            this.loginTextBox.TabIndex = 1;
+            this.loginTextBox.TabIndex = 0;
             // 
             // passwordTextBox
             // 
@@ -62,7 +62,7 @@
             this.passwordTextBox.Name = "passwordTextBox";
             this.passwordTextBox.PasswordChar = '*';
             this.passwordTextBox.Size = new System.Drawing.Size(165, 22);
-            this.passwordTextBox.TabIndex = 2;
+            this.passwordTextBox.TabIndex = 1;
             // 
             // userNameLabel
             // 
@@ -70,7 +70,7 @@
             this.userNameLabel.Location = new System.Drawing.Point(15, 15);
             this.userNameLabel.Name = "userNameLabel";
             this.userNameLabel.Size = new System.Drawing.Size(55, 17);
-            this.userNameLabel.TabIndex = 3;
+            this.userNameLabel.TabIndex = 4;
             this.userNameLabel.Text = "Логин: ";
             // 
             // passwordLabel
@@ -79,7 +79,7 @@
             this.passwordLabel.Location = new System.Drawing.Point(15, 45);
             this.passwordLabel.Name = "passwordLabel";
             this.passwordLabel.Size = new System.Drawing.Size(65, 17);
-            this.passwordLabel.TabIndex = 4;
+            this.passwordLabel.TabIndex = 5;
             this.passwordLabel.Text = "Пароль: ";
             // 
             // exitButton
@@ -87,7 +87,7 @@
             this.exitButton.Location = new System.Drawing.Point(150, 80);
             this.exitButton.Name = "exitButton";
             this.exitButton.Size = new System.Drawing.Size(125, 30);
-            this.exitButton.TabIndex = 5;
+            this.exitButton.TabIndex = 3;
             this.exitButton.Text = "Выход";
             this.exitButton.UseVisualStyleBackColor = true;
             this.exitButton.Click += new System.EventHandler(this.exitButton_Click);

@@ -47,20 +47,20 @@
             this.openToolStripMenuItem,
             this.exitToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(104, 48);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(182, 84);
             // 
             // openToolStripMenuItem
             // 
             this.openToolStripMenuItem.Name = "openToolStripMenuItem";
-            this.openToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
-            this.openToolStripMenuItem.Text = "Open";
+            this.openToolStripMenuItem.Size = new System.Drawing.Size(181, 26);
+            this.openToolStripMenuItem.Text = "Открыть";
             this.openToolStripMenuItem.Click += new System.EventHandler(this.openToolStripMenuItem_Click);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
-            this.exitToolStripMenuItem.Text = "Exit";
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(181, 26);
+            this.exitToolStripMenuItem.Text = "Выйти";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
             // pctestingIcon
@@ -72,9 +72,10 @@
             // 
             // testButton
             // 
-            this.testButton.Location = new System.Drawing.Point(11, 11);
+            this.testButton.Location = new System.Drawing.Point(15, 14);
+            this.testButton.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.testButton.Name = "testButton";
-            this.testButton.Size = new System.Drawing.Size(188, 24);
+            this.testButton.Size = new System.Drawing.Size(251, 30);
             this.testButton.TabIndex = 1;
             this.testButton.Text = "Тестировать компьютер";
             this.testButton.UseVisualStyleBackColor = true;
@@ -88,10 +89,10 @@
             // 
             // exitButton
             // 
-            this.exitButton.Location = new System.Drawing.Point(11, 41);
-            this.exitButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.exitButton.Location = new System.Drawing.Point(15, 50);
+            this.exitButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.exitButton.Name = "exitButton";
-            this.exitButton.Size = new System.Drawing.Size(188, 24);
+            this.exitButton.Size = new System.Drawing.Size(251, 30);
             this.exitButton.TabIndex = 2;
             this.exitButton.Text = "Назад";
             this.exitButton.UseVisualStyleBackColor = true;
@@ -99,11 +100,12 @@
             // 
             // UserForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(212, 72);
+            this.ClientSize = new System.Drawing.Size(283, 89);
             this.Controls.Add(this.exitButton);
             this.Controls.Add(this.testButton);
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "UserForm";
             this.Text = "User";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.UserForm_FormClosing);
