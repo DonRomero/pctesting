@@ -37,7 +37,7 @@ namespace pctesting
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
             trafficWatcher.Stop();
-            //process.SaveToDatabase();
+            process.SaveToDatabase();
             Application.Exit();
         }
 
@@ -94,7 +94,7 @@ namespace pctesting
         private void exitButton_Click(object sender, EventArgs e)
         {
             trafficWatcher.Stop();
-            //process.SaveToDatabase();
+            process.SaveToDatabase();
             new LoginForm().Show();
             this.Close();
         }

@@ -10,61 +10,65 @@ namespace pctesting
 {
     class ProcessControl
     {
-        List<Process> processLastIteration = Process.GetProcesses().ToList();
-        List<Process> ExitProcess = new List<Process>();
+        List<Process> processLastIteration=new List<Process>();
+        List<DateTime> startTime=new List<DateTime>();
         DBService.DataServiceClient client = new DBService.DataServiceClient();
 
         string comp;
         string user;
 
-        [DllImport("kernel32.dll")]
-        static extern bool GetProcessTimes(IntPtr handle,
-            out System.Runtime.InteropServices.FILETIME lpCreationTime, 
-            out System.Runtime.InteropServices.FILETIME lpExitTime, 
-            out System.Runtime.InteropServices.FILETIME lpKernelTime,
-            out System.Runtime.InteropServices.FILETIME lpUserTime);
+
 
         public ProcessControl(string user, string comp)
         {
             this.comp = comp;
             this.user = user;
+            processLastIteration = Process.GetProcesses().ToList();
+            for (int i = 0; i < processLastIteration.Count; i++)
+            {
+                try
+                {
+                    startTime.Add(processLastIteration[i].StartTime);
+                }
+                catch (Exception e)
+                {
+                    processLastIteration.Remove(processLastIteration[i]);
+                    i--;
+                }
+            }
         }
         public void UpdateProcess()
         {
             Process[] proc = Process.GetProcesses();
-            foreach (Process pr in proc)
+            for (int i = 0; i < processLastIteration.Count;i++ )
             {
-                //FILETIME ftCreation, ftExit, ftKernel, ftUser;
-                //try
-                //{                   
-                //    GetProcessTimes(pr.Handle, out ftCreation, out ftExit, out ftKernel, out ftUser);
-                //}
-                //catch(Exception e)
-                //{
-
-                //}
-                if (!processLastIteration.Exists(lp=>lp.Id==pr.Id))
+                if (!processLastIteration.Exists(lp => lp.Id == processLastIteration[i].Id))
                 {
-                    var temp = DateTime.Now - pr.StartTime;
-                    client.SaveProcessesToDB(pr.ProcessName, pr.StartTime, DateTime.Now, temp, comp, user);
+                    client.SaveProcessesToDB(processLastIteration[i].ProcessName, startTime[i], DateTime.Now, DateTime.Now - processLastIteration[i].StartTime, comp, user);
                 }
             }
+            startTime.Clear();
             processLastIteration = proc.ToList();
+            for(int i=0;i<processLastIteration.Count;i++)
+            {
+                try
+                {
+                    startTime.Add(processLastIteration[i].StartTime);
+                }
+                catch(Exception e)
+                {
+                    processLastIteration.Remove(processLastIteration[i]);
+                    i--;
+                }
+            }
         }
 
         public void SaveToDatabase()
         {
-            DBService.DataServiceClient client = new DBService.DataServiceClient();
-            //foreach (Process p in processLastIteration)
-            //{
-            //    var temp=p.ExitTime-p.StartTime;
-            //    client.SaveProcessesToDB(p.ProcessName, p.StartTime,p.ExitTime ,temp, comp, user);
-            //}
-            //foreach(Process p in ExitProcess)
-            //{
-            //    var temp = p.ExitTime - p.StartTime;
-            //    client.SaveProcessesToDB(p.ProcessName, p.StartTime, p.ExitTime, temp, comp, user);
-            //}
+            for (int i = 0; i < processLastIteration.Count; i++)
+            {
+               client.SaveProcessesToDB(processLastIteration[i].ProcessName, startTime[i], DateTime.Now, DateTime.Now - processLastIteration[i].StartTime, comp, user);
+            }
         }
     }
 }
