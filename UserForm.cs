@@ -17,7 +17,7 @@ namespace pctesting
         FileManager fileWatcher;
         TrafficManager trafficWatcher;
         ProcessControl process;
-        KeyHook kh = new KeyHook();
+        ActivityControl activityControl=new ActivityControl();
         public UserForm(string userName, string compName)
         {
             InitializeComponent();
@@ -26,6 +26,7 @@ namespace pctesting
             process = new ProcessControl(userName, compName);
             fileWatcher.watch();
             trafficWatcher.Start();
+            activityControl.Subscribe();
         }
 
         private void openToolStripMenuItem_Click(object sender, EventArgs e)
@@ -36,6 +37,7 @@ namespace pctesting
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            activityControl.Unsubscribe();
             trafficWatcher.Stop();
             process.SaveToDatabase();
             Application.Exit();
@@ -65,20 +67,10 @@ namespace pctesting
             process.UpdateProcess();
         }
 
-        void kh_KeyUp(object sender, KeyEventArgs e)
-        {
-            //e.Handled = true;
-        }
-
-        void kh_KeyDown(object sender, KeyEventArgs e)
-        {
-            //e.Handled = true;
-        }
 
         private void UserForm_Load(object sender, EventArgs e)
         {
-            kh.KeyDown += new KeyEventHandler(kh_KeyDown);
-            kh.KeyUp += new KeyEventHandler(kh_KeyUp);
+
         }
 
         private void UserForm_FormClosing(object sender, FormClosingEventArgs e)
@@ -93,6 +85,7 @@ namespace pctesting
 
         private void exitButton_Click(object sender, EventArgs e)
         {
+            activityControl.Unsubscribe();
             trafficWatcher.Stop();
             process.SaveToDatabase();
             new LoginForm().Show();

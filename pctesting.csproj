@@ -45,6 +45,9 @@
     <Reference Include="FiddlerCore4">
       <HintPath>.\FiddlerCore4.dll</HintPath>
     </Reference>
+    <Reference Include="Gma.System.MouseKeyHook">
+      <HintPath>..\..\..\Downloads\globalmousekeyhook-vNext (1)\globalmousekeyhook-vNext\MouseKeyHook\bin\Debug\Gma.System.MouseKeyHook.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.DirectX, Version=1.0.2902.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\Windows\Microsoft.NET\DirectX for Managed Code\1.0.2902.0\Microsoft.DirectX.dll</HintPath>
@@ -96,6 +99,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ActivityControl.cs" />
     <Compile Include="AddUserForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -109,7 +113,6 @@
       <DependentUpon>AdminForm.cs</DependentUpon>
     </Compile>
     <Compile Include="FileManager.cs" />
-    <Compile Include="KeyHook.cs" />
     <Compile Include="TestHardware\Algorithm.cs" />
     <Compile Include="TestHardware\CheckEnable.cs" />
     <Compile Include="TestHardware\HardwareInfo.cs" />
