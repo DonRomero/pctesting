@@ -17,13 +17,14 @@ namespace pctesting
         FileManager fileWatcher;
         TrafficManager trafficWatcher;
         ProcessControl process;
-        ActivityControl activityControl=new ActivityControl();
+        ActivityControl activityControl;
         public UserForm(string userName, string compName)
         {
             InitializeComponent();
             fileWatcher = new FileManager(userName, compName);
             trafficWatcher = new TrafficManager(userName, compName);
             process = new ProcessControl(userName, compName);
+            activityControl = new ActivityControl(userName, compName);
             fileWatcher.watch();
             trafficWatcher.Start();
             activityControl.Subscribe();
