@@ -89,7 +89,7 @@
             this.Controls.Add(this.userNameTextBox);
             this.Controls.Add(this.userNameLabel);
             this.Name = "AddUserForm";
-            this.Text = "AddUserForm";
+            this.Text = "Добавление пользователя";
             this.ResumeLayout(false);
             this.PerformLayout();
 

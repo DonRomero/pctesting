@@ -157,6 +157,9 @@
     <EmbeddedResource Include="TestHardware\Report.resx">
       <DependentUpon>Report.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="TestHardware\Teapot.resx">
+      <DependentUpon>Teapot.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UserForm.resx">
       <DependentUpon>UserForm.cs</DependentUpon>
     </EmbeddedResource>
