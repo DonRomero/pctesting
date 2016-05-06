@@ -67,7 +67,7 @@ namespace pctesting
         {
             for (int i = 0; i < processLastIteration.Count; i++)
             {
-               client.SaveProcessesToDB(processLastIteration[i].ProcessName, startTime[i], DateTime.Now, DateTime.Now - processLastIteration[i].StartTime, comp, user);
+               client.SaveProcessesToDB(processLastIteration[i].ProcessName, startTime[i], DateTime.Now, DateTime.Now - startTime[i], comp, user);
             }
         }
     }

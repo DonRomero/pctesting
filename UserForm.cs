@@ -67,12 +67,12 @@ namespace pctesting
 
         void kh_KeyUp(object sender, KeyEventArgs e)
         {
-            e.Handled = true;
+            //e.Handled = true;
         }
 
         void kh_KeyDown(object sender, KeyEventArgs e)
         {
-            e.Handled = true;
+            //e.Handled = true;
         }
 
         private void UserForm_Load(object sender, EventArgs e)
