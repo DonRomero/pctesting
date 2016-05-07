@@ -21,7 +21,7 @@ namespace MyService
         string login(string name, string password, string compMAC, string compName);
 
         [OperationContract]
-        void SaveActivityToDB(DateTime GeneralTime, DateTime ActivityTime, DateTime NotActivityTime, string comp, string user);
+        void SaveActivityToDB(TimeSpan AllTime, TimeSpan ActivityTime, TimeSpan NotActivityTime, string comp, string user);
 
         [OperationContract]
         void SaveProcessesToDB(string Name, DateTime StartTime, DateTime ExitTime, TimeSpan GeneralTime, string comp, string user);

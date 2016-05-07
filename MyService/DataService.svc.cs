@@ -168,11 +168,11 @@ namespace MyService
             execute("INSERT INTO TRAFFIC VALUES( NULL, '" + URL + "'," + time + "," + IDs[0] + "," + IDs[1] + ");");
             sql.Close();
         }
-        public void SaveActivityToDB(DateTime AllTime, DateTime ActivityTime, DateTime NotActivityTime, string comp, string user)
+        public void SaveActivityToDB(TimeSpan AllTime, TimeSpan ActivityTime, TimeSpan NotActivityTime, string comp, string user)
         {
             sql.Open();
             int[] IDs = selectIDs(comp, user);
-            execute("INSERT INTO ACTIVITY VALUES(NULL, " + AllTime + ", " + ActivityTime + ", " + NotActivityTime + ", " + IDs[0] + ", " + IDs[1] + ");");
+            execute("INSERT INTO ACTIVITY VALUES(NULL, " + (long)AllTime.Ticks/10000 + ", " + (long)ActivityTime.Ticks/10000 + ", " + (long)NotActivityTime.Ticks/10000 + ", " + IDs[0] + ", " + IDs[1] + ");");
             sql.Close();
         }
         public void SaveProcessesToDB(string Name, DateTime StartTime, DateTime FinishTime, TimeSpan GeneralTime, string comp, string user)
