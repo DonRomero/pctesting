@@ -99,6 +99,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ActivityControl.cs" />
     <Compile Include="AddUserForm.cs">
       <SubType>Form</SubType>
     </Compile>

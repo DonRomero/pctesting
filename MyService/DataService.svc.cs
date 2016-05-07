@@ -97,8 +97,8 @@ namespace MyService
                 else
                     ansString = "user";
             }
-            return ansString;
             sql.Close();
+            return ansString;
         }
         public void execute(string query)
         {
