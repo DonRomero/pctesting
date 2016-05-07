@@ -56,8 +56,7 @@ namespace pctesting
             m_GlobalHook.KeyPress -= GlobalHookKeyPress;
             //It is recommened to dispose it
             m_GlobalHook.Dispose();
-            TimeSpan temp=DateTime.Now - StartWorkTime;
-            client.SaveActivityToDB(temp, temp-PassiveTime,PassiveTime,comp,user);
+            client.SaveActivityToDB((DateTime.Now - StartWorkTime), (DateTime.Now - StartWorkTime)-PassiveTime,PassiveTime,comp,user);
         }
     }
 }

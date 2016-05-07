@@ -34,10 +34,10 @@ namespace pctesting.DBService {
         System.Threading.Tasks.Task<string> loginAsync(string name, string password, string compMAC, string compName);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDataService/SaveActivityToDB", ReplyAction="http://tempuri.org/IDataService/SaveActivityToDBResponse")]
-        void SaveActivityToDB(System.TimeSpan GeneralTime, System.TimeSpan ActivityTime, System.TimeSpan NotActivityTime, string comp, string user);
+        void SaveActivityToDB(System.TimeSpan AllTime, System.TimeSpan ActivityTime, System.TimeSpan NotActivityTime, string comp, string user);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDataService/SaveActivityToDB", ReplyAction="http://tempuri.org/IDataService/SaveActivityToDBResponse")]
-        System.Threading.Tasks.Task SaveActivityToDBAsync(System.TimeSpan GeneralTime, System.TimeSpan ActivityTime, System.TimeSpan NotActivityTime, string comp, string user);
+        System.Threading.Tasks.Task SaveActivityToDBAsync(System.TimeSpan AllTime, System.TimeSpan ActivityTime, System.TimeSpan NotActivityTime, string comp, string user);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDataService/SaveProcessesToDB", ReplyAction="http://tempuri.org/IDataService/SaveProcessesToDBResponse")]
         void SaveProcessesToDB(string Name, System.DateTime StartTime, System.DateTime ExitTime, System.TimeSpan GeneralTime, string comp, string user);
@@ -115,14 +115,14 @@ namespace pctesting.DBService {
             return base.Channel.loginAsync(name, password, compMAC, compName);
         }
 
-        public void SaveActivityToDB(System.TimeSpan GeneralTime, System.TimeSpan ActivityTime, System.TimeSpan NotActivityTime, string comp, string user)
+        public void SaveActivityToDB(System.TimeSpan AllTime, System.TimeSpan ActivityTime, System.TimeSpan NotActivityTime, string comp, string user)
         {
-            base.Channel.SaveActivityToDB(GeneralTime, ActivityTime, NotActivityTime, comp, user);
+            base.Channel.SaveActivityToDB(AllTime, ActivityTime, NotActivityTime, comp, user);
         }
 
-        public System.Threading.Tasks.Task SaveActivityToDBAsync(System.TimeSpan GeneralTime, System.TimeSpan ActivityTime, System.TimeSpan NotActivityTime, string comp, string user)
+        public System.Threading.Tasks.Task SaveActivityToDBAsync(System.TimeSpan AllTime, System.TimeSpan ActivityTime, System.TimeSpan NotActivityTime, string comp, string user)
         {
-            return base.Channel.SaveActivityToDBAsync(GeneralTime, ActivityTime, NotActivityTime, comp, user);
+            return base.Channel.SaveActivityToDBAsync(AllTime, ActivityTime, NotActivityTime, comp, user);
         }
         
         public void SaveProcessesToDB(string Name, System.DateTime StartTime, System.DateTime ExitTime, System.TimeSpan GeneralTime, string comp, string user) {
