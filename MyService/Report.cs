@@ -11,11 +11,11 @@ namespace MyService
     class Report
     {
         static string root;
+        SQLiteConnection sql = new SQLiteConnection("DataSource = " + root + @"mydb.sqlite;Version=3");
 
         public Report(string str)
         {
             root = str;
-            //sql = new SQLiteConnection("DataSource = " + root + @"mydb.sqlite;Version=3");
         }
 
         private void report(SQLiteDataReader reader, string subject)
@@ -32,20 +32,16 @@ namespace MyService
 
         private SQLiteDataReader execute(string query)
         {
-            using (SQLiteConnection sql = new SQLiteConnection("DataSource = " + root + @"mydb.sqlite;Version=3"))
-            {
-                sql.Open();
-                SQLiteCommand sc = new SQLiteCommand(query, sql);
-                return sc.ExecuteReader();
-            }
+            SQLiteCommand sc = new SQLiteCommand(query, sql);
+            return sc.ExecuteReader();
         }
 
         public void makeReport()
         {
-            //sql.Open();
+            sql.Open();
             report(execute("SELECT NAME FROM USER WHERE ADMIN NOT LIKE 1;"), "user");
             report(execute("SELECT NAME FROM COMPUTER;"), "computer");
-            //sql.Close();
+            sql.Close();
         }
 
         private void makeReport(string name, string subject, string table)

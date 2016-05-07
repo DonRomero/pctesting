@@ -16,7 +16,7 @@ namespace MyService
     {
         static string diskLetter = Path.GetPathRoot(Environment.GetFolderPath(Environment.SpecialFolder.System));
         Report report = new Report(diskLetter + @"\pctesting\");
-        //SQLiteConnection sql = new SQLiteConnection("DataSource = " + diskLetter + @"pctesting\mydb.sqlite;Version=3");
+        SQLiteConnection sql = new SQLiteConnection("DataSource = " + diskLetter + @"pctesting\mydb.sqlite;Version=3");
         string adminLogin = "admin";
         string adminPassword = "admin";
         string fk_computer = "CONSTRAINT fk_computer " +
@@ -28,40 +28,34 @@ namespace MyService
 
         public List<string> getUsers()
         {
-            using (SQLiteConnection sql = new SQLiteConnection("DataSource = " + diskLetter + @"pctesting\mydb.sqlite;Version=3"))
+            sql.Open();
+            SQLiteCommand sc = new SQLiteCommand("SELECT NAME FROM USER;", sql);
+            SQLiteDataReader reader = sc.ExecuteReader();
+            List<string> list = new List<string>();
+            while (reader.Read())
             {
-                sql.Open();
-                SQLiteCommand sc = new SQLiteCommand("SELECT NAME FROM USER;", sql);
-                SQLiteDataReader reader = sc.ExecuteReader();
-                List<string> list = new List<string>();
-                while (reader.Read())
-                {
-                    list.Add(reader[0].ToString());
-                }
-                //sql.Close();
-                return list;
+                list.Add(reader[0].ToString());
             }
+            sql.Close();
+            return list;
         }
 
         public bool addUser(string name, string password)
         {
-            try
-            {
-                using (SQLiteConnection sql = new SQLiteConnection("DataSource = " + diskLetter + @"pctesting\mydb.sqlite;Version=3"))
-                {
-                    sql.Open();
-                    SQLiteCommand sc = new SQLiteCommand("SELECT COUNT(*) FROM USER WHERE NAME = '" + name + "';");
-                    if (Convert.ToInt32(sc.ExecuteScalar()) > 0)
-                        return false;
-                    execute(String.Format("INSERT INTO USER VALUES(NULL, '{0}', '{1}', {2});", name, password, 0));
-                }
-                    //sql.Close();
-                return true;
-            }
-            catch (Exception ex)
-            {
+            //try
+            //{
+            sql.Open();
+            SQLiteCommand sc = new SQLiteCommand("SELECT COUNT(*) FROM USER WHERE NAME = '" + name + "';", sql);
+            if (Convert.ToInt32(sc.ExecuteScalar()) > 0)
                 return false;
-            }
+            execute(String.Format("INSERT INTO USER VALUES(NULL, '{0}', '{1}', {2});", name, password, 0));
+            //sql.Close();
+            return true;
+            //}
+            //catch (Exception ex)
+            //{
+            //    return false;
+            //}
         }
 
         public bool makeReport()
@@ -87,36 +81,29 @@ namespace MyService
             //if (!File.Exists(@"mydb.sqlite"))
             //    SQLiteConnection.CreateFile(@"mydb.sqlite");//файл хранится в папке с IIS Express
             string ansString = "denied";
-            using (SQLiteConnection sql = new SQLiteConnection("DataSource = " + diskLetter + @"pctesting\mydb.sqlite;Version=3"))
+            sql.Open();
+            setConnection();
+            SQLiteCommand sc = new SQLiteCommand("SELECT COUNT(*) FROM USER WHERE name = '" + name + "' AND password = '" + password + "';", sql);
+            if (Convert.ToInt32(sc.ExecuteScalar()) > 0)
             {
-                sql.Open();
-                setConnection();
-                SQLiteCommand sc = new SQLiteCommand("SELECT COUNT(*) FROM USER WHERE name = '" + name + "' AND password = '" + password + "';", sql);
-                if (Convert.ToInt32(sc.ExecuteScalar()) > 0)
+                sc = new SQLiteCommand("SELECT COUNT(*) FROM COMPUTER WHERE MAC = '" + compMAC + "';", sql);
+                if (Convert.ToInt32(sc.ExecuteScalar()) == 0)
                 {
-                    sc = new SQLiteCommand("SELECT COUNT(*) FROM COMPUTER WHERE MAC = '" + compMAC + "';", sql);
-                    if (Convert.ToInt32(sc.ExecuteScalar()) == 0)
-                    {
-                        execute("INSERT INTO COMPUTER VALUES(NULL, '" + compMAC + "' , '" + compName + "');");
-                    }
-                    sc = new SQLiteCommand(String.Format("SELECT COUNT(*) FROM USER WHERE name = '{0}' AND password = '{1}' AND admin = 1;", name, password), sql);
-                    if (Convert.ToInt32(sc.ExecuteScalar()) > 0)
-                        ansString = "admin";
-                    else
-                        ansString = "user";
+                    execute("INSERT INTO COMPUTER VALUES(NULL, '" + compMAC + "' , '" + compName + "');");
                 }
-                return ansString;
+                sc = new SQLiteCommand(String.Format("SELECT COUNT(*) FROM USER WHERE name = '{0}' AND password = '{1}' AND admin = 1;", name, password), sql);
+                if (Convert.ToInt32(sc.ExecuteScalar()) > 0)
+                    ansString = "admin";
+                else
+                    ansString = "user";
             }
-            //sql.Close();
+            return ansString;
+            sql.Close();
         }
         public void execute(string query)
         {
-            using (SQLiteConnection sql = new SQLiteConnection("DataSource = " + diskLetter + @"pctesting\mydb.sqlite;Version=3"))
-            {
-                sql.Open();
-                SQLiteCommand sc = new SQLiteCommand(query, sql);
-                sc.ExecuteNonQuery();
-            }
+            SQLiteCommand sc = new SQLiteCommand(query, sql);
+            sc.ExecuteNonQuery();
         }
 
         public void setConnection()
@@ -168,32 +155,32 @@ namespace MyService
 
         public void saveFileDataToDB(string name, string path, long time, string type, string comp, string user)
         {
-            //.Open();
+            sql.Open();
             int[] IDs = selectIDs(comp, user);
             execute(String.Format("INSERT INTO FILE VALUES( NULL, '{0}', '{1}', {2}, '{3}', {4}, {5});", name, path, time, type, IDs[0], IDs[1]));
-            //sql.Close();
+            sql.Close();
         }
 
         public void saveTrafficDataToDB(string URL, long time, string comp, string user)
         {
-            //sql.Open();
+            sql.Open();
             int[] IDs = selectIDs(comp, user);
             execute("INSERT INTO TRAFFIC VALUES( NULL, '" + URL + "'," + time + "," + IDs[0] + "," + IDs[1] + ");");
-            //sql.Close();
+            sql.Close();
         }
         public void SaveActivityToDB(DateTime AllTime, DateTime ActivityTime, DateTime NotActivityTime, string comp, string user)
         {
-            //sql.Open();
+            sql.Open();
             int[] IDs = selectIDs(comp, user);
             execute("INSERT INTO ACTIVITY VALUES(NULL, " + AllTime + ", " + ActivityTime + ", " + NotActivityTime + ", " + IDs[0] + ", " + IDs[1] + ");");
-            //sql.Close();
+            sql.Close();
         }
         public void SaveProcessesToDB(string Name, DateTime StartTime, DateTime FinishTime, TimeSpan GeneralTime, string comp, string user)
         {
-            //sql.Open();
+            sql.Open();
             int[] IDs = selectIDs(comp, user);
             execute("INSERT INTO PROCESS VALUES(NULL, '" + Name + "', " + (long)StartTime.Ticks / 10000 + ", " + (long)FinishTime.Ticks / 10000 + ", " + (long)GeneralTime.Ticks / 10000 + "," + IDs[0] + "," + IDs[1] + ");");
-            //sql.Close();
+            sql.Close();
         }
     }
 }
