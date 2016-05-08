@@ -1,9 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.Serialization;
-using System.ServiceModel;
-using System.Text;
 using System.Data.SQLite;
 using System.IO;
 
@@ -17,7 +13,6 @@ namespace MyService
         static string diskLetter = Path.GetPathRoot(Environment.GetFolderPath(Environment.SpecialFolder.System));
         Report report = new Report(diskLetter + @"\pctesting\");
         SQLiteConnection sql = new SQLiteConnection("DataSource = " + diskLetter + @"pctesting\mydb.sqlite;Version=3");
-        SQLiteConnection sql1 = new SQLiteConnection("DataSource = " + diskLetter + @"pctesting\mydb.sqlite;Version=3");
         string adminLogin = "admin";
         string adminPassword = "admin";
         string fk_computer = "CONSTRAINT fk_computer " +
@@ -109,11 +104,11 @@ namespace MyService
 
         public void setConnection()
         {
-            try
-            {
+            //try
+            //{
                 execute("CREATE TABLE IF NOT EXISTS COMPUTER(id INTEGER PRIMARY KEY AUTOINCREMENT, MAC TEXT, name TEXT);"
                         + "CREATE TABLE IF NOT EXISTS USER(id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, password TEXT, admin INTEGER);");
-                SQLiteCommand sc = new SQLiteCommand("SELECT COUNT(*) FROM USER WHERE NAME = 'admin';");
+                SQLiteCommand sc = new SQLiteCommand("SELECT COUNT(*) FROM USER WHERE admin = 1;", sql);
                 if (Convert.ToInt32(sc.ExecuteScalar()) == 0)
                 {
                     execute("INSERT INTO USER VALUES(NULL, '" + adminLogin + "', '" + adminPassword + "', " + 1 + ");");
@@ -136,11 +131,11 @@ namespace MyService
                 execute("CREATE TABLE IF NOT EXISTS ACTIVITY(id INTEGER PRIMARY KEY AUTOINCREMENT, allTime INTEGER, activeTime INTEGER, passiveTime INTEGER, computerID INTEGER, userID INTEGER, " +
                     fk_computer + ", " +
                     fk_user + ";");
-            }
-            catch (Exception ex)
-            {
+            //}
+            //catch (Exception ex)
+            //{
 
-            }
+            //}
         }
 
         private int[] selectIDs(string comp, string user)
