@@ -12,6 +12,7 @@ namespace MyService
     {
         static string root;
         SQLiteConnection sql = new SQLiteConnection("DataSource = " + root + @"mydb.sqlite;Version=3");
+        SQLiteConnection sql1 = new SQLiteConnection("DataSource = " + root + @"mydb.sqlite;Version=3");
 
         public Report(string str)
         {
@@ -27,6 +28,8 @@ namespace MyService
                     Directory.CreateDirectory(root + @"report\" + subject + "\\" + name);
                 makeReport(name, subject, "TRAFFIC");
                 makeReport(name, subject, "FILE");
+                makeReport(name, subject, "PROCESS");
+                makeReport(name, subject, "ACTIVITY");
             }
         }
 
@@ -86,6 +89,39 @@ namespace MyService
                             break;
                     }
                     break;
+                case "PROCESS":
+                    columns.Add("Имя");
+                    columns.Add("Время начала");
+                    columns.Add("Время окночания");
+                    columns.Add("Общее время");
+                    switch(subject)
+                    {
+                        case "computer":
+                            sc = new SQLiteCommand("SELECT P.NAME, STARTTIME, FINISHTIME, P.ALLTIME FROM PROCESS P JOIN COMPUTER C ON P.COMPUTERID=C.ID WHERE C.NAME='" + name + "';", sql);
+                            PdfWriter.GetInstance(doc, new FileStream(root + @"report\computer\" + name + @"\process.pdf", FileMode.Create));
+                            break;
+                        case "user":
+                            sc = new SQLiteCommand("SELECT P.NAME, STARTTIME, FINISHTIME, P.ALLTIME FROM PROCESS P JOIN USER U ON P.USERID = U.ID WHERE U.NAME = '" + name + "';", sql);
+                            PdfWriter.GetInstance(doc, new FileStream(root + @"report\user\" + name + @"\process.pdf", FileMode.Create));
+                            break;
+                    }
+                    break;
+                case "ACTIVITY":
+                    columns.Add("Общее время работы");
+                    columns.Add("Время активности");
+                    columns.Add("Время простоя");
+                    switch (subject)
+                    {
+                        case "computer":
+                            sc = new SQLiteCommand("SELECT A.ALLTIME, ACTIVETIME,PASSIVETIME FROM ACTIVITY A JOIN COMPUTER C ON A.COMPUTERID=C.ID WHERE C.NAME='" + name + "';", sql);
+                            PdfWriter.GetInstance(doc, new FileStream(root + @"report\computer\" + name + @"\activity.pdf", FileMode.Create));
+                            break;
+                        case "user":
+                            sc = new SQLiteCommand("SELECT A.ALLTIME, ACTIVETIME,PASSIVETIME FROM ACTIVITY A JOIN USER U ON A.USERID = U.ID WHERE U.NAME = '" + name + "';", sql);
+                            PdfWriter.GetInstance(doc, new FileStream(root + @"report\user\" + name + @"\activity.pdf", FileMode.Create));
+                            break;
+                    }
+                    break;
             }
             switch (subject)
             {
@@ -96,7 +132,7 @@ namespace MyService
                     columns.Add("Компьютер");
                     break;
             }
-            sql.Open();
+            sql1.Open();
             SQLiteDataReader sdr = sc.ExecuteReader();
             DataTable dt = new DataTable();
             dt.Load(sdr);
@@ -150,7 +186,7 @@ namespace MyService
                         }
                         else
                         {
-                            if (columns[j].Equals("Время"))
+                            if (columns[j].Equals("Время")||columns[j].ToString().Contains("Время"))
                                 phrase = new DateTime(Convert.ToInt64(dt.Rows[i][j]) * 10000).ToString();
                             else
                                 phrase = dt.Rows[i][j].ToString();
@@ -161,7 +197,7 @@ namespace MyService
                 }
             }
             doc.Add(pdfTable);
-            sql.Close();
+            sql1.Close();
             doc.Close();
         }
     }

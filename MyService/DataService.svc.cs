@@ -17,6 +17,7 @@ namespace MyService
         static string diskLetter = Path.GetPathRoot(Environment.GetFolderPath(Environment.SpecialFolder.System));
         Report report = new Report(diskLetter + @"\pctesting\");
         SQLiteConnection sql = new SQLiteConnection("DataSource = " + diskLetter + @"pctesting\mydb.sqlite;Version=3");
+        SQLiteConnection sql1 = new SQLiteConnection("DataSource = " + diskLetter + @"pctesting\mydb.sqlite;Version=3");
         string adminLogin = "admin";
         string adminPassword = "admin";
         string fk_computer = "CONSTRAINT fk_computer " +
