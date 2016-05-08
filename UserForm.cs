@@ -30,6 +30,7 @@ namespace pctesting
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            timer1.Enabled = false;
             activityControl.Unsubscribe();
             trafficWatcher.Stop();
             process.SaveToDatabase();
@@ -78,6 +79,7 @@ namespace pctesting
 
         private void exitButton_Click(object sender, EventArgs e)
         {
+            timer1.Enabled = false;
             activityControl.Unsubscribe();
             trafficWatcher.Stop();
             process.SaveToDatabase();

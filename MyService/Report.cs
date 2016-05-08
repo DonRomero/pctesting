@@ -106,11 +106,11 @@ namespace MyService
                     switch(subject)
                     {
                         case "computer":
-                            sc = new SQLiteCommand("SELECT P.NAME, STARTTIME, FINISHTIME, P.ALLTIME FROM PROCESS P JOIN COMPUTER C ON P.COMPUTERID=C.ID WHERE C.NAME='" + name + "';", sql);
+                            sc = new SQLiteCommand("SELECT P.NAME, STARTTIME, FINISHTIME, P.ALLTIME, USERID FROM PROCESS P JOIN COMPUTER C ON P.COMPUTERID=C.ID WHERE C.NAME='" + name + "';", sql);
                             PdfWriter.GetInstance(doc, new FileStream(root + @"report\computer\" + name + @"\process.pdf", FileMode.Create));
                             break;
                         case "user":
-                            sc = new SQLiteCommand("SELECT P.NAME, STARTTIME, FINISHTIME, P.ALLTIME FROM PROCESS P JOIN USER U ON P.USERID = U.ID WHERE U.NAME = '" + name + "';", sql);
+                            sc = new SQLiteCommand("SELECT P.NAME, STARTTIME, FINISHTIME, P.ALLTIME, COMPUTERID FROM PROCESS P JOIN USER U ON P.USERID = U.ID WHERE U.NAME = '" + name + "';", sql);
                             PdfWriter.GetInstance(doc, new FileStream(root + @"report\user\" + name + @"\process.pdf", FileMode.Create));
                             break;
                     }
@@ -122,11 +122,11 @@ namespace MyService
                     switch (subject)
                     {
                         case "computer":
-                            sc = new SQLiteCommand("SELECT A.ALLTIME, ACTIVETIME,PASSIVETIME FROM ACTIVITY A JOIN COMPUTER C ON A.COMPUTERID=C.ID WHERE C.NAME='" + name + "';", sql);
+                            sc = new SQLiteCommand("SELECT A.ALLTIME, ACTIVETIME,PASSIVETIME, USERID FROM ACTIVITY A JOIN COMPUTER C ON A.COMPUTERID=C.ID WHERE C.NAME='" + name + "';", sql);
                             PdfWriter.GetInstance(doc, new FileStream(root + @"report\computer\" + name + @"\activity.pdf", FileMode.Create));
                             break;
                         case "user":
-                            sc = new SQLiteCommand("SELECT A.ALLTIME, ACTIVETIME,PASSIVETIME FROM ACTIVITY A JOIN USER U ON A.USERID = U.ID WHERE U.NAME = '" + name + "';", sql);
+                            sc = new SQLiteCommand("SELECT A.ALLTIME, ACTIVETIME,PASSIVETIME ,COMPUTERID FROM ACTIVITY A JOIN USER U ON A.USERID = U.ID WHERE U.NAME = '" + name + "';", sql);
                             PdfWriter.GetInstance(doc, new FileStream(root + @"report\user\" + name + @"\activity.pdf", FileMode.Create));
                             break;
                     }
@@ -194,6 +194,7 @@ namespace MyService
                         }
                         else
                         {
+
                             if (columns[j].Equals("Время")||columns[j].ToString().Contains("Время"))
                                 phrase = new DateTime(Convert.ToInt64(dt.Rows[i][j]) * 10000).ToString();
                             else
