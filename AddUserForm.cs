@@ -14,7 +14,7 @@ namespace pctesting
         private void saveButton_Click(object sender, EventArgs e)
         {
             DBService.DataServiceClient client = new DataServiceClient();
-            if(client.addUser(userNameTextBox.Text, userPasswordTextBox.Text))
+            if (userNameTextBox.Text.Length > 0 && userPasswordTextBox.Text.Length > 0 && client.addUser(userNameTextBox.Text, userPasswordTextBox.Text))
             {
                 MessageBox.Show("Пользователь успешно добавлен", "Пользователь добавлен");
                 this.Hide();

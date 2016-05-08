@@ -256,6 +256,5 @@ namespace MyService
             excelapp.ActiveChart.Export(root + @"chart.bmp", "BMP", Type.Missing);
             excelapp.Workbooks[book].Saved = true; ;
         }
-
     }
 }
