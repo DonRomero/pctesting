@@ -58,6 +58,7 @@ namespace MyService
             SQLiteCommand sc = new SQLiteCommand("");
             List<string> columns = new List<string>();
             Document doc = new Document();
+            List<string> TSnames = new List<string> { "Общее время", "Общее время работы", "Время активности", "Время простоя" };
             List<string> chartQuery = new List<string>();
             List<string> chartName = new List<string>();
             switch (table)
@@ -101,7 +102,7 @@ namespace MyService
                 case "PROCESS":
                     columns.Add("Имя");
                     columns.Add("Время начала");
-                    columns.Add("Время окночания");
+                    columns.Add("Время окончания");
                     columns.Add("Общее время");
                     switch(subject)
                     {
@@ -194,11 +195,17 @@ namespace MyService
                         }
                         else
                         {
-
-                            if (columns[j].Equals("Время")||columns[j].ToString().Contains("Время"))
-                                phrase = new DateTime(Convert.ToInt64(dt.Rows[i][j]) * 10000).ToString();
+                            if (TSnames.Exists(n => n == columns[j]))
+                            {
+                                phrase = new TimeSpan(Convert.ToInt64(dt.Rows[i][j]) * 10000).ToString();
+                            }
                             else
-                                phrase = dt.Rows[i][j].ToString();
+                            {
+                                if (columns[j].Equals("Время") || columns[j].Equals("Время начала") || columns[j].Equals("Время окончания"))
+                                    phrase = new DateTime(Convert.ToInt64(dt.Rows[i][j]) * 10000).ToString();
+                                else
+                                    phrase = dt.Rows[i][j].ToString();
+                            }
                         }
                     }
                     PdfPCell cell = new PdfPCell(new Phrase(phrase, font));
