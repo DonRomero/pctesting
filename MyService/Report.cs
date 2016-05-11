@@ -6,6 +6,8 @@ using System.Data.SQLite;
 using System.Data;
 using System.Collections.Generic;
 using Excel = Microsoft.Office.Interop.Excel;
+using System.Windows.Forms.DataVisualization.Charting;
+using System.Windows.Forms;
 
 namespace MyService
 {
@@ -61,6 +63,8 @@ namespace MyService
             List<string> TSnames = new List<string> { "Общее время", "Общее время работы", "Время активности", "Время простоя" };
             List<string> chartQuery = new List<string>();
             List<string> chartName = new List<string>();
+            List<string> chartX = new List<string>();
+            List<string> chartY = new List<string>();
             switch (table)
             {
                 case "TRAFFIC":
@@ -71,14 +75,18 @@ namespace MyService
                         case "computer":
                             sc = new SQLiteCommand("SELECT URL, TIME, USERID FROM TRAFFIC T JOIN COMPUTER C ON T.COMPUTERID = C.ID WHERE C.NAME = '" + name + "';", sql);
                             PdfWriter.GetInstance(doc, new FileStream(root + @"report\computer\" + name + @"\traffic.pdf", FileMode.Create));
-                            chartQuery.Add("SELECT URL, COUNT(URL) FROM TRAFFIC T JOIN COMPUTER C ON T.COMPUTERID = C.ID WHERE C.NAME = '" + name + "' GROUP BY URL ORDER BY COUNT(URL) DESC;");
+                            chartQuery.Add("SELECT URL, COUNT(URL) FROM TRAFFIC T JOIN COMPUTER C ON T.COMPUTERID = C.ID WHERE C.NAME = '" + name + "' GROUP BY URL ORDER BY COUNT(URL) DESC LIMIT 9;");
                             chartName.Add("Самый популярные URL на этом компьютере");
+                            chartX.Add("URL");
+                            chartY.Add("COUNT(URL)");
                             break;
                         case "user":
                             sc = new SQLiteCommand("SELECT URL, TIME, COMPUTERID FROM TRAFFIC T JOIN USER U ON T.USERID = U.ID WHERE U.NAME = '" + name + "';", sql);
                             PdfWriter.GetInstance(doc, new FileStream(root + @"report\user\" + name + @"\traffic.pdf", FileMode.Create));
-                            chartQuery.Add("SELECT URL, COUNT(URL) FROM TRAFFIC T JOIN USER U ON T.USERID = U.ID WHERE U.NAME = '" + name + "' GROUP BY URL ORDER BY COUNT(URL) DESC");
+                            chartQuery.Add("SELECT URL, COUNT(URL) FROM TRAFFIC T JOIN USER U ON T.USERID = U.ID WHERE U.NAME = '" + name + "' GROUP BY URL ORDER BY COUNT(URL) DESC LIMIT 9");
                             chartName.Add("Самый популярные URL этого пользователя");
+                            chartX.Add("URL");
+                            chartY.Add("COUNT(URL)");
                             break;
                     }
                     break;
@@ -104,10 +112,10 @@ namespace MyService
                     columns.Add("Время начала");
                     columns.Add("Время окончания");
                     columns.Add("Общее время");
-                    switch(subject)
+                    switch (subject)
                     {
                         case "computer":
-                            sc = new SQLiteCommand("SELECT P.NAME, STARTTIME, FINISHTIME, P.ALLTIME, USERID FROM PROCESS P JOIN COMPUTER C ON P.COMPUTERID=C.ID WHERE C.NAME='" + name + "';", sql);
+                            sc = new SQLiteCommand("SELECT P.NAME, STARTTIME, FINISHTIME, P.ALLTIME, USERID FROM PROCESS P JOIN COMPUTER C ON P.COMPUTERID = C.ID WHERE C.NAME='" + name + "';", sql);
                             PdfWriter.GetInstance(doc, new FileStream(root + @"report\computer\" + name + @"\process.pdf", FileMode.Create));
                             break;
                         case "user":
@@ -123,7 +131,7 @@ namespace MyService
                     switch (subject)
                     {
                         case "computer":
-                            sc = new SQLiteCommand("SELECT A.ALLTIME, ACTIVETIME,PASSIVETIME, USERID FROM ACTIVITY A JOIN COMPUTER C ON A.COMPUTERID=C.ID WHERE C.NAME='" + name + "';", sql);
+                            sc = new SQLiteCommand("SELECT A.ALLTIME, ACTIVETIME,PASSIVETIME, USERID FROM ACTIVITY A JOIN COMPUTER C ON A.COMPUTERID = C.ID WHERE C.NAME='" + name + "';", sql);
                             PdfWriter.GetInstance(doc, new FileStream(root + @"report\computer\" + name + @"\activity.pdf", FileMode.Create));
                             break;
                         case "user":
@@ -214,7 +222,8 @@ namespace MyService
             }
             for (int i = 0; i < chartName.Count; i++)
             {
-                makeChart(chartQuery[i], chartName[i]);
+                makeChart(chartQuery[i], chartX[i], chartY[i]);
+                doc.Add(new Phrase(chartName[i]));
                 Image chart = Image.GetInstance(root + @"chart.bmp");
                 doc.Add(chart);
             }
@@ -223,46 +232,64 @@ namespace MyService
             doc.Close();
         }
 
-        private void makeChart(string query, string name)
-        { 
-            //excelapp.SheetsInNewWorkbook = 3;
-            excelapp.Workbooks.Add(Type.Missing);
-            Excel.Sheets excelsheets = excelapp.Workbooks[++book].Worksheets;
+        private void makeChart(string query, string xName, string yName)
+        {
+            Chart chart = new Chart();
             DataTable dt = new DataTable();
+            ChartArea ChartArea1 = new ChartArea();
+            chart.Series.Add("Series1");
+            chart.ChartAreas.Add("ChartArea1");
+            //chart.ChartAreas["ChartArea1"].AxisX.LabelAutoFitStyle = LabelAutoFitStyles.None;
+            chart.Size = new System.Drawing.Size(500, 500);
+            chart.ChartAreas["ChartArea1"].AxisX.LabelStyle.Font = new System.Drawing.Font("Trebuchet MS", 6F, System.Drawing.FontStyle.Regular);
+            chart.Series["Series1"].ChartType = SeriesChartType.Column;
+            //chart.Series["Series1"]["DrawingStyle"] = "Emboss";
+            chart.Series["Series1"].IsValueShownAsLabel = true;
             dt.Load(execute(query));
-            Excel.Worksheet excelworksheet = (Excel.Worksheet)excelsheets.get_Item(1);
-            excelworksheet.Activate();
-            Excel.Range excelcells;
-            for (int i = 0; i < dt.Rows.Count; i++)
-            {
-                for (int j = 0; j < dt.Columns.Count; j++)
-                {
-                    excelcells = excelworksheet.Cells[j + 1][i + 1];
-                    excelcells.Value2 = dt.Rows[i][j];
-                }
-            }
-            excelcells = excelworksheet.get_Range("A1", "B" + Math.Max(dt.Rows.Count, 1));
-            excelcells.Select();
-            Excel.Chart excelchart = (Excel.Chart)excelapp.Charts.Add(Type.Missing,
-                Type.Missing, Type.Missing, Type.Missing);
-            excelchart.Activate();
-            excelchart.Select(Type.Missing);
-            excelapp.ActiveChart.ChartType = Excel.XlChartType.xlColumnClustered;
+            chart.DataSource = dt;
+            chart.Series["Series1"].YValueMembers = yName;
+            chart.Series["Series1"].XValueMember = xName;
+            chart.DataBind();
+            chart.SaveImage(root + @"chart.bmp", System.Drawing.Imaging.ImageFormat.Bmp);
 
-            excelapp.ActiveChart.HasTitle = true;
-            excelapp.ActiveChart.ChartTitle.Text = name;
+            ////excelapp.SheetsInNewWorkbook = 3;
+            //excelapp.Workbooks.Add(Type.Missing);
+            //Excel.Sheets excelsheets = excelapp.Workbooks[++book].Worksheets;
+            //DataTable dt = new DataTable();
+            //dt.Load(execute(query));
+            //Excel.Worksheet excelworksheet = (Excel.Worksheet)excelsheets.get_Item(1);
+            //excelworksheet.Activate();
+            //Excel.Range excelcells;
+            //for (int i = 0; i < dt.Rows.Count; i++)
+            //{
+            //    for (int j = 0; j < dt.Columns.Count; j++)
+            //    {
+            //        excelcells = excelworksheet.Cells[j + 1][i + 1];
+            //        excelcells.Value2 = dt.Rows[i][j];
+            //    }
+            //}
+            //excelcells = excelworksheet.get_Range("A1", "B" + Math.Max(dt.Rows.Count, 1));
+            //excelcells.Select();
+            //Excel.Chart excelchart = (Excel.Chart)excelapp.Charts.Add(Type.Missing,
+            //    Type.Missing, Type.Missing, Type.Missing);
+            //excelchart.Activate();
+            //excelchart.Select(Type.Missing);
+            //excelapp.ActiveChart.ChartType = Excel.XlChartType.xlColumnClustered;
 
-            excelapp.ActiveChart.ChartTitle.Font.Size = 13;
+            //excelapp.ActiveChart.HasTitle = true;
+            //excelapp.ActiveChart.ChartTitle.Text = name;
 
-            excelapp.ActiveChart.ChartTitle.Shadow = true;
-            excelapp.ActiveChart.ChartTitle.Border.LineStyle = Excel.Constants.xlSolid;
+            //excelapp.ActiveChart.ChartTitle.Font.Size = 13;
 
-            Excel.SeriesCollection seriesCollection = (Excel.SeriesCollection)excelapp.ActiveChart.SeriesCollection(Type.Missing);
-            Excel.Series series = seriesCollection.Item(1);
+            //excelapp.ActiveChart.ChartTitle.Shadow = true;
+            //excelapp.ActiveChart.ChartTitle.Border.LineStyle = Excel.Constants.xlSolid;
 
-            series.XValues = excelworksheet.get_Range("A1", "A" + Math.Max(dt.Rows.Count, 1));
-            excelapp.ActiveChart.Export(root + @"chart.bmp", "BMP", Type.Missing);
-            excelapp.Workbooks[book].Saved = true; ;
+            //Excel.SeriesCollection seriesCollection = (Excel.SeriesCollection)excelapp.ActiveChart.SeriesCollection(Type.Missing);
+            //Excel.Series series = seriesCollection.Item(1);
+
+            //series.XValues = excelworksheet.get_Range("A1", "A" + Math.Max(dt.Rows.Count, 1));
+            //excelapp.ActiveChart.Export(root + @"chart.bmp", "BMP", Type.Missing);
+            //excelapp.Workbooks[book].Saved = true; ;
         }
     }
 }
