@@ -62,10 +62,10 @@ namespace pctesting
 
         public void SaveToDatabase()
         {
-            for (int i = 0; i < processLastIteration.Count; i++)
-            {
-               client.SaveProcessesToDB(processLastIteration[i].ProcessName, startTime[i], DateTime.Now, DateTime.Now - startTime[i], comp, user);
-            }
+            //for (int i = 0; i < processLastIteration.Count; i++)
+            //{
+            //   client.SaveProcessesToDB(processLastIteration[i].ProcessName, startTime[i], DateTime.Now, DateTime.Now - startTime[i], comp, user);
+            //}
         }
     }
 }

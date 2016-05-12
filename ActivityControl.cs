@@ -5,7 +5,6 @@ using System.Text;
 using System.Threading.Tasks;
 using Gma.System.MouseKeyHook;
 using System.Windows.Forms;
-using System.Runtime.InteropServices;
 
 namespace pctesting
 {
