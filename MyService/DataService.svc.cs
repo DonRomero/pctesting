@@ -113,7 +113,7 @@ namespace MyService
                 {
                     execute("INSERT INTO USER VALUES(NULL, '" + adminLogin + "', '" + adminPassword + "', " + 1 + ");");
                 }
-                execute("CREATE TABLE IF NOT EXISTS FILE(id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, path TEXT, time INTEGER, type TEXT, computerID INTEGER, userID INTEGER, " +
+                execute("CREATE TABLE IF NOT EXISTS FILE(id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, path TEXT, extension TEXT, time INTEGER, type TEXT, computerID INTEGER, userID INTEGER, " +
                     fk_computer + ", " +
                     fk_user + ";");
                 execute("CREATE TABLE IF NOT EXISTS TRAFFIC(id INTEGER PRIMARY KEY AUTOINCREMENT, URL TEXT, time INTEGER, computerID INTEGER, userID INTEGER, " +
@@ -149,11 +149,11 @@ namespace MyService
             }
         }
 
-        public void saveFileDataToDB(string name, string path, long time, string type, string comp, string user)
+        public void saveFileDataToDB(string name, string path, string ext, long time, string type, string comp, string user)
         {
             sql.Open();
             int[] IDs = selectIDs(comp, user);
-            execute(String.Format("INSERT INTO FILE VALUES( NULL, '{0}', '{1}', {2}, '{3}', {4}, {5});", name, path, time, type, IDs[0], IDs[1]));
+            execute(String.Format("INSERT INTO FILE VALUES( NULL, '{0}', '{1}', '{2}', {3}, '{4}', {5}, {6});", name, path, ext, time, type, IDs[0], IDs[1]));
             sql.Close();
         }
 

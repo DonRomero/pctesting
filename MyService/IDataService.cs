@@ -9,7 +9,7 @@ namespace MyService
     public interface IDataService
     {
         [OperationContract]
-        void saveFileDataToDB(string name, string path, long time, string type, string comp, string user);
+        void saveFileDataToDB(string name, string path, string ext, long time, string type, string comp, string user);
 
         [OperationContract]
         void saveTrafficDataToDB(string URL, long time, string comp, string user);
