@@ -16,10 +16,10 @@ namespace pctesting.DBService {
     public interface IDataService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDataService/saveFileDataToDB", ReplyAction="http://tempuri.org/IDataService/saveFileDataToDBResponse")]
-        void saveFileDataToDB(string name, string path, long time, string type, string comp, string user);
+        void saveFileDataToDB(string name, string path, string ext, long time, string type, string comp, string user);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDataService/saveFileDataToDB", ReplyAction="http://tempuri.org/IDataService/saveFileDataToDBResponse")]
-        System.Threading.Tasks.Task saveFileDataToDBAsync(string name, string path, long time, string type, string comp, string user);
+        System.Threading.Tasks.Task saveFileDataToDBAsync(string name, string path, string ext, long time, string type, string comp, string user);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDataService/saveTrafficDataToDB", ReplyAction="http://tempuri.org/IDataService/saveTrafficDataToDBResponse")]
         void saveTrafficDataToDB(string URL, long time, string comp, string user);
@@ -91,12 +91,12 @@ namespace pctesting.DBService {
                 base(binding, remoteAddress) {
         }
         
-        public void saveFileDataToDB(string name, string path, long time, string type, string comp, string user) {
-            base.Channel.saveFileDataToDB(name, path, time, type, comp, user);
+        public void saveFileDataToDB(string name, string path, string ext, long time, string type, string comp, string user) {
+            base.Channel.saveFileDataToDB(name, path, ext, time, type, comp, user);
         }
         
-        public System.Threading.Tasks.Task saveFileDataToDBAsync(string name, string path, long time, string type, string comp, string user) {
-            return base.Channel.saveFileDataToDBAsync(name, path, time, type, comp, user);
+        public System.Threading.Tasks.Task saveFileDataToDBAsync(string name, string path, string ext, long time, string type, string comp, string user) {
+            return base.Channel.saveFileDataToDBAsync(name, path, ext, time, type, comp, user);
         }
         
         public void saveTrafficDataToDB(string URL, long time, string comp, string user) {
@@ -114,14 +114,12 @@ namespace pctesting.DBService {
         public System.Threading.Tasks.Task<string> loginAsync(string name, string password, string compMAC, string compName) {
             return base.Channel.loginAsync(name, password, compMAC, compName);
         }
-
-        public void SaveActivityToDB(System.TimeSpan AllTime, System.TimeSpan ActivityTime, System.TimeSpan NotActivityTime, string comp, string user)
-        {
+        
+        public void SaveActivityToDB(System.TimeSpan AllTime, System.TimeSpan ActivityTime, System.TimeSpan NotActivityTime, string comp, string user) {
             base.Channel.SaveActivityToDB(AllTime, ActivityTime, NotActivityTime, comp, user);
         }
-
-        public System.Threading.Tasks.Task SaveActivityToDBAsync(System.TimeSpan AllTime, System.TimeSpan ActivityTime, System.TimeSpan NotActivityTime, string comp, string user)
-        {
+        
+        public System.Threading.Tasks.Task SaveActivityToDBAsync(System.TimeSpan AllTime, System.TimeSpan ActivityTime, System.TimeSpan NotActivityTime, string comp, string user) {
             return base.Channel.SaveActivityToDBAsync(AllTime, ActivityTime, NotActivityTime, comp, user);
         }
         

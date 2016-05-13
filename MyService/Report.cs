@@ -70,6 +70,8 @@ namespace MyService
                 case "TRAFFIC":
                     columns.Add("URL");
                     columns.Add("Время");
+                    chartX.Add("URL");
+                    chartY.Add("COUNT(URL)");
                     switch (subject)
                     {
                         case "computer":
@@ -77,16 +79,12 @@ namespace MyService
                             PdfWriter.GetInstance(doc, new FileStream(root + @"report\computer\" + name + @"\traffic.pdf", FileMode.Create));
                             chartQuery.Add("SELECT URL, COUNT(URL) FROM TRAFFIC T JOIN COMPUTER C ON T.COMPUTERID = C.ID WHERE C.NAME = '" + name + "' GROUP BY URL ORDER BY COUNT(URL) DESC LIMIT 9;");
                             chartName.Add("Самый популярные URL на этом компьютере");
-                            chartX.Add("URL");
-                            chartY.Add("COUNT(URL)");
                             break;
                         case "user":
                             sc = new SQLiteCommand("SELECT URL, TIME, COMPUTERID FROM TRAFFIC T JOIN USER U ON T.USERID = U.ID WHERE U.NAME = '" + name + "';", sql);
                             PdfWriter.GetInstance(doc, new FileStream(root + @"report\user\" + name + @"\traffic.pdf", FileMode.Create));
                             chartQuery.Add("SELECT URL, COUNT(URL) FROM TRAFFIC T JOIN USER U ON T.USERID = U.ID WHERE U.NAME = '" + name + "' GROUP BY URL ORDER BY COUNT(URL) DESC LIMIT 9");
                             chartName.Add("Самый популярные URL этого пользователя");
-                            chartX.Add("URL");
-                            chartY.Add("COUNT(URL)");
                             break;
                     }
                     break;
@@ -95,15 +93,20 @@ namespace MyService
                     columns.Add("Путь");
                     columns.Add("Время");
                     columns.Add("Тип");
+                    chartX.Add("EXTENSION");
+                    chartY.Add("COUNT(EXTENSION)");
+                    chartName.Add("Часто используемые форматы файлов");
                     switch (subject)
                     {
                         case "computer":
                             sc = new SQLiteCommand("SELECT F.NAME, PATH, TIME, TYPE, USERID FROM FILE F JOIN COMPUTER C ON F.COMPUTERID = C.ID WHERE C.NAME = '" + name + "';", sql);
                             PdfWriter.GetInstance(doc, new FileStream(root + @"report\computer\" + name + @"\file.pdf", FileMode.Create));
+                            chartQuery.Add("SELECT EXTENSION, COUNT(EXTENSION) FROM FILE F JOIN COMPUTER C ON F.COMPUTERID = C.ID WHERE C.NAME = '" + name + "' GROUP BY EXTENSION ORDER BY COUNT(EXTENSION) DESC LIMIT 9;");
                             break;
                         case "user":
                             sc = new SQLiteCommand("SELECT F.NAME, PATH, TIME, TYPE, COMPUTERID FROM FILE F JOIN USER U ON F.USERID = U.ID WHERE U.NAME = '" + name + "';", sql);
                             PdfWriter.GetInstance(doc, new FileStream(root + @"report\user\" + name + @"\file.pdf", FileMode.Create));
+                            chartQuery.Add("SELECT EXTENSION, COUNT(EXTENSION) FROM FILE F JOIN USER U ON F.USERID = U.ID WHERE U.NAME = '" + name + "' GROUP BY EXTENSION ORDER BY COUNT(EXTENSION) DESC LIMIT 9");
                             break;
                     }
                     break;

@@ -7,6 +7,7 @@
       <xs:sequence>
         <xs:element minOccurs="0" name="name" nillable="true" type="xs:string" />
         <xs:element minOccurs="0" name="path" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="ext" nillable="true" type="xs:string" />
         <xs:element minOccurs="0" name="time" type="xs:long" />
         <xs:element minOccurs="0" name="type" nillable="true" type="xs:string" />
         <xs:element minOccurs="0" name="comp" nillable="true" type="xs:string" />
@@ -54,9 +55,9 @@
   <xs:element name="SaveActivityToDB">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" name="GeneralTime" type="xs:dateTime" />
-        <xs:element minOccurs="0" name="ActivityTime" type="xs:dateTime" />
-        <xs:element minOccurs="0" name="NotActivityTime" type="xs:dateTime" />
+        <xs:element xmlns:q1="http://schemas.microsoft.com/2003/10/Serialization/" minOccurs="0" name="AllTime" type="q1:duration" />
+        <xs:element xmlns:q2="http://schemas.microsoft.com/2003/10/Serialization/" minOccurs="0" name="ActivityTime" type="q2:duration" />
+        <xs:element xmlns:q3="http://schemas.microsoft.com/2003/10/Serialization/" minOccurs="0" name="NotActivityTime" type="q3:duration" />
         <xs:element minOccurs="0" name="comp" nillable="true" type="xs:string" />
         <xs:element minOccurs="0" name="user" nillable="true" type="xs:string" />
       </xs:sequence>
@@ -73,7 +74,7 @@
         <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
         <xs:element minOccurs="0" name="StartTime" type="xs:dateTime" />
         <xs:element minOccurs="0" name="ExitTime" type="xs:dateTime" />
-        <xs:element xmlns:q1="http://schemas.microsoft.com/2003/10/Serialization/" minOccurs="0" name="GeneralTime" type="q1:duration" />
+        <xs:element xmlns:q4="http://schemas.microsoft.com/2003/10/Serialization/" minOccurs="0" name="GeneralTime" type="q4:duration" />
         <xs:element minOccurs="0" name="comp" nillable="true" type="xs:string" />
         <xs:element minOccurs="0" name="user" nillable="true" type="xs:string" />
       </xs:sequence>
@@ -119,7 +120,7 @@
   <xs:element name="getUsersResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q2="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="getUsersResult" nillable="true" type="q2:ArrayOfstring" />
+        <xs:element xmlns:q5="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="getUsersResult" nillable="true" type="q5:ArrayOfstring" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

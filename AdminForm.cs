@@ -71,7 +71,6 @@ namespace pctesting
         private void reportButton_Click(object sender, EventArgs e)
         {
             client.makeReport();
-            Process.Start(diskLetter+@"pctesting\report\");
         }
 
         private void backupButton_Click(object sender, EventArgs e)

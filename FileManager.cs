@@ -48,15 +48,21 @@ namespace pctesting
         private static void OnChanged(object source, FileSystemEventArgs e)
         {
             DBService.DataServiceClient client = new DataServiceClient();
-            string name = e.Name.Remove(0, e.Name.LastIndexOf("\\")+1);
-            client.saveFileDataToDB(name, e.FullPath, (long)DateTime.Now.Ticks/10000, e.ChangeType.ToString(), comp, user);
+            string name = e.Name.Remove(0, e.Name.LastIndexOf("\\") + 1);
+            string ext = "";
+            if (name.LastIndexOf(".") >= 0)
+                ext = name.Substring(name.LastIndexOf("."));
+            client.saveFileDataToDB(name, e.FullPath, name.Substring(name.LastIndexOf(".")), (long)DateTime.Now.Ticks/10000, e.ChangeType.ToString(), comp, user);
         }
 
         private static void OnRenamed(object source, RenamedEventArgs e)
         {
             DBService.DataServiceClient client = new DataServiceClient();
             string name = e.Name.Remove(0, e.Name.LastIndexOf("\\")+1);
-            client.saveFileDataToDB(name, e.FullPath, (long)DateTime.Now.Ticks/10000, e.ChangeType.ToString(), comp, user);
+            string ext = "";
+            if (name.LastIndexOf(".") >= 0)
+                ext = name.Substring(name.LastIndexOf("."));
+            client.saveFileDataToDB(name, e.FullPath, name.Substring(name.LastIndexOf(".")), (long)DateTime.Now.Ticks/10000, e.ChangeType.ToString(), comp, user);
         }
     }
 }
