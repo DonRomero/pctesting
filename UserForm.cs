@@ -16,10 +16,10 @@ namespace pctesting
             fileWatcher = new FileManager(userName, compName);
             trafficWatcher = new TrafficManager(userName, compName);
             //process = new ProcessControl(userName, compName);
-            activityControl = new ActivityControl(userName, compName);
+            //activityControl = new ActivityControl(userName, compName);
             fileWatcher.watch();
             trafficWatcher.Start();
-            activityControl.Subscribe();
+            //activityControl.Subscribe();
         }
 
         private void openToolStripMenuItem_Click(object sender, EventArgs e)
@@ -31,7 +31,7 @@ namespace pctesting
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
             timer1.Enabled = false;
-            activityControl.Unsubscribe();
+            //activityControl.Unsubscribe();
             trafficWatcher.Stop();
             //process.SaveToDatabase();
             Application.Exit();
@@ -80,7 +80,7 @@ namespace pctesting
         private void exitButton_Click(object sender, EventArgs e)
         {
             timer1.Enabled = false;
-            activityControl.Unsubscribe();
+            //activityControl.Unsubscribe();
             trafficWatcher.Stop();
             //process.SaveToDatabase();
             new LoginForm().Show();
