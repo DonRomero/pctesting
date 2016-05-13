@@ -15,7 +15,7 @@ namespace MyService
     {
         static string root;
         SQLiteConnection sql = new SQLiteConnection("DataSource = " + root + @"mydb.sqlite;Version=3");
-        Excel.Application excelapp = new Excel.Application();
+        //Excel.Application excelapp = new Excel.Application();
         int book = 0;
 
         public Report(string str)
@@ -49,7 +49,7 @@ namespace MyService
             report(execute("SELECT NAME FROM USER WHERE ADMIN NOT LIKE 1;"), "user");
             report(execute("SELECT NAME FROM COMPUTER;"), "computer");
             sql.Close();
-            excelapp.Quit();
+            //excelapp.Quit();
         }
 
         private void makeReport(string name, string subject, string table)
