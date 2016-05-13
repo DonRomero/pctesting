@@ -60,7 +60,13 @@ namespace pctesting
             if (headers.Contains("Referer"))
                 return;
             DBService.DataServiceClient client = new DataServiceClient();
-            client.saveTrafficDataToDB(sess.fullUrl.ToLower(), (long)DateTime.Now.Ticks/10000, comp, user);
+            try {
+                client.saveTrafficDataToDB(sess.fullUrl.ToLower(), (long)DateTime.Now.Ticks / 10000, comp, user);
+            }
+            catch(Exception ex)
+            {
+
+            }
         }
 
         public void Start()

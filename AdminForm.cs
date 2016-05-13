@@ -70,7 +70,15 @@ namespace pctesting
 
         private void reportButton_Click(object sender, EventArgs e)
         {
-            client.makeReport();
+            try
+            {
+                client.makeReport();
+                MessageBox.Show("Отчёты созданы.", "Успешно");
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show("Возникла ошибка при создании отчётов", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void backupButton_Click(object sender, EventArgs e)

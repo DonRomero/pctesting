@@ -52,7 +52,7 @@ namespace pctesting
             string ext = "";
             if (name.LastIndexOf(".") >= 0)
                 ext = name.Substring(name.LastIndexOf("."));
-            client.saveFileDataToDB(name, e.FullPath, name.Substring(name.LastIndexOf(".")), (long)DateTime.Now.Ticks/10000, e.ChangeType.ToString(), comp, user);
+            client.saveFileDataToDB(name, e.FullPath, ext, (long)DateTime.Now.Ticks/10000, e.ChangeType.ToString(), comp, user);
         }
 
         private static void OnRenamed(object source, RenamedEventArgs e)
@@ -62,7 +62,7 @@ namespace pctesting
             string ext = "";
             if (name.LastIndexOf(".") >= 0)
                 ext = name.Substring(name.LastIndexOf("."));
-            client.saveFileDataToDB(name, e.FullPath, name.Substring(name.LastIndexOf(".")), (long)DateTime.Now.Ticks/10000, e.ChangeType.ToString(), comp, user);
+            client.saveFileDataToDB(name, e.FullPath, ext, (long)DateTime.Now.Ticks/10000, e.ChangeType.ToString(), comp, user);
         }
     }
 }
