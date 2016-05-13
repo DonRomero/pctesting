@@ -15,7 +15,7 @@ namespace pctesting
             InitializeComponent();
             fileWatcher = new FileManager(userName, compName);
             trafficWatcher = new TrafficManager(userName, compName);
-            process = new ProcessControl(userName, compName);
+            //process = new ProcessControl(userName, compName);
             activityControl = new ActivityControl(userName, compName);
             fileWatcher.watch();
             trafficWatcher.Start();
@@ -33,7 +33,7 @@ namespace pctesting
             timer1.Enabled = false;
             activityControl.Unsubscribe();
             trafficWatcher.Stop();
-            process.SaveToDatabase();
+            //process.SaveToDatabase();
             Application.Exit();
         }
 
@@ -58,7 +58,7 @@ namespace pctesting
         }
         private void timer1_Tick(object sender, EventArgs e)
         {
-            process.UpdateProcess();
+            //process.UpdateProcess();
         }
 
 
@@ -82,7 +82,7 @@ namespace pctesting
             timer1.Enabled = false;
             activityControl.Unsubscribe();
             trafficWatcher.Stop();
-            process.SaveToDatabase();
+            //process.SaveToDatabase();
             new LoginForm().Show();
             this.Close();
         }
