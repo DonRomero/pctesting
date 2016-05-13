@@ -87,7 +87,6 @@ namespace pctesting
                     Directory.CreateDirectory(diskLetter + @"pctesting\backup");
                     File.Copy(diskLetter + @"\pctesting\mydb.sqlite", diskLetter + @"\pctesting\backup\mydb-backup_" + DateTime.Now.ToString().Replace('.', '-').Replace(' ', '-').Replace(':', '-') + ".sqlite");
                     MessageBox.Show("База данных успешно сохранена.", "Бекап");
-                    Process.Start(diskLetter + @"pctesting\backup\");
                 }
                 catch (Exception ex)
                 {
