@@ -115,15 +115,20 @@ namespace MyService
                     columns.Add("Время начала");
                     columns.Add("Время окончания");
                     columns.Add("Общее время");
+                    chartName.Add("Самые часто открываемые процессы");
+                    chartX.Add("name");
+                    chartY.Add("COUNT(P.NAME)");
                     switch (subject)
                     {
                         case "computer":
                             sc = new SQLiteCommand("SELECT P.NAME, STARTTIME, FINISHTIME, P.ALLTIME, USERID FROM PROCESS P JOIN COMPUTER C ON P.COMPUTERID = C.ID WHERE C.NAME='" + name + "';", sql);
                             PdfWriter.GetInstance(doc, new FileStream(root + @"report\computer\" + name + @"\process.pdf", FileMode.Create));
+                            chartQuery.Add("SELECT P.NAME, COUNT(P.NAME) FROM PROCESS P JOIN COMPUTER C ON P.COMPUTERID = C.ID WHERE C.NAME = '" + name + "' GROUP BY P.NAME ORDER BY COUNT(P.NAME) DESC LIMIT 9;");
                             break;
                         case "user":
                             sc = new SQLiteCommand("SELECT P.NAME, STARTTIME, FINISHTIME, P.ALLTIME, COMPUTERID FROM PROCESS P JOIN USER U ON P.USERID = U.ID WHERE U.NAME = '" + name + "';", sql);
                             PdfWriter.GetInstance(doc, new FileStream(root + @"report\user\" + name + @"\process.pdf", FileMode.Create));
+                            chartQuery.Add("SELECT P.NAME, COUNT(P.NAME) FROM PROCESS P JOIN USER U ON P.USERID = U.ID WHERE U.NAME = '" + name + "' GROUP BY P.NAME ORDER BY COUNT(P.NAME) DESC LIMIT 9");
                             break;
                     }
                     break;
@@ -131,15 +136,20 @@ namespace MyService
                     columns.Add("Общее время работы");
                     columns.Add("Время активности");
                     columns.Add("Время простоя");
+                    chartName.Add("Сессии с самой большой активностью пользователя");
+                    chartX.Add("ID");
+                    chartY.Add("ACTIVETIME");
                     switch (subject)
                     {
                         case "computer":
                             sc = new SQLiteCommand("SELECT A.ALLTIME, ACTIVETIME,PASSIVETIME, USERID FROM ACTIVITY A JOIN COMPUTER C ON A.COMPUTERID = C.ID WHERE C.NAME='" + name + "';", sql);
                             PdfWriter.GetInstance(doc, new FileStream(root + @"report\computer\" + name + @"\activity.pdf", FileMode.Create));
+                            chartQuery.Add("SELECT A.ID, ACTIVETIME FROM ACTIVITY A JOIN COMPUTER C ON A.COMPUTERID = C.ID WHERE C.NAME = '" + name + "' GROUP BY A.ID ORDER BY ACTIVETIME DESC LIMIT 9");
                             break;
                         case "user":
-                            sc = new SQLiteCommand("SELECT A.ALLTIME, ACTIVETIME,PASSIVETIME ,COMPUTERID FROM ACTIVITY A JOIN USER U ON A.USERID = U.ID WHERE U.NAME = '" + name + "';", sql);
+                            sc = new SQLiteCommand("SELECT A.ALLTIME, ACTIVETIME, PASSIVETIME ,COMPUTERID FROM ACTIVITY A JOIN USER U ON A.USERID = U.ID WHERE U.NAME = '" + name + "';", sql);
                             PdfWriter.GetInstance(doc, new FileStream(root + @"report\user\" + name + @"\activity.pdf", FileMode.Create));
+                            chartQuery.Add("SELECT A.ID, ACTIVETIME FROM ACTIVITY A JOIN USER U ON A.USERID = U.ID WHERE U.NAME = '" + name + "' GROUP BY A.ID ORDER BY ACTIVETIME DESC LIMIT 9");
                             break;
                     }
                     break;
