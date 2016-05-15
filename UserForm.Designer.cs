@@ -37,6 +37,7 @@
             this.testButton = new System.Windows.Forms.Button();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.exitButton = new System.Windows.Forms.Button();
+            this.backgroundWorkerForSaveInfo = new System.ComponentModel.BackgroundWorker();
             this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -47,19 +48,19 @@
             this.openToolStripMenuItem,
             this.exitToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(143, 56);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(122, 48);
             // 
             // openToolStripMenuItem
             // 
             this.openToolStripMenuItem.Name = "openToolStripMenuItem";
-            this.openToolStripMenuItem.Size = new System.Drawing.Size(142, 26);
+            this.openToolStripMenuItem.Size = new System.Drawing.Size(121, 22);
             this.openToolStripMenuItem.Text = "Открыть";
             this.openToolStripMenuItem.Click += new System.EventHandler(this.openToolStripMenuItem_Click);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(142, 26);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(121, 22);
             this.exitToolStripMenuItem.Text = "Выйти";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
@@ -72,10 +73,9 @@
             // 
             // testButton
             // 
-            this.testButton.Location = new System.Drawing.Point(15, 14);
-            this.testButton.Margin = new System.Windows.Forms.Padding(4);
+            this.testButton.Location = new System.Drawing.Point(11, 11);
             this.testButton.Name = "testButton";
-            this.testButton.Size = new System.Drawing.Size(251, 30);
+            this.testButton.Size = new System.Drawing.Size(188, 24);
             this.testButton.TabIndex = 1;
             this.testButton.Text = "Тестировать компьютер";
             this.testButton.UseVisualStyleBackColor = true;
@@ -89,23 +89,26 @@
             // 
             // exitButton
             // 
-            this.exitButton.Location = new System.Drawing.Point(15, 50);
-            this.exitButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.exitButton.Location = new System.Drawing.Point(11, 41);
+            this.exitButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.exitButton.Name = "exitButton";
-            this.exitButton.Size = new System.Drawing.Size(251, 30);
+            this.exitButton.Size = new System.Drawing.Size(188, 24);
             this.exitButton.TabIndex = 2;
             this.exitButton.Text = "Назад";
             this.exitButton.UseVisualStyleBackColor = true;
             this.exitButton.Click += new System.EventHandler(this.exitButton_Click);
             // 
+            // backgroundWorkerForSaveInfo
+            // 
+            this.backgroundWorkerForSaveInfo.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorkerForSaveInfo_DoWork);
+            // 
             // UserForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(283, 89);
+            this.ClientSize = new System.Drawing.Size(212, 72);
             this.Controls.Add(this.exitButton);
             this.Controls.Add(this.testButton);
-            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "UserForm";
             this.Text = "Пользователь";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.UserForm_FormClosing);
@@ -125,6 +128,7 @@
         private System.Windows.Forms.Button testButton;
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.Button exitButton;
+        private System.ComponentModel.BackgroundWorker backgroundWorkerForSaveInfo;
     }
 }
 

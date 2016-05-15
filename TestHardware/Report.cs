@@ -55,6 +55,7 @@ namespace pctesting.TestHardware
             {
                 FinalReport.Text = "Ваш компьютер имеет отличную производительность.";
             }
+
         }
     }
 }

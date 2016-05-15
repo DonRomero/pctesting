@@ -30,10 +30,11 @@ namespace pctesting
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            backgroundWorkerForSaveInfo.RunWorkerAsync();
             timer1.Enabled = false;
             activityControl.Unsubscribe();
             trafficWatcher.Stop();
-            process.SaveToDatabase();
+            //process.SaveToDatabase();
             Application.Exit();
         }
 
@@ -79,12 +80,23 @@ namespace pctesting
 
         private void exitButton_Click(object sender, EventArgs e)
         {
+            backgroundWorkerForSaveInfo.RunWorkerAsync();
             timer1.Enabled = false;
             activityControl.Unsubscribe();
-            trafficWatcher.Stop();
-            process.SaveToDatabase();
+            trafficWatcher.Stop();            
+            //process.SaveToDatabase();
             new LoginForm().Show();
             this.Close();
+        }
+
+        private void backgroundWorkerForSaveInfo_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
+        {
+            process.SaveToDatabase();
+        }
+
+        private void StartBackGround()
+        {
+
         }
     }
 }
