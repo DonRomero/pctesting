@@ -116,7 +116,7 @@ namespace MyService
                 execute("CREATE TABLE IF NOT EXISTS FILE(id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, path TEXT, extension TEXT, time INTEGER, type TEXT, computerID INTEGER, userID INTEGER, " +
                     fk_computer + ", " +
                     fk_user + ";");
-                execute("CREATE TABLE IF NOT EXISTS TRAFFIC(id INTEGER PRIMARY KEY AUTOINCREMENT, URL TEXT, time INTEGER, computerID INTEGER, userID INTEGER, " +
+                execute("CREATE TABLE IF NOT EXISTS TRAFFIC(id INTEGER PRIMARY KEY AUTOINCREMENT, URL TEXT, host TRXT, referer TEXT, time INTEGER, computerID INTEGER, userID INTEGER, " +
                     fk_computer + ", " +
                     fk_user + ";");
                 execute("CREATE TABLE IF NOT EXISTS CHARACTERISTIC(id INTEGER PRIMARY KEY AUTOINCREMENT, time INTEGER, teapots INTEGER, RAM TEXT, freeRAM TEXT, CPU TEXT, VideoRAM TEXT, computerID INTEGER, " +
@@ -153,11 +153,11 @@ namespace MyService
             sql.Close();
         }
 
-        public void saveTrafficDataToDB(string URL, long time, string comp, string user)
+        public void saveTrafficDataToDB(string URL, string host, string referer, long time, string comp, string user)
         {
             sql.Open();
             int[] IDs = selectIDs(comp, user);
-            execute("INSERT INTO TRAFFIC VALUES( NULL, '" + URL + "'," + time + "," + IDs[0] + "," + IDs[1] + ");");
+            execute("INSERT INTO TRAFFIC VALUES( NULL, '" + URL + "', '" + host + "', '" + referer + "'," + time + "," + IDs[0] + "," + IDs[1] + ");");
             sql.Close();
         }
         public void SaveActivityToDB(TimeSpan AllTime, TimeSpan ActivityTime, TimeSpan NotActivityTime, string comp, string user)

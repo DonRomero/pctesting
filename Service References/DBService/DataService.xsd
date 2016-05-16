@@ -24,6 +24,8 @@
     <xs:complexType>
       <xs:sequence>
         <xs:element minOccurs="0" name="URL" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="host" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="referer" nillable="true" type="xs:string" />
         <xs:element minOccurs="0" name="time" type="xs:long" />
         <xs:element minOccurs="0" name="comp" nillable="true" type="xs:string" />
         <xs:element minOccurs="0" name="user" nillable="true" type="xs:string" />
@@ -122,6 +124,25 @@
       <xs:sequence>
         <xs:element xmlns:q5="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="getUsersResult" nillable="true" type="q5:ArrayOfstring" />
       </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SaveTestCharacteristic">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="time" type="xs:dateTime" />
+        <xs:element minOccurs="0" name="teapots" type="xs:int" />
+        <xs:element minOccurs="0" name="RAM" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="freeRAM" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="CPU" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="VideoRAM" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="comp" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="user" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SaveTestCharacteristicResponse">
+    <xs:complexType>
+      <xs:sequence />
     </xs:complexType>
   </xs:element>
 </xs:schema>

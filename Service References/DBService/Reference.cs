@@ -22,10 +22,10 @@ namespace pctesting.DBService {
         System.Threading.Tasks.Task saveFileDataToDBAsync(string name, string path, string ext, long time, string type, string comp, string user);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDataService/saveTrafficDataToDB", ReplyAction="http://tempuri.org/IDataService/saveTrafficDataToDBResponse")]
-        void saveTrafficDataToDB(string URL, long time, string comp, string user);
+        void saveTrafficDataToDB(string URL, string host, string referer, long time, string comp, string user);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDataService/saveTrafficDataToDB", ReplyAction="http://tempuri.org/IDataService/saveTrafficDataToDBResponse")]
-        System.Threading.Tasks.Task saveTrafficDataToDBAsync(string URL, long time, string comp, string user);
+        System.Threading.Tasks.Task saveTrafficDataToDBAsync(string URL, string host, string referer, long time, string comp, string user);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDataService/login", ReplyAction="http://tempuri.org/IDataService/loginResponse")]
         string login(string name, string password, string compMAC, string compName);
@@ -62,14 +62,12 @@ namespace pctesting.DBService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDataService/getUsers", ReplyAction="http://tempuri.org/IDataService/getUsersResponse")]
         System.Threading.Tasks.Task<string[]> getUsersAsync();
-
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDataService/SaveTestCharacteristic", ReplyAction="http://tempuri.org/IDataService/SaveTestCharacteristicResponse")]
         void SaveTestCharacteristic(System.DateTime time, int teapots, string RAM, string freeRAM, string CPU, string VideoRAM, string comp, string user);
-
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDataService/SaveTestCharacteristic", ReplyAction="http://tempuri.org/IDataService/SaveTestCharacteristicResponse")]
         System.Threading.Tasks.Task SaveTestCharacteristicAsync(System.DateTime time, int teapots, string RAM, string freeRAM, string CPU, string VideoRAM, string comp, string user);
-
-
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -107,12 +105,12 @@ namespace pctesting.DBService {
             return base.Channel.saveFileDataToDBAsync(name, path, ext, time, type, comp, user);
         }
         
-        public void saveTrafficDataToDB(string URL, long time, string comp, string user) {
-            base.Channel.saveTrafficDataToDB(URL, time, comp, user);
+        public void saveTrafficDataToDB(string URL, string host, string referer, long time, string comp, string user) {
+            base.Channel.saveTrafficDataToDB(URL, host, referer, time, comp, user);
         }
         
-        public System.Threading.Tasks.Task saveTrafficDataToDBAsync(string URL, long time, string comp, string user) {
-            return base.Channel.saveTrafficDataToDBAsync(URL, time, comp, user);
+        public System.Threading.Tasks.Task saveTrafficDataToDBAsync(string URL, string host, string referer, long time, string comp, string user) {
+            return base.Channel.saveTrafficDataToDBAsync(URL, host, referer, time, comp, user);
         }
         
         public string login(string name, string password, string compMAC, string compName) {
@@ -162,16 +160,13 @@ namespace pctesting.DBService {
         public System.Threading.Tasks.Task<string[]> getUsersAsync() {
             return base.Channel.getUsersAsync();
         }
-
-        public void SaveTestCharacteristic(System.DateTime time, int teapots, string RAM, string freeRAM, string CPU, string VideoRAM, string comp, string user)
-        {
+        
+        public void SaveTestCharacteristic(System.DateTime time, int teapots, string RAM, string freeRAM, string CPU, string VideoRAM, string comp, string user) {
             base.Channel.SaveTestCharacteristic(time, teapots, RAM, freeRAM, CPU, VideoRAM, comp, user);
         }
-
-        public System.Threading.Tasks.Task SaveTestCharacteristicAsync(System.DateTime time, int teapots, string RAM, string freeRAM, string CPU, string VideoRAM, string comp, string user)
-        {
+        
+        public System.Threading.Tasks.Task SaveTestCharacteristicAsync(System.DateTime time, int teapots, string RAM, string freeRAM, string CPU, string VideoRAM, string comp, string user) {
             return base.Channel.SaveTestCharacteristicAsync(time, teapots, RAM, freeRAM, CPU, VideoRAM, comp, user);
         }
-
     }
 }

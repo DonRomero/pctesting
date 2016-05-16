@@ -55,13 +55,9 @@ namespace pctesting
 
             if (sess == null || sess.oRequest == null || sess.oRequest.headers == null)
                 return;
-
-            string headers = sess.oRequest.headers.ToString();
-            if (headers.Contains("Referer"))
-                return;
             DBService.DataServiceClient client = new DataServiceClient();
             try {
-                client.saveTrafficDataToDB(sess.fullUrl.ToLower(), (long)DateTime.Now.Ticks / 10000, comp, user);
+                client.saveTrafficDataToDB(sess.fullUrl.ToLower(), sess.host, sess.oRequest.headers["referer"], (long)DateTime.Now.Ticks / 10000, comp, user);
             }
             catch(Exception ex)
             {
@@ -81,6 +77,7 @@ namespace pctesting
         public void Stop()
         {
             FiddlerApplication.AfterSessionComplete -= AfterSession;
+            //UninstallCertificate();
 
             if (FiddlerApplication.IsStarted())
                 FiddlerApplication.Shutdown();
@@ -100,14 +97,14 @@ namespace pctesting
             return true;
         }
 
-        //public static bool UninstallCertificate()
-        //{
-        //    if (CertMaker.rootCertExists())
-        //    {
-        //        if (!CertMaker.removeFiddlerGeneratedCerts(true))
-        //            return false;
-        //    }
-        //    return true;
-        //}
+        public static bool UninstallCertificate()
+        {
+            if (CertMaker.rootCertExists())
+            {
+                if (!CertMaker.removeFiddlerGeneratedCerts(true))
+                    return false;
+            }
+            return true;
+        }
     }
 }

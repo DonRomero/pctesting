@@ -55,6 +55,12 @@
   <wsdl:message name="IDataService_getUsers_OutputMessage">
     <wsdl:part name="parameters" element="tns:getUsersResponse" />
   </wsdl:message>
+  <wsdl:message name="IDataService_SaveTestCharacteristic_InputMessage">
+    <wsdl:part name="parameters" element="tns:SaveTestCharacteristic" />
+  </wsdl:message>
+  <wsdl:message name="IDataService_SaveTestCharacteristic_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SaveTestCharacteristicResponse" />
+  </wsdl:message>
   <wsdl:portType name="IDataService">
     <wsdl:operation name="saveFileDataToDB">
       <wsdl:input wsaw:Action="http://tempuri.org/IDataService/saveFileDataToDB" message="tns:IDataService_saveFileDataToDB_InputMessage" />
@@ -87,6 +93,10 @@
     <wsdl:operation name="getUsers">
       <wsdl:input wsaw:Action="http://tempuri.org/IDataService/getUsers" message="tns:IDataService_getUsers_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IDataService/getUsersResponse" message="tns:IDataService_getUsers_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SaveTestCharacteristic">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDataService/SaveTestCharacteristic" message="tns:IDataService_SaveTestCharacteristic_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDataService/SaveTestCharacteristicResponse" message="tns:IDataService_SaveTestCharacteristic_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IDataService" type="tns:IDataService">
@@ -156,6 +166,15 @@
     </wsdl:operation>
     <wsdl:operation name="getUsers">
       <soap:operation soapAction="http://tempuri.org/IDataService/getUsers" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SaveTestCharacteristic">
+      <soap:operation soapAction="http://tempuri.org/IDataService/SaveTestCharacteristic" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
