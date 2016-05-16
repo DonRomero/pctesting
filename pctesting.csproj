@@ -123,6 +123,12 @@
     <Compile Include="TestHardware\Report.Designer.cs">
       <DependentUpon>Report.cs</DependentUpon>
     </Compile>
+    <Compile Include="TestHardware\Stop.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TestHardware\Stop.Designer.cs">
+      <DependentUpon>Stop.cs</DependentUpon>
+    </Compile>
     <Compile Include="TestHardware\Teapot.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -159,6 +165,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="TestHardware\Report.resx">
       <DependentUpon>Report.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TestHardware\Stop.resx">
+      <DependentUpon>Stop.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="TestHardware\Teapot.resx">
       <DependentUpon>Teapot.cs</DependentUpon>

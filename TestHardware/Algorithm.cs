@@ -6,9 +6,8 @@ namespace pctesting.TestHardware
 {
     class Algorithm
     {
-        public static void BeginTest(string comp, string user)
+        public static void BeginTest(string comp, string user, CheckEnable enable)
         {
-            CheckEnable enable = new CheckEnable();
             HardwareInfo hardware = new HardwareInfo();
             List<myThread> threads = new List<myThread>();
             int i = 0;

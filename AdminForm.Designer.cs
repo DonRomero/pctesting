@@ -44,10 +44,10 @@
             // 
             // testButton
             // 
-            this.testButton.Location = new System.Drawing.Point(15, 12);
-            this.testButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.testButton.Location = new System.Drawing.Point(11, 10);
+            this.testButton.Margin = new System.Windows.Forms.Padding(2);
             this.testButton.Name = "testButton";
-            this.testButton.Size = new System.Drawing.Size(251, 30);
+            this.testButton.Size = new System.Drawing.Size(188, 24);
             this.testButton.TabIndex = 0;
             this.testButton.Text = "Тестировать компьютер";
             this.testButton.UseVisualStyleBackColor = true;
@@ -55,10 +55,10 @@
             // 
             // reportButton
             // 
-            this.reportButton.Location = new System.Drawing.Point(15, 116);
-            this.reportButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.reportButton.Location = new System.Drawing.Point(11, 94);
+            this.reportButton.Margin = new System.Windows.Forms.Padding(2);
             this.reportButton.Name = "reportButton";
-            this.reportButton.Size = new System.Drawing.Size(251, 30);
+            this.reportButton.Size = new System.Drawing.Size(188, 24);
             this.reportButton.TabIndex = 3;
             this.reportButton.Text = "Сформировать отчёты";
             this.reportButton.UseVisualStyleBackColor = true;
@@ -66,10 +66,10 @@
             // 
             // backupButton
             // 
-            this.backupButton.Location = new System.Drawing.Point(15, 46);
-            this.backupButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.backupButton.Location = new System.Drawing.Point(11, 37);
+            this.backupButton.Margin = new System.Windows.Forms.Padding(2);
             this.backupButton.Name = "backupButton";
-            this.backupButton.Size = new System.Drawing.Size(251, 30);
+            this.backupButton.Size = new System.Drawing.Size(188, 24);
             this.backupButton.TabIndex = 1;
             this.backupButton.Text = "Бекап Базы Данных";
             this.backupButton.UseVisualStyleBackColor = true;
@@ -77,10 +77,10 @@
             // 
             // addUserButton
             // 
-            this.addUserButton.Location = new System.Drawing.Point(15, 81);
-            this.addUserButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.addUserButton.Location = new System.Drawing.Point(11, 66);
+            this.addUserButton.Margin = new System.Windows.Forms.Padding(2);
             this.addUserButton.Name = "addUserButton";
-            this.addUserButton.Size = new System.Drawing.Size(251, 30);
+            this.addUserButton.Size = new System.Drawing.Size(188, 24);
             this.addUserButton.TabIndex = 2;
             this.addUserButton.Text = "Добавить пользователя";
             this.addUserButton.UseVisualStyleBackColor = true;
@@ -93,19 +93,19 @@
             this.openToolStripMenuItem,
             this.exitToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(143, 56);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(122, 48);
             // 
             // openToolStripMenuItem
             // 
             this.openToolStripMenuItem.Name = "openToolStripMenuItem";
-            this.openToolStripMenuItem.Size = new System.Drawing.Size(142, 26);
+            this.openToolStripMenuItem.Size = new System.Drawing.Size(121, 22);
             this.openToolStripMenuItem.Text = "Открыть";
             this.openToolStripMenuItem.Click += new System.EventHandler(this.openToolStripMenuItem_Click);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(142, 26);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(121, 22);
             this.exitToolStripMenuItem.Text = "Выйти";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
@@ -118,10 +118,10 @@
             // 
             // exitButton
             // 
-            this.exitButton.Location = new System.Drawing.Point(15, 151);
-            this.exitButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.exitButton.Location = new System.Drawing.Point(11, 123);
+            this.exitButton.Margin = new System.Windows.Forms.Padding(2);
             this.exitButton.Name = "exitButton";
-            this.exitButton.Size = new System.Drawing.Size(251, 30);
+            this.exitButton.Size = new System.Drawing.Size(188, 24);
             this.exitButton.TabIndex = 4;
             this.exitButton.Text = "Назад";
             this.exitButton.UseVisualStyleBackColor = true;
@@ -129,15 +129,15 @@
             // 
             // AdminForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(283, 188);
+            this.ClientSize = new System.Drawing.Size(212, 153);
             this.Controls.Add(this.exitButton);
             this.Controls.Add(this.addUserButton);
             this.Controls.Add(this.backupButton);
             this.Controls.Add(this.reportButton);
             this.Controls.Add(this.testButton);
-            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "AdminForm";
             this.Text = "Администратор";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.AdminForm_FormClosing);

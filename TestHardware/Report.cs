@@ -40,7 +40,7 @@ namespace pctesting.TestHardware
             textBox3.Text = _RAM + "Кбайт";
             textBox4.Text = _FreeRAM + "Кбайт";
             textBox5.Text = _VideoRAM + "Байт";
-            client.SaveTestCharacteristic(DateTime.Now, _ColichChain, _RAM, _FreeRAM, _CPU, _VideoRAM, _comp, _user);
+            //client.SaveTestCharacteristic(DateTime.Now, _ColichChain, _RAM, _FreeRAM, _CPU, _VideoRAM, _comp, _user);
             if (_ColichChain < 20)
             {
                 FinalReport.Text = "Ваш компьютер имеет очень низкую производительность.";

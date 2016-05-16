@@ -60,7 +60,8 @@ namespace pctesting
 
         private void testButton_Click(object sender, EventArgs e)
         {
-            Algorithm.BeginTest(comp,user);
+            TestHardware.Stop st = new TestHardware.Stop(user, comp);
+            st.ShowDialog(); 
         }
         private void timer1_Tick(object sender, EventArgs e)
         {

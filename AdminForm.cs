@@ -11,11 +11,13 @@ namespace pctesting
         DBService.DataServiceClient client = new DataServiceClient();
         string diskLetter = "";
         string comp;
+        string user;
         public AdminForm(string userName, string compMAC, string diskLetter)
         {
             InitializeComponent();
             this.diskLetter = diskLetter;
             this.comp = compMAC;
+            this.user = userName;
         }
 
         private void openToolStripMenuItem_Click(object sender, EventArgs e)
@@ -52,7 +54,8 @@ namespace pctesting
 
         private void testButton_Click(object sender, EventArgs e)
         {
-            TestHardware.Algorithm.BeginTest(comp,"");
+            TestHardware.Stop st = new TestHardware.Stop(user, comp);
+            st.ShowDialog();      
         }
 
         private void AdminForm_FormClosing(object sender, FormClosingEventArgs e)
