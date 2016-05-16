@@ -25,19 +25,25 @@ namespace MyService
 
         private void report(SQLiteDataReader reader, string subject)
         {
-            while (reader.Read())
+            try {
+                while (reader.Read())
+                {
+                    string name = reader.GetString(0);
+                    if (!Directory.Exists(root + @"report\" + subject + "\\" + name))
+                        Directory.CreateDirectory(root + @"report\" + subject + "\\" + name);
+                    makeReport(name, subject, "TRAFFIC");
+                    makeReport(name, subject, "FILE");
+                    makeReport(name, subject, "PROCESS");
+                    makeReport(name, subject, "ACTIVITY");
+                    //if(subject=="computer")
+                    //{
+                    //    makeReport(name, subject, "CHARACTERISTIC");
+                    //}
+                }
+            }
+            catch(IOException ex)
             {
-                string name = reader.GetString(0);
-                if (!Directory.Exists(root + @"report\" + subject + "\\" + name))
-                    Directory.CreateDirectory(root + @"report\" + subject + "\\" + name);
-                makeReport(name, subject, "TRAFFIC");
-                makeReport(name, subject, "FILE");
-                makeReport(name, subject, "PROCESS");
-                makeReport(name, subject, "ACTIVITY");
-                //if(subject=="computer")
-                //{
-                //    makeReport(name, subject, "CHARACTERISTIC");
-                //}
+                
             }
         }
 
@@ -74,21 +80,20 @@ namespace MyService
                 case "TRAFFIC":
                     columns.Add("URL");
                     columns.Add("Время");
-                    chartX.Add("URL");
-                    chartY.Add("COUNT(URL)");
+                    chartX.Add("HOST");
+                    chartY.Add("COUNT(HOST)");
+                    chartName.Add("Самый популярные URL");
                     switch (subject)
                     {
                         case "computer":
                             sc = new SQLiteCommand("SELECT URL, TIME, USERID FROM TRAFFIC T JOIN COMPUTER C ON T.COMPUTERID = C.ID WHERE C.NAME = '" + name + "';", sql);
                             PdfWriter.GetInstance(doc, new FileStream(root + @"report\computer\" + name + @"\traffic.pdf", FileMode.Create));
-                            chartQuery.Add("SELECT URL, COUNT(URL) FROM TRAFFIC T JOIN COMPUTER C ON T.COMPUTERID = C.ID WHERE C.NAME = '" + name + "' GROUP BY URL ORDER BY COUNT(URL) DESC LIMIT 9;");
-                            chartName.Add("Самый популярные URL на этом компьютере");
+                            chartQuery.Add("SELECT HOST, COUNT(HOST) FROM TRAFFIC T JOIN COMPUTER C ON T.COMPUTERID = C.ID WHERE C.NAME = '" + name + "' GROUP BY HOST ORDER BY COUNT(HOST) DESC LIMIT 9;");
                             break;
                         case "user":
                             sc = new SQLiteCommand("SELECT URL, TIME, COMPUTERID FROM TRAFFIC T JOIN USER U ON T.USERID = U.ID WHERE U.NAME = '" + name + "';", sql);
                             PdfWriter.GetInstance(doc, new FileStream(root + @"report\user\" + name + @"\traffic.pdf", FileMode.Create));
-                            chartQuery.Add("SELECT URL, COUNT(URL) FROM TRAFFIC T JOIN USER U ON T.USERID = U.ID WHERE U.NAME = '" + name + "' GROUP BY URL ORDER BY COUNT(URL) DESC LIMIT 9");
-                            chartName.Add("Самый популярные URL этого пользователя");
+                            chartQuery.Add("SELECT HOST, COUNT(HOST) FROM TRAFFIC T JOIN USER U ON T.USERID = U.ID WHERE U.NAME = '" + name + "' GROUP BY HOST ORDER BY COUNT(HOST) DESC LIMIT 9");
                             break;
                     }
                     break;
@@ -254,11 +259,11 @@ namespace MyService
             for (int i = 0; i < chartName.Count; i++)
             {
                 makeChart(chartQuery[i], chartX[i], chartY[i]);
-                doc.Add(new Phrase(chartName[i]));
+                doc.Add(new Phrase(chartName[i], font));
                 Image chart = Image.GetInstance(root + @"chart.bmp");
                 doc.Add(chart);
             }
-            doc.Add(new Phrase(" "));
+            //doc.Add(new Phrase(" "));
             doc.Add(pdfTable);
             doc.Close();
         }

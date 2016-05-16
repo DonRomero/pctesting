@@ -12,7 +12,7 @@ namespace MyService
         void saveFileDataToDB(string name, string path, string ext, long time, string type, string comp, string user);
 
         [OperationContract]
-        void saveTrafficDataToDB(string URL, long time, string comp, string user);
+        void saveTrafficDataToDB(string URL, string host, string referer, long time, string comp, string user);
 
         [OperationContract]
         string login(string name, string password, string compMAC, string compName);
