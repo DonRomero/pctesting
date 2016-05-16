@@ -119,12 +119,8 @@ namespace MyService
                 execute("CREATE TABLE IF NOT EXISTS TRAFFIC(id INTEGER PRIMARY KEY AUTOINCREMENT, URL TEXT, time INTEGER, computerID INTEGER, userID INTEGER, " +
                     fk_computer + ", " +
                     fk_user + ";");
-                execute("CREATE TABLE IF NOT EXISTS TEST(id INTEGER PRIMARY KEY AUTOINCREMENT, time INTEGER, computerID INTEGER, " +
-                    fk_computer + ");");
-                execute("CREATE TABLE IF NOT EXISTS CHARACTERISTIC(id INTEGER PRIMARY KEY AUTOINCREMENT, RAM TEXT, CRU TEXT, VideoRAM TEXT, freeRAM TEXT, testID INTEGER, " +
-                    "CONSTRAINT fk_test " +
-                    "FOREIGN KEY (testID) " +
-                    "REFERENCES TEST(id));");
+                execute("CREATE TABLE IF NOT EXISTS CHARACTERISTIC(id INTEGER PRIMARY KEY AUTOINCREMENT, time INTEGER, RAM TEXT, freeRAM TEXT, CPU TEXT, VideoRAM TEXT, computerID INTEGER, " +
+                    fk_computer+");");
                 execute("CREATE TABLE IF NOT EXISTS PROCESS(id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, startTime INTEGER, finishTime INTEGER, allTime INTEGER, computerID INTEGER, userID INTEGER, " +
                     fk_computer + ", " +
                     fk_user + ";");
@@ -175,7 +171,14 @@ namespace MyService
         {
             sql.Open();
             int[] IDs = selectIDs(comp, user);
-            execute("INSERT INTO PROCESS VALUES(NULL, '" + Name + "', " + (long)StartTime.Ticks / 10000 + ", " + (long)FinishTime.Ticks / 10000 + ", " + (long)GeneralTime.Ticks / 10000 + "," + IDs[0] + "," + IDs[1] + ");");
+            execute("INSERT INTO PROCESS VALUES( NULL, '" + Name + "', " + (long)StartTime.Ticks / 10000 + ", " + (long)FinishTime.Ticks / 10000 + ", " + (long)GeneralTime.Ticks / 10000 + "," + IDs[0] + "," + IDs[1] + ");");
+            sql.Close();
+        }
+        public void SaveTestCharacteristic(DateTime time, string RAM, string freeRAM, string CPU, string VideoRAM, string comp, string user)
+        {
+            sql.Open();
+            int[] IDs = selectIDs(comp,user);
+            execute("INSERT INTO CHARACTERISTIC VALUES( NULL, '" + (long)time.Ticks / 10000 + "', '" + RAM + "', '" + freeRAM + "', '" + CPU + "', '" + VideoRAM + "', " + IDs[0] + ");");
             sql.Close();
         }
     }

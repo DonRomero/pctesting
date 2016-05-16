@@ -6,7 +6,7 @@ namespace pctesting.TestHardware
 {
     class Algorithm
     {
-        public static void BeginTest()
+        public static void BeginTest(string comp, string user)
         {
             CheckEnable enable = new CheckEnable();
             HardwareInfo hardware = new HardwareInfo();
@@ -17,7 +17,7 @@ namespace pctesting.TestHardware
             int width1 = width;
             int height1 = height;
             int ColichChain = 0;
-            int maxCPU = 80;
+            int maxCPU = 95;
 
             while (hardware.GetProcessorInformation() < maxCPU)
             {
@@ -46,7 +46,7 @@ namespace pctesting.TestHardware
                                     {
                                         k.Stop();
                                     }
-                                    Report ot = new Report(ColichChain, CPU_load, Ram, FreeRam, VideoRam);
+                                    Report ot = new Report(ColichChain, CPU_load, Ram, FreeRam, VideoRam,comp,user);
                                     ot.ShowDialog();
                                     return;
                                 }
@@ -62,7 +62,7 @@ namespace pctesting.TestHardware
                                     k.Stop();
                                 }
                                 enable.Active = true;
-                                Report ot = new Report(ColichChain, CPU_load, Ram, FreeRam, VideoRam);
+                                Report ot = new Report(ColichChain, CPU_load, Ram, FreeRam, VideoRam,comp,user);
                                 ot.ShowDialog();
                                 return;
                             }
@@ -95,7 +95,7 @@ namespace pctesting.TestHardware
                                     {
                                         k.Stop();
                                     }
-                                    Report ot = new Report(ColichChain, CPU_load, Ram, FreeRam, VideoRam);
+                                    Report ot = new Report(ColichChain, CPU_load, Ram, FreeRam, VideoRam,comp,user);
                                     ot.ShowDialog();
                                     return;
                                 }
@@ -111,7 +111,7 @@ namespace pctesting.TestHardware
                                     k.Stop();
                                 }
                                 enable.Active = true;
-                                Report ot = new Report(ColichChain, CPU_load, Ram, FreeRam, VideoRam);
+                                Report ot = new Report(ColichChain, CPU_load, Ram, FreeRam, VideoRam,comp,user);
                                 ot.ShowDialog();
                                 return;
                             }
@@ -130,7 +130,7 @@ namespace pctesting.TestHardware
             {
                 k.Stop();
             }
-            Report ot1 = new Report(ColichChain, CPU_load1, Ram1, FreeRam1, VideoRam1);
+            Report ot1 = new Report(ColichChain, CPU_load1, Ram1, FreeRam1, VideoRam1,comp,user);
             ot1.ShowDialog();
         }
     }

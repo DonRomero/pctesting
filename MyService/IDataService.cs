@@ -31,5 +31,8 @@ namespace MyService
 
         [OperationContract]
         List<string> getUsers();
+
+        [OperationContract]
+        void SaveTestCharacteristic(DateTime time, string RAM, string freeRAM, string CPU, string VideoRAM, string comp, string user);
     }
 }

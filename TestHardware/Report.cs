@@ -17,9 +17,11 @@ namespace pctesting.TestHardware
         string _RAM;
         string _FreeRAM;
         string _VideoRAM;
+        string _comp;
+        string _user;
         HardwareInfo hardware = new HardwareInfo();
 
-        public Report(int Colich, string CPU, string RAM, string FreeRAM, string VideoRam)
+        public Report(int Colich, string CPU, string RAM, string FreeRAM, string VideoRam, string comp,string user)
         {
             InitializeComponent();
             _ColichChain = Colich;
@@ -27,14 +29,19 @@ namespace pctesting.TestHardware
             _RAM = RAM;
             _FreeRAM = FreeRAM;
             _VideoRAM = VideoRam;
+            _comp = comp;
+            _user = user;
         }
         private void Report_Load(object sender, EventArgs e)
         {
+            DBService.DataServiceClient client = new DBService.DataServiceClient();
+            client.SaveTestCharacteristic(DateTime.Now, _RAM, _FreeRAM, _CPU, _VideoRAM, _comp, _user);
             textBox1.Text = Convert.ToString(_ColichChain);
             textBox2.Text = _CPU + "%";
             textBox3.Text = _RAM + "Кбайт";
             textBox4.Text = _FreeRAM + "Кбайт";
             textBox5.Text = _VideoRAM + "Байт";
+            client.SaveTestCharacteristic(DateTime.Now, _RAM, _FreeRAM, _CPU, _VideoRAM, _comp, _user);
             if (_ColichChain < 20)
             {
                 FinalReport.Text = "Ваш компьютер имеет очень низкую производительность.";

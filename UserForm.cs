@@ -10,6 +10,9 @@ namespace pctesting
         TrafficManager trafficWatcher;
         ProcessControl process;
         ActivityControl activityControl;
+
+        string comp;
+        string user;
         public UserForm(string userName, string compName)
         {
             InitializeComponent();
@@ -17,6 +20,8 @@ namespace pctesting
             trafficWatcher = new TrafficManager(userName, compName);
             process = new ProcessControl(userName, compName);
             activityControl = new ActivityControl(userName, compName);
+            this.comp = compName;
+            this.user = userName;
             fileWatcher.watch();
             trafficWatcher.Start();
             activityControl.Subscribe();
@@ -55,7 +60,7 @@ namespace pctesting
 
         private void testButton_Click(object sender, EventArgs e)
         {
-            Algorithm.BeginTest();
+            Algorithm.BeginTest(comp,user);
         }
         private void timer1_Tick(object sender, EventArgs e)
         {
@@ -92,11 +97,6 @@ namespace pctesting
         private void backgroundWorkerForSaveInfo_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
         {
             process.SaveToDatabase();
-        }
-
-        private void StartBackGround()
-        {
-
         }
     }
 }
