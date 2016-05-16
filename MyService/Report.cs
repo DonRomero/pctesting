@@ -34,6 +34,10 @@ namespace MyService
                 makeReport(name, subject, "FILE");
                 makeReport(name, subject, "PROCESS");
                 makeReport(name, subject, "ACTIVITY");
+                //if(subject=="computer")
+                //{
+                //    makeReport(name, subject, "CHARACTERISTIC");
+                //}
             }
         }
 
@@ -153,6 +157,20 @@ namespace MyService
                             break;
                     }
                     break;
+                //case "CHARACTERISTIC":
+                //    columns.Add("Дата теста");
+                //    columns.Add("Кол-во чайников");
+                //    columns.Add("RAM");
+                //    columns.Add("freeRAM");
+                //    columns.Add("CPU");
+                //    columns.Add("VideoRAM");
+                //    chartName.Add("Компьютеры с наибольшей характеристикой");
+                //    chartX.Add("Time");
+                //    chartY.Add("teapots");
+                //    sc = new SQLiteCommand("SELECT time, teapots, RAM ,freeRAM,CPU COMPUTERID FROM ACTIVITY A JOIN USER U ON A.USERID = U.ID WHERE U.NAME = '" + name + "';", sql);
+                //    PdfWriter.GetInstance(doc, new FileStream(root + @"report\computer\" + name + @"\characterisctic.pdf", FileMode.Create));
+                //    chartQuery.Add("SELECT A.ID, ACTIVETIME FROM ACTIVITY A JOIN USER U ON A.USERID = U.ID WHERE U.NAME = '" + name + "' GROUP BY A.ID ORDER BY ACTIVETIME DESC LIMIT 9");
+                //    break;
             }
             switch (subject)
             {
@@ -222,7 +240,7 @@ namespace MyService
                             }
                             else
                             {
-                                if (columns[j].Equals("Время") || columns[j].Equals("Время начала") || columns[j].Equals("Время окончания"))
+                                if (columns[j].Equals("Время") || columns[j].Equals("Время начала") || columns[j].Equals("Время окончания")||columns[j].Equals("Дата теста"))
                                     phrase = new DateTime(Convert.ToInt64(dt.Rows[i][j]) * 10000).ToString();
                                 else
                                     phrase = dt.Rows[i][j].ToString();

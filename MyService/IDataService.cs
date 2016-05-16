@@ -33,6 +33,6 @@ namespace MyService
         List<string> getUsers();
 
         [OperationContract]
-        void SaveTestCharacteristic(DateTime time, string RAM, string freeRAM, string CPU, string VideoRAM, string comp, string user);
+        void SaveTestCharacteristic(DateTime time, int teapots, string RAM, string freeRAM, string CPU, string VideoRAM, string comp, string user);
     }
 }
