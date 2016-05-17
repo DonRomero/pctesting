@@ -35,10 +35,10 @@ namespace MyService
                     makeReport(name, subject, "FILE");
                     makeReport(name, subject, "PROCESS");
                     makeReport(name, subject, "ACTIVITY");
-                    //if(subject=="computer")
-                    //{
-                    //    makeReport(name, subject, "CHARACTERISTIC");
-                    //}
+                    if (subject == "computer")
+                    {
+                        makeReport(name, subject, "CHARACTERISTIC");
+                    }
                 }
             }
             catch(IOException ex)
@@ -162,20 +162,20 @@ namespace MyService
                             break;
                     }
                     break;
-                //case "CHARACTERISTIC":
-                //    columns.Add("Дата теста");
-                //    columns.Add("Кол-во чайников");
-                //    columns.Add("RAM");
-                //    columns.Add("freeRAM");
-                //    columns.Add("CPU");
-                //    columns.Add("VideoRAM");
-                //    chartName.Add("Компьютеры с наибольшей характеристикой");
-                //    chartX.Add("Time");
-                //    chartY.Add("teapots");
-                //    sc = new SQLiteCommand("SELECT time, teapots, RAM ,freeRAM,CPU COMPUTERID FROM ACTIVITY A JOIN USER U ON A.USERID = U.ID WHERE U.NAME = '" + name + "';", sql);
-                //    PdfWriter.GetInstance(doc, new FileStream(root + @"report\computer\" + name + @"\characterisctic.pdf", FileMode.Create));
-                //    chartQuery.Add("SELECT A.ID, ACTIVETIME FROM ACTIVITY A JOIN USER U ON A.USERID = U.ID WHERE U.NAME = '" + name + "' GROUP BY A.ID ORDER BY ACTIVETIME DESC LIMIT 9");
-                //    break;
+                case "CHARACTERISTIC":
+                    columns.Add("Дата теста");
+                    columns.Add("Кол-во чайников");
+                    columns.Add("RAM");
+                    columns.Add("freeRAM");
+                    columns.Add("CPU");
+                    columns.Add("VideoRAM");
+                    chartName.Add("Компьютеры с наибольшей производительностью");
+                    chartX.Add("Time");
+                    chartY.Add("teapots");
+                    sc = new SQLiteCommand("SELECT time, teapots, RAM ,freeRAM, CPU, VideoRAM, COMPUTERID FROM CHARACTERISTIC CH JOIN COMPUTER C ON CH.COMPUTERID = C.ID WHERE C.NAME='" + name + "';", sql);
+                    PdfWriter.GetInstance(doc, new FileStream(root + @"report\computer\" + name + @"\characterisctic.pdf", FileMode.Create));
+                    chartQuery.Add("SELECT time, teapots FROM CHARACTERISTIC CH JOIN COMPUTER C ON CH.COMPUTERID = C.ID WHERE C.NAME = '" + name + "' GROUP BY time ORDER BY teapots DESC LIMIT 9");
+                    break;
             }
             switch (subject)
             {
@@ -258,7 +258,7 @@ namespace MyService
             }
             for (int i = 0; i < chartName.Count; i++)
             {
-                makeChart(chartQuery[i], chartX[i], chartY[i]);
+                makeChart(chartQuery[i], chartX[i], chartY[i],columns);
                 doc.Add(new Phrase(chartName[i], font));
                 Image chart = Image.GetInstance(root + @"chart.bmp");
                 doc.Add(chart);
@@ -268,7 +268,7 @@ namespace MyService
             doc.Close();
         }
 
-        private void makeChart(string query, string xName, string yName)
+        private void makeChart(string query, string xName, string yName,List<string> columns)
         {
             Chart chart = new Chart();
             DataTable dt = new DataTable();
@@ -282,6 +282,19 @@ namespace MyService
             //chart.Series["Series1"]["DrawingStyle"] = "Emboss";
             chart.Series["Series1"].IsValueShownAsLabel = true;
             dt.Load(execute(query));
+            if (xName == "Time")
+            {
+                for (int i = 0; i < dt.Rows.Count; i++)
+                {
+                    for (int j = 0; j < dt.Columns.Count; j++)
+                    {
+                        if (columns[j].Equals("Дата теста"))
+                        {
+                            dt.Rows[i][j] = new DateTime(Convert.ToInt64(dt.Rows[i][j]) * 10000).ToString();
+                        }
+                    }
+                }
+            }
             chart.DataSource = dt;
             chart.Series["Series1"].YValueMembers = yName;
             chart.Series["Series1"].XValueMember = xName;

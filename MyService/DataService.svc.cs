@@ -119,7 +119,7 @@ namespace MyService
                 execute("CREATE TABLE IF NOT EXISTS TRAFFIC(id INTEGER PRIMARY KEY AUTOINCREMENT, URL TEXT, host TRXT, referer TEXT, time INTEGER, computerID INTEGER, userID INTEGER, " +
                     fk_computer + ", " +
                     fk_user + ";");
-                execute("CREATE TABLE IF NOT EXISTS CHARACTERISTIC(id INTEGER PRIMARY KEY AUTOINCREMENT, time INTEGER, teapots INTEGER, RAM TEXT, freeRAM TEXT, CPU TEXT, VideoRAM TEXT, computerID INTEGER, " +
+                execute("CREATE TABLE IF NOT EXISTS CHARACTERISTIC(id INTEGER PRIMARY KEY AUTOINCREMENT, time TEXT, teapots INTEGER, RAM TEXT, freeRAM TEXT, CPU TEXT, VideoRAM TEXT, computerID INTEGER, " +
                     fk_computer+");");
                 execute("CREATE TABLE IF NOT EXISTS PROCESS(id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, startTime INTEGER, finishTime INTEGER, allTime INTEGER, computerID INTEGER, userID INTEGER, " +
                     fk_computer + ", " +
