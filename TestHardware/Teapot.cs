@@ -30,7 +30,7 @@ namespace pctesting.TestHardware
                 PresentParameters parameters = new PresentParameters();
                 parameters.Windowed = true;
                 parameters.SwapEffect = SwapEffect.Discard;
-                 device = new Device(0, DeviceType.Hardware, this, CreateFlags.HardwareVertexProcessing, parameters);
+                device = new Device(0, DeviceType.Hardware, this, CreateFlags.HardwareVertexProcessing, parameters);
                 teapot = Mesh.Teapot(device);
             }
             catch (Exception e)

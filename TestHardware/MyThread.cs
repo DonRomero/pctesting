@@ -32,17 +32,25 @@ namespace pctesting.TestHardware
         }
         private void Show_teapot()
         {
-            Teapot form = new Teapot(enable);
-            form.Text = "teapot";
-            form.Width = width;
-            form.Height = heigth;
-            form.InitD3D();
-            form.SetDesktopBounds(x, y, width, heigth);
-            form.Show();
-            while (form.Created)
+            try
             {
-                form.Render();
-                Application.DoEvents();
+                Teapot form = new Teapot(enable);
+                form.Text = "teapot";
+                form.Width = width;
+                form.Height = heigth;
+                form.InitD3D();
+                form.SetDesktopBounds(x, y, width, heigth);
+                form.Show();
+                while (form.Created)
+                {
+                    form.Render();
+                    Application.DoEvents();
+                }
+            }
+            catch(Exception e)
+            {
+                enable.Active = false;
+                return;
             }
         }
     }

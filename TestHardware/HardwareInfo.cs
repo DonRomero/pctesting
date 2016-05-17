@@ -76,13 +76,13 @@ namespace pctesting.TestHardware
         }
         public string GetVideoRam()
         {
-            find = new ManagementObjectSearcher(QueryWin32VideoController);
-            ManagementObjectCollection.ManagementObjectEnumerator it = find.Get().GetEnumerator();
-            while (it.MoveNext())
-            {
+                find = new ManagementObjectSearcher(QueryWin32VideoController);
+                ManagementObjectCollection.ManagementObjectEnumerator it = find.Get().GetEnumerator();
+                while (it.MoveNext())
+                {
 
-            }
-            return Convert.ToString(it.Current["AdapterRAM"]);
+                }
+                return Convert.ToString(it.Current["AdapterRAM"]);
         }
     }
 }
