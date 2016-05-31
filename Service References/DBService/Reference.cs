@@ -9,65 +9,73 @@
 //------------------------------------------------------------------------------
 
 namespace pctesting.DBService {
-    
-    
+
+
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="DBService.IDataService")]
-    public interface IDataService {
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDataService/saveFileDataToDB", ReplyAction="http://tempuri.org/IDataService/saveFileDataToDBResponse")]
+    [System.ServiceModel.ServiceContractAttribute(ConfigurationName = "DBService.IDataService")]
+    public interface IDataService
+    {
+
+        [System.ServiceModel.OperationContractAttribute(Action = "http://tempuri.org/IDataService/saveFileDataToDB", ReplyAction = "http://tempuri.org/IDataService/saveFileDataToDBResponse")]
         void saveFileDataToDB(string name, string path, string ext, long time, string type, string comp, string user);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDataService/saveFileDataToDB", ReplyAction="http://tempuri.org/IDataService/saveFileDataToDBResponse")]
+
+        [System.ServiceModel.OperationContractAttribute(Action = "http://tempuri.org/IDataService/saveFileDataToDB", ReplyAction = "http://tempuri.org/IDataService/saveFileDataToDBResponse")]
         System.Threading.Tasks.Task saveFileDataToDBAsync(string name, string path, string ext, long time, string type, string comp, string user);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDataService/saveTrafficDataToDB", ReplyAction="http://tempuri.org/IDataService/saveTrafficDataToDBResponse")]
+
+        [System.ServiceModel.OperationContractAttribute(Action = "http://tempuri.org/IDataService/saveTrafficDataToDB", ReplyAction = "http://tempuri.org/IDataService/saveTrafficDataToDBResponse")]
         void saveTrafficDataToDB(string URL, string host, string referer, long time, string comp, string user);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDataService/saveTrafficDataToDB", ReplyAction="http://tempuri.org/IDataService/saveTrafficDataToDBResponse")]
+
+        [System.ServiceModel.OperationContractAttribute(Action = "http://tempuri.org/IDataService/saveTrafficDataToDB", ReplyAction = "http://tempuri.org/IDataService/saveTrafficDataToDBResponse")]
         System.Threading.Tasks.Task saveTrafficDataToDBAsync(string URL, string host, string referer, long time, string comp, string user);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDataService/login", ReplyAction="http://tempuri.org/IDataService/loginResponse")]
+
+        [System.ServiceModel.OperationContractAttribute(Action = "http://tempuri.org/IDataService/login", ReplyAction = "http://tempuri.org/IDataService/loginResponse")]
         string login(string name, string password, string compMAC, string compName);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDataService/login", ReplyAction="http://tempuri.org/IDataService/loginResponse")]
+
+        [System.ServiceModel.OperationContractAttribute(Action = "http://tempuri.org/IDataService/login", ReplyAction = "http://tempuri.org/IDataService/loginResponse")]
         System.Threading.Tasks.Task<string> loginAsync(string name, string password, string compMAC, string compName);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDataService/SaveActivityToDB", ReplyAction="http://tempuri.org/IDataService/SaveActivityToDBResponse")]
+
+        [System.ServiceModel.OperationContractAttribute(Action = "http://tempuri.org/IDataService/SaveActivityToDB", ReplyAction = "http://tempuri.org/IDataService/SaveActivityToDBResponse")]
         void SaveActivityToDB(System.TimeSpan AllTime, System.TimeSpan ActivityTime, System.TimeSpan NotActivityTime, string comp, string user);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDataService/SaveActivityToDB", ReplyAction="http://tempuri.org/IDataService/SaveActivityToDBResponse")]
+
+        [System.ServiceModel.OperationContractAttribute(Action = "http://tempuri.org/IDataService/SaveActivityToDB", ReplyAction = "http://tempuri.org/IDataService/SaveActivityToDBResponse")]
         System.Threading.Tasks.Task SaveActivityToDBAsync(System.TimeSpan AllTime, System.TimeSpan ActivityTime, System.TimeSpan NotActivityTime, string comp, string user);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDataService/SaveProcessesToDB", ReplyAction="http://tempuri.org/IDataService/SaveProcessesToDBResponse")]
+
+        [System.ServiceModel.OperationContractAttribute(Action = "http://tempuri.org/IDataService/SaveProcessesToDB", ReplyAction = "http://tempuri.org/IDataService/SaveProcessesToDBResponse")]
         void SaveProcessesToDB(string Name, System.DateTime StartTime, System.DateTime ExitTime, System.TimeSpan GeneralTime, string comp, string user);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDataService/SaveProcessesToDB", ReplyAction="http://tempuri.org/IDataService/SaveProcessesToDBResponse")]
+
+        [System.ServiceModel.OperationContractAttribute(Action = "http://tempuri.org/IDataService/SaveProcessesToDB", ReplyAction = "http://tempuri.org/IDataService/SaveProcessesToDBResponse")]
         System.Threading.Tasks.Task SaveProcessesToDBAsync(string Name, System.DateTime StartTime, System.DateTime ExitTime, System.TimeSpan GeneralTime, string comp, string user);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDataService/makeReport", ReplyAction="http://tempuri.org/IDataService/makeReportResponse")]
+
+        [System.ServiceModel.OperationContractAttribute(Action = "http://tempuri.org/IDataService/makeReport", ReplyAction = "http://tempuri.org/IDataService/makeReportResponse")]
         bool makeReport();
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDataService/makeReport", ReplyAction="http://tempuri.org/IDataService/makeReportResponse")]
+
+        [System.ServiceModel.OperationContractAttribute(Action = "http://tempuri.org/IDataService/makeReport", ReplyAction = "http://tempuri.org/IDataService/makeReportResponse")]
         System.Threading.Tasks.Task<bool> makeReportAsync();
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDataService/addUser", ReplyAction="http://tempuri.org/IDataService/addUserResponse")]
+
+        [System.ServiceModel.OperationContractAttribute(Action = "http://tempuri.org/IDataService/addUser", ReplyAction = "http://tempuri.org/IDataService/addUserResponse")]
         bool addUser(string name, string password);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDataService/addUser", ReplyAction="http://tempuri.org/IDataService/addUserResponse")]
+
+        [System.ServiceModel.OperationContractAttribute(Action = "http://tempuri.org/IDataService/addUser", ReplyAction = "http://tempuri.org/IDataService/addUserResponse")]
         System.Threading.Tasks.Task<bool> addUserAsync(string name, string password);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDataService/getUsers", ReplyAction="http://tempuri.org/IDataService/getUsersResponse")]
+
+        [System.ServiceModel.OperationContractAttribute(Action = "http://tempuri.org/IDataService/getUsers", ReplyAction = "http://tempuri.org/IDataService/getUsersResponse")]
         string[] getUsers();
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDataService/getUsers", ReplyAction="http://tempuri.org/IDataService/getUsersResponse")]
+
+        [System.ServiceModel.OperationContractAttribute(Action = "http://tempuri.org/IDataService/getUsers", ReplyAction = "http://tempuri.org/IDataService/getUsersResponse")]
         System.Threading.Tasks.Task<string[]> getUsersAsync();
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDataService/SaveTestCharacteristic", ReplyAction="http://tempuri.org/IDataService/SaveTestCharacteristicResponse")]
+
+        [System.ServiceModel.OperationContractAttribute(Action = "http://tempuri.org/IDataService/SaveTestCharacteristic", ReplyAction = "http://tempuri.org/IDataService/SaveTestCharacteristicResponse")]
         void SaveTestCharacteristic(System.DateTime time, int teapots, string RAM, string freeRAM, string CPU, string VideoRAM, string comp, string user);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDataService/SaveTestCharacteristic", ReplyAction="http://tempuri.org/IDataService/SaveTestCharacteristicResponse")]
+
+        [System.ServiceModel.OperationContractAttribute(Action = "http://tempuri.org/IDataService/SaveTestCharacteristic", ReplyAction = "http://tempuri.org/IDataService/SaveTestCharacteristicResponse")]
         System.Threading.Tasks.Task SaveTestCharacteristicAsync(System.DateTime time, int teapots, string RAM, string freeRAM, string CPU, string VideoRAM, string comp, string user);
+        
+        [System.ServiceModel.OperationContractAttribute(Action = "http://tempuri.org/IDataService/FindInternetActivity", ReplyAction = "http://tempuri.org/IDataService/FindInternetActivity")]
+        string[][] FindInternetActivity(string UserName);
+
+        [System.ServiceModel.OperationContractAttribute(Action = "http://tempuri.org/IDataService/FindFileActivity", ReplyAction = "http://tempuri.org/IDataService/FindFileActivity")]
+        string[][] FindFileActivity(string UserName);
+
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -167,6 +175,15 @@ namespace pctesting.DBService {
         
         public System.Threading.Tasks.Task SaveTestCharacteristicAsync(System.DateTime time, int teapots, string RAM, string freeRAM, string CPU, string VideoRAM, string comp, string user) {
             return base.Channel.SaveTestCharacteristicAsync(time, teapots, RAM, freeRAM, CPU, VideoRAM, comp, user);
+        }
+        public string [][] FindInternetActivity(string UserName)
+        {
+            return base.Channel.FindInternetActivity(UserName);
+        }
+
+        public string[][] FindFileActivity(string UserName)
+        {
+            return base.Channel.FindFileActivity(UserName);
         }
     }
 }

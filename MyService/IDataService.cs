@@ -34,5 +34,13 @@ namespace MyService
 
         [OperationContract]
         void SaveTestCharacteristic(DateTime time, int teapots, string RAM, string freeRAM, string CPU, string VideoRAM, string comp, string user);
+        [OperationContract]
+        List<List<string>> FindInternetActivity(string UserName);
+
+        [OperationContract]
+        List<List<string>> FindFileActivity(string UserName);
+
+        [OperationContract]
+        List<List<string>> getActivity();
     }
 }

@@ -106,5 +106,11 @@ namespace pctesting
                 }
             }
         }
+
+        private void UserActivityReport_Click(object sender, EventArgs e)
+        {
+            UserActions usAction = new UserActions();
+            usAction.Show();
+        }
     }
 }

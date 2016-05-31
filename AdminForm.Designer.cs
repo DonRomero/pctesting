@@ -39,6 +39,7 @@
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pctestingIcon = new System.Windows.Forms.NotifyIcon(this.components);
             this.exitButton = new System.Windows.Forms.Button();
+            this.UserActivityReport = new System.Windows.Forms.Button();
             this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -118,7 +119,7 @@
             // 
             // exitButton
             // 
-            this.exitButton.Location = new System.Drawing.Point(11, 123);
+            this.exitButton.Location = new System.Drawing.Point(11, 151);
             this.exitButton.Margin = new System.Windows.Forms.Padding(2);
             this.exitButton.Name = "exitButton";
             this.exitButton.Size = new System.Drawing.Size(188, 24);
@@ -127,11 +128,22 @@
             this.exitButton.UseVisualStyleBackColor = true;
             this.exitButton.Click += new System.EventHandler(this.exitButton_Click);
             // 
+            // UserActivityReport
+            // 
+            this.UserActivityReport.Location = new System.Drawing.Point(11, 123);
+            this.UserActivityReport.Name = "UserActivityReport";
+            this.UserActivityReport.Size = new System.Drawing.Size(187, 23);
+            this.UserActivityReport.TabIndex = 5;
+            this.UserActivityReport.Text = "Активность пользователя";
+            this.UserActivityReport.UseVisualStyleBackColor = true;
+            this.UserActivityReport.Click += new System.EventHandler(this.UserActivityReport_Click);
+            // 
             // AdminForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(212, 153);
+            this.ClientSize = new System.Drawing.Size(210, 182);
+            this.Controls.Add(this.UserActivityReport);
             this.Controls.Add(this.exitButton);
             this.Controls.Add(this.addUserButton);
             this.Controls.Add(this.backupButton);
@@ -158,5 +170,6 @@
         private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
         private System.Windows.Forms.NotifyIcon pctestingIcon;
         private System.Windows.Forms.Button exitButton;
+        private System.Windows.Forms.Button UserActivityReport;
     }
 }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data.SQLite;
 using System.IO;
+using System.Data;
 
 
 namespace MyService
@@ -12,6 +13,7 @@ namespace MyService
     {
         static string diskLetter = Path.GetPathRoot(Environment.GetFolderPath(Environment.SpecialFolder.System));
         Report report = new Report(diskLetter + @"\pctesting\");
+        UserReport Usreport = new UserReport(diskLetter + @"\pctesting\");
         SQLiteConnection sql = new SQLiteConnection("DataSource = " + diskLetter + @"pctesting\mydb.sqlite;Version=3");
         string adminLogin = "admin";
         string adminPassword = "admin";
@@ -35,7 +37,27 @@ namespace MyService
             sql.Close();
             return list;
         }
+        public List<List<string>> getActivity()
+        {
+            sql.Open();
+            SQLiteCommand sc = new SQLiteCommand("SELECT  FROM USER;", sql);
+            SQLiteDataReader reader = sc.ExecuteReader();
+            DataTable dt = new DataTable();
+            dt.Load(reader);
+            reader.Close();
+            List<List<string>> list = new List<List<string>>();
+            for (int i = 0; i < dt.Rows.Count; i++)
+            {
+                for (int j = 0; j < dt.Columns.Count; j++)
+                {
 
+                    list.Add(new List<string>());
+                    list[list.Count-1].Add(dt.Rows[i][j].ToString());
+                }
+            }
+            sql.Close();
+            return list;
+        }
         public bool addUser(string name, string password)
         {
             //try
@@ -53,6 +75,7 @@ namespace MyService
             //    return false;
             //}
         }
+
 
         public bool makeReport()
         {
@@ -180,6 +203,14 @@ namespace MyService
             int[] IDs = selectIDs(comp,user);
             execute("INSERT INTO CHARACTERISTIC VALUES( NULL, " + (long)time.Ticks / 10000 + ", "+teapots+", '" + RAM + "', '" + freeRAM + "', '" + CPU + "', '" + VideoRAM + "', " + IDs[0] + ");");
             sql.Close();
+        }
+        public List<List<string>> FindInternetActivity(string UserName)
+        {
+            return Usreport.FindInternetActivity(UserName);
+        }
+        public List<List<string>> FindFileActivity(string UserName)
+        {
+            return Usreport.FindFileActivity(UserName);
         }
     }
 }

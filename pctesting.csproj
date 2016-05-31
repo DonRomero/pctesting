@@ -113,6 +113,8 @@
       <DependentUpon>AdminForm.cs</DependentUpon>
     </Compile>
     <Compile Include="FileManager.cs" />
+    <Compile Include="GeneralFrame.cs" />
+    <Compile Include="UserInfoFrame.cs" />
     <Compile Include="TestHardware\Algorithm.cs" />
     <Compile Include="TestHardware\CheckEnable.cs" />
     <Compile Include="TestHardware\HardwareInfo.cs" />
@@ -134,6 +136,12 @@
     </Compile>
     <Compile Include="TestHardware\Teapot.Designer.cs">
       <DependentUpon>Teapot.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserActions.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UserActions.Designer.cs">
+      <DependentUpon>UserActions.cs</DependentUpon>
     </Compile>
     <Compile Include="UserForm.cs">
       <SubType>Form</SubType>
@@ -171,6 +179,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="TestHardware\Teapot.resx">
       <DependentUpon>Teapot.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserActions.resx">
+      <DependentUpon>UserActions.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserForm.resx">
       <DependentUpon>UserForm.cs</DependentUpon>
