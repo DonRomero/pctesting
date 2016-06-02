@@ -304,6 +304,7 @@ namespace MyService
         public List<List<string>> FindFileActivity(string UserName)
         {
             return Usreport.FindFileActivity(UserName);
+        }
 
         private string GetResponse(string url, byte[] byteData, string method)
         {

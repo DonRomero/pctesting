@@ -5,7 +5,6 @@
       <xsd:import schemaLocation="http://localhost:18336/DataService.svc?xsd=xsd0" namespace="http://tempuri.org/" />
       <xsd:import schemaLocation="http://localhost:18336/DataService.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
       <xsd:import schemaLocation="http://localhost:18336/DataService.svc?xsd=xsd2" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
-      <xsd:import schemaLocation="http://localhost:18336/DataService.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/System.Data" />
     </xsd:schema>
   </wsdl:types>
   <wsdl:message name="IDataService_saveFileDataToDB_InputMessage">
@@ -56,17 +55,29 @@
   <wsdl:message name="IDataService_getUsers_OutputMessage">
     <wsdl:part name="parameters" element="tns:getUsersResponse" />
   </wsdl:message>
-  <wsdl:message name="IDataService_getTrafficTable_InputMessage">
-    <wsdl:part name="parameters" element="tns:getTrafficTable" />
-  </wsdl:message>
-  <wsdl:message name="IDataService_getTrafficTable_OutputMessage">
-    <wsdl:part name="parameters" element="tns:getTrafficTableResponse" />
-  </wsdl:message>
   <wsdl:message name="IDataService_SaveTestCharacteristic_InputMessage">
     <wsdl:part name="parameters" element="tns:SaveTestCharacteristic" />
   </wsdl:message>
   <wsdl:message name="IDataService_SaveTestCharacteristic_OutputMessage">
     <wsdl:part name="parameters" element="tns:SaveTestCharacteristicResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDataService_FindInternetActivity_InputMessage">
+    <wsdl:part name="parameters" element="tns:FindInternetActivity" />
+  </wsdl:message>
+  <wsdl:message name="IDataService_FindInternetActivity_OutputMessage">
+    <wsdl:part name="parameters" element="tns:FindInternetActivityResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDataService_FindFileActivity_InputMessage">
+    <wsdl:part name="parameters" element="tns:FindFileActivity" />
+  </wsdl:message>
+  <wsdl:message name="IDataService_FindFileActivity_OutputMessage">
+    <wsdl:part name="parameters" element="tns:FindFileActivityResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDataService_getActivity_InputMessage">
+    <wsdl:part name="parameters" element="tns:getActivity" />
+  </wsdl:message>
+  <wsdl:message name="IDataService_getActivity_OutputMessage">
+    <wsdl:part name="parameters" element="tns:getActivityResponse" />
   </wsdl:message>
   <wsdl:portType name="IDataService">
     <wsdl:operation name="saveFileDataToDB">
@@ -101,13 +112,21 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IDataService/getUsers" message="tns:IDataService_getUsers_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IDataService/getUsersResponse" message="tns:IDataService_getUsers_OutputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="getTrafficTable">
-      <wsdl:input wsaw:Action="http://tempuri.org/IDataService/getTrafficTable" message="tns:IDataService_getTrafficTable_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IDataService/getTrafficTableResponse" message="tns:IDataService_getTrafficTable_OutputMessage" />
-    </wsdl:operation>
     <wsdl:operation name="SaveTestCharacteristic">
       <wsdl:input wsaw:Action="http://tempuri.org/IDataService/SaveTestCharacteristic" message="tns:IDataService_SaveTestCharacteristic_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IDataService/SaveTestCharacteristicResponse" message="tns:IDataService_SaveTestCharacteristic_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="FindInternetActivity">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDataService/FindInternetActivity" message="tns:IDataService_FindInternetActivity_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDataService/FindInternetActivityResponse" message="tns:IDataService_FindInternetActivity_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="FindFileActivity">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDataService/FindFileActivity" message="tns:IDataService_FindFileActivity_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDataService/FindFileActivityResponse" message="tns:IDataService_FindFileActivity_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="getActivity">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDataService/getActivity" message="tns:IDataService_getActivity_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDataService/getActivityResponse" message="tns:IDataService_getActivity_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IDataService" type="tns:IDataService">
@@ -184,8 +203,8 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="getTrafficTable">
-      <soap:operation soapAction="http://tempuri.org/IDataService/getTrafficTable" style="document" />
+    <wsdl:operation name="SaveTestCharacteristic">
+      <soap:operation soapAction="http://tempuri.org/IDataService/SaveTestCharacteristic" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -193,8 +212,26 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="SaveTestCharacteristic">
-      <soap:operation soapAction="http://tempuri.org/IDataService/SaveTestCharacteristic" style="document" />
+    <wsdl:operation name="FindInternetActivity">
+      <soap:operation soapAction="http://tempuri.org/IDataService/FindInternetActivity" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FindFileActivity">
+      <soap:operation soapAction="http://tempuri.org/IDataService/FindFileActivity" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getActivity">
+      <soap:operation soapAction="http://tempuri.org/IDataService/getActivity" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

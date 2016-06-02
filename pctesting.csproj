@@ -118,6 +118,11 @@
     </Compile>
     <Compile Include="FileManager.cs" />
     <Compile Include="GeneralFrame.cs" />
+    <Compile Include="Service References\DBService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <Compile Include="UserInfoFrame.cs" />
     <Compile Include="TestHardware\Algorithm.cs" />
     <Compile Include="TestHardware\CheckEnable.cs" />
@@ -209,9 +214,6 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <None Include="Service References\DBService\DataService.wsdl" />
-    <None Include="Service References\DBService\DataService.xsd">
-      <SubType>Designer</SubType>
-    </None>
     <None Include="Service References\DBService\DataService1.xsd">
       <SubType>Designer</SubType>
     </None>
