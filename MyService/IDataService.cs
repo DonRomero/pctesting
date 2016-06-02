@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.ServiceModel;
 
 namespace MyService
@@ -31,6 +32,15 @@ namespace MyService
 
         [OperationContract]
         List<string> getUsers();
+
+        [OperationContract]
+        DataTable getTrafficTable();
+
+        //[OperationContract]
+        //DataTable getTTTable();
+
+        //[OperationContract]
+        //DataTable getThemeTable();
 
         [OperationContract]
         void SaveTestCharacteristic(DateTime time, int teapots, string RAM, string freeRAM, string CPU, string VideoRAM, string comp, string user);

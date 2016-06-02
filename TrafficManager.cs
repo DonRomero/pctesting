@@ -1,17 +1,16 @@
 ﻿using System;
 using pctesting.DBService;
 using Fiddler;
+using System.Text.RegularExpressions;
 
 namespace pctesting
 {
     class TrafficManager
     {
-        private UrlCaptureConfiguration CaptureConfiguration { get; set; }
         string comp, user;
 
         public TrafficManager(string user, string comp)
         {
-            CaptureConfiguration = new UrlCaptureConfiguration();  // this usually comes from configuration settings
             this.comp = comp;
             this.user = user;
         }
@@ -22,41 +21,17 @@ namespace pctesting
             if (sess.RequestMethod == "CONNECT")
                 return;
 
-            if (CaptureConfiguration.ProcessId > 0)
-            {
-                if (sess.LocalProcessID != 0 && sess.LocalProcessID != CaptureConfiguration.ProcessId)
-                    return;
-            }
-
-            if (!string.IsNullOrEmpty(CaptureConfiguration.CaptureDomain))
-            {
-                if (sess.hostname.ToLower() != CaptureConfiguration.CaptureDomain.Trim().ToLower())
-                    return;
-            }
-
-            if (CaptureConfiguration.IgnoreResources)
-            {
-                string url = sess.fullUrl.ToLower();
-
-                var extensions = CaptureConfiguration.ExtensionFilterExclusions;
-                foreach (var ext in extensions)
-                {
-                    if (url.Contains(ext))
-                        return;
-                }
-
-                var filters = CaptureConfiguration.UrlFilterExclusions;
-                foreach (var urlFilter in filters)
-                {
-                    if (url.Contains(urlFilter))
-                        return;
-                }
-            }
-
-            if (sess == null || sess.oRequest == null || sess.oRequest.headers == null)
+            if (sess == null || sess.oRequest == null || sess.oRequest.headers == null|| sess.url.Contains("localhost"))
+                return;
+            if (sess.fullUrl.Equals("http://www.keva.ru/?cat=ling-themurl"))
+                return;
+            Regex newReg = new Regex(@"<[\s\S]*body[\s\S]*>[\s\S]*<[\s\S]*>[\s\S]*<\/[\s\S]*body>", RegexOptions.IgnoreCase);
+            MatchCollection matches = newReg.Matches(sess.GetResponseBodyAsString());
+            if (matches.Count == 0)
                 return;
             DBService.DataServiceClient client = new DataServiceClient();
-            try {
+            try
+            {
                 client.saveTrafficDataToDB(sess.fullUrl.ToLower(), sess.host, sess.oRequest.headers["referer"], (long)DateTime.Now.Ticks / 10000, comp, user);
             }
             catch(Exception ex)
@@ -67,7 +42,6 @@ namespace pctesting
 
         public void Start()
         {
-            CaptureConfiguration.IgnoreResources = true;
             InstallCertificate();
 
             FiddlerApplication.AfterSessionComplete += AfterSession;
