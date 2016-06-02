@@ -16,7 +16,6 @@ namespace MyService
         static string root;
         SQLiteConnection sql = new SQLiteConnection("DataSource = " + root + @"mydb.sqlite;Version=3");
         //Excel.Application excelapp = new Excel.Application();
-        int book = 0;
 
         public Report(string str)
         {

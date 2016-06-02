@@ -46,7 +46,7 @@
       <HintPath>.\FiddlerCore4.dll</HintPath>
     </Reference>
     <Reference Include="Gma.System.MouseKeyHook">
-      <HintPath>..\..\..\Downloads\globalmousekeyhook-vNext (1)\globalmousekeyhook-vNext\MouseKeyHook\bin\Debug\Gma.System.MouseKeyHook.dll</HintPath>
+      <HintPath>.\Gma.System.MouseKeyHook.dll</HintPath>
     </Reference>
     <Reference Include="GraphSharpDemo, Version=1.0.0.0, Culture=neutral, processorArchitecture=x86">
       <SpecificVersion>False</SpecificVersion>

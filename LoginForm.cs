@@ -30,8 +30,8 @@ namespace pctesting
             if (loginTextBox.Text.Equals("") | passwordTextBox.Text.Equals(""))
                 MessageBox.Show("Введите корректные данные!", "Некорректный ввод", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             else
-                //try
-                //{
+                try
+                {
                     switch (client.login(loginTextBox.Text, passwordTextBox.Text, macAddress, compName))
                     {
                         case "user":
@@ -46,11 +46,11 @@ namespace pctesting
                             MessageBox.Show("Неверный логин или пароль", "В доступе отказано!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                             break;
                     }
-                //}
-                //catch (Exception ex)
-                //{
-                //    MessageBox.Show("Возникла ошибка подключения!\nПроверьте работоспособность сервера.", "Ошибка подключения", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                //}
+                }
+                catch (System.ServiceModel.EndpointNotFoundException ex)
+                {
+                    MessageBox.Show("Возникла ошибка подключения!\nПроверьте работоспособность сервера.", "Ошибка подключения", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
         }
 
         private void exitButton_Click(object sender, EventArgs e)
