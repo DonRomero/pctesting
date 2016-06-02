@@ -1,148 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<xs:schema xmlns:tns="http://tempuri.org/" elementFormDefault="qualified" targetNamespace="http://tempuri.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
-  <xs:import schemaLocation="http://localhost:18336/DataService.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
-  <xs:import schemaLocation="http://localhost:18336/DataService.svc?xsd=xsd2" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
-  <xs:element name="saveFileDataToDB">
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/System.Data" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/System.Data" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="DataTable" nillable="true">
     <xs:complexType>
+      <xs:annotation>
+        <xs:appinfo>
+          <ActualType Name="DataTable" Namespace="http://schemas.datacontract.org/2004/07/System.Data" xmlns="http://schemas.microsoft.com/2003/10/Serialization/" />
+        </xs:appinfo>
+      </xs:annotation>
       <xs:sequence>
-        <xs:element minOccurs="0" name="name" nillable="true" type="xs:string" />
-        <xs:element minOccurs="0" name="path" nillable="true" type="xs:string" />
-        <xs:element minOccurs="0" name="ext" nillable="true" type="xs:string" />
-        <xs:element minOccurs="0" name="time" type="xs:long" />
-        <xs:element minOccurs="0" name="type" nillable="true" type="xs:string" />
-        <xs:element minOccurs="0" name="comp" nillable="true" type="xs:string" />
-        <xs:element minOccurs="0" name="user" nillable="true" type="xs:string" />
+        <xs:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+        <xs:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
       </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="saveFileDataToDBResponse">
-    <xs:complexType>
-      <xs:sequence />
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="saveTrafficDataToDB">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element minOccurs="0" name="URL" nillable="true" type="xs:string" />
-        <xs:element minOccurs="0" name="host" nillable="true" type="xs:string" />
-        <xs:element minOccurs="0" name="referer" nillable="true" type="xs:string" />
-        <xs:element minOccurs="0" name="time" type="xs:long" />
-        <xs:element minOccurs="0" name="comp" nillable="true" type="xs:string" />
-        <xs:element minOccurs="0" name="user" nillable="true" type="xs:string" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="saveTrafficDataToDBResponse">
-    <xs:complexType>
-      <xs:sequence />
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="login">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element minOccurs="0" name="name" nillable="true" type="xs:string" />
-        <xs:element minOccurs="0" name="password" nillable="true" type="xs:string" />
-        <xs:element minOccurs="0" name="compMAC" nillable="true" type="xs:string" />
-        <xs:element minOccurs="0" name="compName" nillable="true" type="xs:string" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="loginResponse">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element minOccurs="0" name="loginResult" nillable="true" type="xs:string" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="SaveActivityToDB">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element xmlns:q1="http://schemas.microsoft.com/2003/10/Serialization/" minOccurs="0" name="AllTime" type="q1:duration" />
-        <xs:element xmlns:q2="http://schemas.microsoft.com/2003/10/Serialization/" minOccurs="0" name="ActivityTime" type="q2:duration" />
-        <xs:element xmlns:q3="http://schemas.microsoft.com/2003/10/Serialization/" minOccurs="0" name="NotActivityTime" type="q3:duration" />
-        <xs:element minOccurs="0" name="comp" nillable="true" type="xs:string" />
-        <xs:element minOccurs="0" name="user" nillable="true" type="xs:string" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="SaveActivityToDBResponse">
-    <xs:complexType>
-      <xs:sequence />
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="SaveProcessesToDB">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
-        <xs:element minOccurs="0" name="StartTime" type="xs:dateTime" />
-        <xs:element minOccurs="0" name="ExitTime" type="xs:dateTime" />
-        <xs:element xmlns:q4="http://schemas.microsoft.com/2003/10/Serialization/" minOccurs="0" name="GeneralTime" type="q4:duration" />
-        <xs:element minOccurs="0" name="comp" nillable="true" type="xs:string" />
-        <xs:element minOccurs="0" name="user" nillable="true" type="xs:string" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="SaveProcessesToDBResponse">
-    <xs:complexType>
-      <xs:sequence />
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="makeReport">
-    <xs:complexType>
-      <xs:sequence />
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="makeReportResponse">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element minOccurs="0" name="makeReportResult" type="xs:boolean" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="addUser">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element minOccurs="0" name="name" nillable="true" type="xs:string" />
-        <xs:element minOccurs="0" name="password" nillable="true" type="xs:string" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="addUserResponse">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element minOccurs="0" name="addUserResult" type="xs:boolean" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="getUsers">
-    <xs:complexType>
-      <xs:sequence />
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="getUsersResponse">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element xmlns:q5="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="getUsersResult" nillable="true" type="q5:ArrayOfstring" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="SaveTestCharacteristic">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element minOccurs="0" name="time" type="xs:dateTime" />
-        <xs:element minOccurs="0" name="teapots" type="xs:int" />
-        <xs:element minOccurs="0" name="RAM" nillable="true" type="xs:string" />
-        <xs:element minOccurs="0" name="freeRAM" nillable="true" type="xs:string" />
-        <xs:element minOccurs="0" name="CPU" nillable="true" type="xs:string" />
-        <xs:element minOccurs="0" name="VideoRAM" nillable="true" type="xs:string" />
-        <xs:element minOccurs="0" name="comp" nillable="true" type="xs:string" />
-        <xs:element minOccurs="0" name="user" nillable="true" type="xs:string" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="SaveTestCharacteristicResponse">
-    <xs:complexType>
-      <xs:sequence />
     </xs:complexType>
   </xs:element>
 </xs:schema>

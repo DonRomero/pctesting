@@ -63,6 +63,12 @@ namespace pctesting.DBService {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDataService/getUsers", ReplyAction="http://tempuri.org/IDataService/getUsersResponse")]
         System.Threading.Tasks.Task<string[]> getUsersAsync();
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDataService/getTrafficTable", ReplyAction="http://tempuri.org/IDataService/getTrafficTableResponse")]
+        System.Data.DataTable getTrafficTable();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDataService/getTrafficTable", ReplyAction="http://tempuri.org/IDataService/getTrafficTableResponse")]
+        System.Threading.Tasks.Task<System.Data.DataTable> getTrafficTableAsync();
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDataService/SaveTestCharacteristic", ReplyAction="http://tempuri.org/IDataService/SaveTestCharacteristicResponse")]
         void SaveTestCharacteristic(System.DateTime time, int teapots, string RAM, string freeRAM, string CPU, string VideoRAM, string comp, string user);
         
@@ -159,6 +165,14 @@ namespace pctesting.DBService {
         
         public System.Threading.Tasks.Task<string[]> getUsersAsync() {
             return base.Channel.getUsersAsync();
+        }
+        
+        public System.Data.DataTable getTrafficTable() {
+            return base.Channel.getTrafficTable();
+        }
+        
+        public System.Threading.Tasks.Task<System.Data.DataTable> getTrafficTableAsync() {
+            return base.Channel.getTrafficTableAsync();
         }
         
         public void SaveTestCharacteristic(System.DateTime time, int teapots, string RAM, string freeRAM, string CPU, string VideoRAM, string comp, string user) {

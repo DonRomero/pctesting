@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+This file is used by the publish/package process of your Web project. You can customize the behavior of this process
+by editing this MSBuild file. In order to learn more about this please visit http://go.microsoft.com/fwlink/?LinkID=208121. 
+-->
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <TimeStampOfAssociatedLegacyPublishXmlFile />
+    <_PublishTargetUrl>http://localhost:8080/</_PublishTargetUrl>
+  </PropertyGroup>
+  <ItemGroup>
+    <File Include="bin/EnvDTE.dll">
+      <publishTime>05/20/2016 00:13:56</publishTime>
+    </File>
+    <File Include="bin/FiddlerCore4.dll">
+      <publishTime>05/20/2016 00:13:56</publishTime>
+    </File>
+    <File Include="bin/itextsharp.dll">
+      <publishTime>05/20/2016 00:13:56</publishTime>
+    </File>
+    <File Include="bin/MyService.dll">
+      <publishTime>05/20/2016 21:06:08</publishTime>
+    </File>
+    <File Include="bin/SQLite.Designer.dll">
+      <publishTime>05/20/2016 00:13:56</publishTime>
+    </File>
+    <File Include="bin/stdole.dll">
+      <publishTime>05/20/2016 00:13:56</publishTime>
+    </File>
+    <File Include="bin/System.Data.SQLite.dll">
+      <publishTime>05/20/2016 00:13:56</publishTime>
+    </File>
+    <File Include="bin/System.Data.SQLite.EF6.dll">
+      <publishTime>05/20/2016 00:13:56</publishTime>
+    </File>
+    <File Include="bin/System.Data.SQLite.Linq.dll">
+      <publishTime>05/20/2016 00:13:56</publishTime>
+    </File>
+    <File Include="DataService.svc">
+      <publishTime>05/20/2016 00:13:56</publishTime>
+    </File>
+    <File Include="Web.config">
+      <publishTime>05/20/2016 21:06:08</publishTime>
+    </File>
+  </ItemGroup>
+</Project>
