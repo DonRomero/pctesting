@@ -3,6 +3,7 @@ using System.Windows.Forms;
 using pctesting.DBService;
 using System.Diagnostics;
 using System.IO;
+using GraphSharpDemo;
 
 namespace pctesting
 {
@@ -105,6 +106,11 @@ namespace pctesting
                     MessageBox.Show("Возникла ошибка при сохранении базы данных.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
+        }
+
+        private void buttonSemanticNet_Click(object sender, EventArgs e)
+        {
+            var w = new GraphSharpDemo.MainWindow();
         }
     }
 }
