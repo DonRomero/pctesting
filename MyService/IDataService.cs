@@ -25,7 +25,7 @@ namespace MyService
         void SaveProcessesToDB(string Name, DateTime StartTime, DateTime ExitTime, TimeSpan GeneralTime, string comp, string user);
 
         [OperationContract]
-        bool makeReport();
+        void makeReport();
 
         [OperationContract]
         bool addUser(string name, string password);

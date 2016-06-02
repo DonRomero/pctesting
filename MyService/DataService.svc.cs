@@ -64,34 +64,19 @@ namespace MyService
         }
         public bool addUser(string name, string password)
         {
-            //try
-            //{
             sql.Open();
             SQLiteCommand sc = new SQLiteCommand("SELECT COUNT(*) FROM USER WHERE NAME = '" + name + "';", sql);
             if (Convert.ToInt32(sc.ExecuteScalar()) > 0)
                 return false;
             execute(String.Format("INSERT INTO USER VALUES(NULL, '{0}', '{1}', {2});", name, password, 0));
-            //sql.Close();
+            sql.Close();
             return true;
-            //}
-            //catch (Exception ex)
-            //{
-            //    return false;
-            //}
         }
 
 
-        public bool makeReport()
+        public void makeReport()
         {
-            //try
-            //{
             report.makeReport();
-            return true;
-            //}
-            //catch (Exception ex)
-            //{
-            //    return false;
-            //}
         }
 
         public string login(string name, string password, string compMAC, string compName)
@@ -131,8 +116,6 @@ namespace MyService
 
         public void setConnection()
         {
-            //try
-            //{
             execute("CREATE TABLE IF NOT EXISTS COMPUTER(id INTEGER PRIMARY KEY AUTOINCREMENT, MAC TEXT, name TEXT);"
                     + "CREATE TABLE IF NOT EXISTS USER(id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, password TEXT, admin INTEGER);");
             SQLiteCommand sc = new SQLiteCommand("SELECT COUNT(*) FROM USER WHERE admin = 1;", sql);
@@ -156,11 +139,6 @@ namespace MyService
             execute("CREATE TABLE IF NOT EXISTS ACTIVITY(id INTEGER PRIMARY KEY AUTOINCREMENT, allTime INTEGER, activeTime INTEGER, passiveTime INTEGER, computerID INTEGER, userID INTEGER, " +
                 fk_computer + ", " +
                 fk_user + ";");
-            //}
-            //catch (Exception ex)
-            //{
-
-            //}
         }
 
         //public DataTable getThemeTable()

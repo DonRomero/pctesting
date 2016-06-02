@@ -2,6 +2,7 @@
 using pctesting.DBService;
 using Fiddler;
 using System.Text.RegularExpressions;
+using System.Windows.Forms;
 
 namespace pctesting
 {
@@ -36,7 +37,7 @@ namespace pctesting
             }
             catch(Exception ex)
             {
-
+                MessageBox.Show("Возникла ошибка при работе с бозой данных!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
