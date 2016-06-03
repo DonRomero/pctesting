@@ -48,10 +48,6 @@
     <Reference Include="Gma.System.MouseKeyHook">
       <HintPath>.\Gma.System.MouseKeyHook.dll</HintPath>
     </Reference>
-    <Reference Include="GraphSharpDemo, Version=1.0.0.0, Culture=neutral, processorArchitecture=x86">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>GraphSharpDemo\GraphSharpDemo\GraphSharpDemo\bin\Debug\GraphSharpDemo.exe</HintPath>
-    </Reference>
     <Reference Include="Microsoft.DirectX, Version=1.0.2902.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>DirectXdll\Microsoft.DirectX.dll</HintPath>
@@ -214,6 +210,9 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <None Include="Service References\DBService\DataService.wsdl" />
+    <None Include="Service References\DBService\DataService.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Service References\DBService\DataService1.xsd">
       <SubType>Designer</SubType>
     </None>

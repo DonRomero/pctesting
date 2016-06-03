@@ -21,7 +21,6 @@ namespace pctesting
             // Ignore HTTPS connect requests
             if (sess.RequestMethod == "CONNECT")
                 return;
-
             if (sess == null || sess.oRequest == null || sess.oRequest.headers == null|| sess.url.Contains("localhost"))
                 return;
             if (sess.fullUrl.Equals("http://www.keva.ru/?cat=ling-themurl"))
@@ -37,7 +36,7 @@ namespace pctesting
             }
             catch(Exception ex)
             {
-                MessageBox.Show("Возникла ошибка при работе с бозой данных!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Возникла ошибка при работе с базой данных!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 

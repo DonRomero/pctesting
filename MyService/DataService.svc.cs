@@ -219,20 +219,29 @@ namespace MyService
                 if (refId == 0)
                     return;
             }
-            string Parameters = "cat=ling-themurl&url=" + URL;
-            byte[] bytes = System.Text.Encoding.ASCII.GetBytes(Parameters);
-            string resp = GetResponse("http://www.keva.ru/?cat=ling-themurl", bytes, "POST");
-            IHtmlDocument angle = new HtmlParser().Parse(resp);
-            IHtmlCollection<IElement> themeCol = angle.QuerySelectorAll("table ul.tree > li a");
-            IHtmlCollection<IElement> valCol = angle.QuerySelectorAll("table ul.tree > li a sup");
-            string[] theme = new string[themeCol.Length], val = new string[themeCol.Length];
+            //string Parameters = "cat=ling-themurl&url=" + URL;
+            //byte[] bytes = System.Text.Encoding.ASCII.GetBytes(Parameters);
+            //string resp = GetResponse("http://www.keva.ru/?cat=ling-themurl", bytes, "POST");
+            //IHtmlDocument angle = new HtmlParser().Parse(resp);
+            //IHtmlCollection<IElement> themeCol = angle.QuerySelectorAll("table ul.tree > li a");
+            //IHtmlCollection<IElement> valCol = angle.QuerySelectorAll("table ul.tree > li a sup");
+            //string[] theme = new string[themeCol.Length], val = new string[themeCol.Length];
+            //string[] theme, val;
 
-            //sc = new SQLiteCommand("SELECT MAX(ID) FROM TRAFFIC;", sql);
-            //int traffId = Convert.ToInt32(sc.ExecuteScalar());
-            for (int i = 0; i < themeCol.Length; i++)
-            {
-                //val[i] = valCol[i].TextContent;
-                theme[i] = themeCol[i].TextContent.Remove(themeCol[i].TextContent.IndexOf(val[i]));
+            ////sc = new SQLiteCommand("SELECT MAX(ID) FROM TRAFFIC;", sql);
+            ////int traffId = Convert.ToInt32(sc.ExecuteScalar());
+            ////for (int i = 0; i < themeCol.Length; i++)
+            ////{
+            //int i = 0;
+            //try
+            //{
+            //    val[i] = valCol[i].TextContent;
+            //    theme[i] = themeCol[i].TextContent.Remove(themeCol[i].TextContent.IndexOf(val[i]));
+            //}
+            //catch(ArgumentNullException ex)
+            //{
+            //    theme[i] = "";
+            //}
                 //sc = new SQLiteCommand("SELECT COUNT(*) FROM THEME WHERE NAME = '" + theme[i] + "';", sql);
                 //if (Convert.ToInt32(sc.ExecuteScalar()) > 0)
                 //{
@@ -246,9 +255,9 @@ namespace MyService
                 //int themeId = Convert.ToInt32(sc.ExecuteScalar());
                 //execute(String.Format("INSERT INTO TRAFFIC_THEME VALUES('{0}', {1}, {2});", val[i], traffId, themeId));
                 //sql.Close();
-                execute(String.Format("INSERT INTO TRAFFIC VALUES( NULL, '{0}', '{1}', '{2}', {3}, {4}, {5}, {6}, '{7}');", URL, host, referer, time, refId, IDs[0], IDs[1], theme[i]));
+                execute(String.Format("INSERT INTO TRAFFIC VALUES( NULL, '{0}', '{1}', '{2}', {3}, {4}, {5}, {6}, '{7}');", URL, host, referer, time, refId, IDs[0], IDs[1], ""));
                 return;
-            }
+            //}
 
         }
 
